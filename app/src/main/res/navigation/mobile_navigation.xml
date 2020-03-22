@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_inicial">
+
+    <fragment
+        android:id="@+id/nav_inicial"
+        android:name="com.example.projetoicompra.ui.inicio.InicioFragment"
+        android:label="@string/menu_inicial"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/nav_historico"
+        android:name="com.example.projetoicompra.ui.historico.HistoricoFragment"
+        android:label="@string/menu_historico"
+        tools:layout="@layout/fragment_historico" />
+
+    <fragment
+        android:id="@+id/nav_mapas"
+        android:name="com.example.projetoicompra.ui.mapas.MapasFragment"
+        android:label="@string/menu_mapas"
+        tools:layout="@layout/fragment_mapas" />
+
+    <fragment
+        android:id="@+id/nav_scan"
+        android:name="com.example.projetoicompra.ui.scan.ScanFragment"
+        android:label="@string/menu_scan"
+        tools:layout="@layout/fragment_scan" />
+
+
+</navigation>
