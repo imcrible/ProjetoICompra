@@ -2,6 +2,7 @@ package com.example.projetoicompra.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.projetoicompra.R;
@@ -91,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void alertar (String msg){
         Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
+        abrirLink(msg);
+
     }
 
     /*@Override
@@ -99,6 +102,17 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }*/
+
+    public void abrirLink(String link){
+        Uri pagina = Uri.parse(link);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, pagina);
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
+
+
+    }
 
     @Override
     public boolean onSupportNavigateUp() {
