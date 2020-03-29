@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
-
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.ui.scan.ScanFragment;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -21,18 +21,19 @@ public class AdicionarComprasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_compras);
 
+        //trecho necessario para iniciar leitua de qrcode
         final Activity essaactivity = this;
         IntentIntegrator intencaoIntegradora = new IntentIntegrator(essaactivity);
         intencaoIntegradora.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
         intencaoIntegradora.setPrompt("Camera Scan");
         intencaoIntegradora.setCameraId(0);
         intencaoIntegradora.initiateScan();
-
-
+        //fim trecho necessario
 
     }
 
 
+    //inicio dos metodos relacionados ao qrcode
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -54,16 +55,26 @@ public class AdicionarComprasActivity extends AppCompatActivity {
     }
 
     private void alertar (String msg){
-        Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
+        abrirLink(msg);
+        //Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
     }
+    //fim dos metodos relacionados ao qrcode
 
 
+    //metodo com intent explicita de abrir o navegador
+    public void abrirLink(String link){
+        Uri pagina = Uri.parse(link);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, pagina);
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
+
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
-
         return super.onCreateOptionsMenu(menu);
-
 
     }
 }

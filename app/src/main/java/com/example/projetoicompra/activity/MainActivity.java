@@ -42,28 +42,30 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        final Activity essaactivity = this;
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Intent intencao = new Intent(getApplication(), ScanFragment.class);
                 //startActivity(intencao);
+
+                /* //trecho necessario para iniciar leitua de qrcode
+                final Activity essaactivity = this;
                 IntentIntegrator intencaoIntegradora = new IntentIntegrator(essaactivity);
                 intencaoIntegradora.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
                 intencaoIntegradora.setPrompt("Camera Scan");
                 intencaoIntegradora.setCameraId(0);
-                intencaoIntegradora.initiateScan();
+                intencaoIntegradora.initiateScan();*/
 
 
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                  //      .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_inicial, R.id.nav_historico, R.id.nav_mapas, R.id.nav_scan )
                 .setDrawerLayout(drawer)
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
+    //inicio dos metodos relacionados ao qrcode
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -92,11 +95,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void alertar (String msg){
         abrirLink(msg);
-
         //Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
 
-
     }
+    //fim dos metodos relacionados ao qrcode
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }*/
 
+    //metodo com intent explicita de abrir o navegador
     public void abrirLink(String link){
         Uri pagina = Uri.parse(link);
 
@@ -112,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null){
             startActivity(intent);
         }
-
 
     }
 
