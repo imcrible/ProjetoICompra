@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void alertar (String msg){
-        Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
         abrirLink(msg);
 
     }
