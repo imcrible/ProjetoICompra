@@ -13,7 +13,6 @@ import androidx.room.PrimaryKey;
 public class Lista_Compra {
 
     @PrimaryKey (autoGenerate = true)
-    @NonNull
     @ColumnInfo(name = "lista_compra_id")
     private int lista_compra_id;
 
@@ -90,8 +89,7 @@ public class Lista_Compra {
         this.cnpj_local_lista = cnpj_local_lista;
     }
 
-    public Lista_Compra(int lista_compra_id, @NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull Double total_compra, @NonNull String cnpj_local_lista) {
-        this.lista_compra_id = lista_compra_id;
+    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull Double total_compra, @NonNull String cnpj_local_lista) {
         this.hora_compra = hora_compra;
         this.data_compra = data_compra;
         this.nota_fiscal = nota_fiscal;

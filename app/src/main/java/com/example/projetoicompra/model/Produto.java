@@ -9,9 +9,8 @@ import androidx.room.PrimaryKey;
 public class Produto {
 
     @PrimaryKey (autoGenerate = true)
-    @NonNull
     @ColumnInfo(name = "produto_id")
-    private String produto_id;
+    private int produto_id;
 
     @NonNull
     @ColumnInfo(name = "nome_produto")
@@ -21,7 +20,7 @@ public class Produto {
     @ColumnInfo(name = "preco_produto")
     private Double preco_produto;
 
-    @NonNull
+
     @ColumnInfo(name = "quatidade")
     private int quantidade;
 
@@ -29,12 +28,12 @@ public class Produto {
     @ColumnInfo(name = "preco_total")
     private Double  preco_total;
 
-    @NonNull
-    public String getProduto_id() {
+
+    public int getProduto_id() {
         return produto_id;
     }
 
-    public void setProduto_id(@NonNull String produto_id) {
+    public void setProduto_id(int produto_id) {
         this.produto_id = produto_id;
     }
 
@@ -60,7 +59,7 @@ public class Produto {
         return quantidade;
     }
 
-    public void setQuantidade(@NonNull  int quantidade) {
+    public void setQuantidade( int quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -74,8 +73,7 @@ public class Produto {
     }
 
 
-    public Produto(@NonNull String produto_id, @NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total) {
-        this.produto_id = produto_id;
+    public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total) {
         this.nome_produto = nome_produto;
         this.preco_produto = preco_produto;
         this.quantidade = quantidade;
