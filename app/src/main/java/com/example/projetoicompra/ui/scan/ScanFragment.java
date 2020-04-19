@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.projetoicompra.activity.AdicionarComprasActivity;
+import com.example.projetoicompra.activity.AdicionarComprasScanActivity;
 import com.example.projetoicompra.R;
 
 public class ScanFragment extends Fragment {
@@ -28,7 +28,7 @@ public class ScanFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Intent intencao = new Intent(getContext(), AdicionarComprasActivity.class);
+        Intent intencao = new Intent(getContext(), AdicionarComprasScanActivity.class);
         startActivity(intencao);
 
         //textoScan = textoScan.findViewById(R.id.textScan);

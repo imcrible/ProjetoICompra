@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "lista_compra",
         foreignKeys = @ForeignKey(entity = Local_Compra.class,
                                             parentColumns = "cnpj_local",
-                                            childColumns = "cnpj_local_lista"))
+                                            childColumns = "cnpj_local_lista"),
+        indices = {@Index(value = {"cnpj_local_lista"})} )
 public class Lista_Compra {
 
     @PrimaryKey (autoGenerate = true)

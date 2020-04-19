@@ -6,10 +6,11 @@
     tools:context=".ui.historico.HistoricoFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_lista"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Historico de Compras"
-        android:textSize="24sp" />
+        tools:listitem="@layout/recyclerview_lista"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

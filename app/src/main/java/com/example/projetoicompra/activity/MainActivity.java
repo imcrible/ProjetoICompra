@@ -42,25 +42,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+        final Activity essaactivity = this;
 
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intencao = new Intent(getApplication(), ScanFragment.class);
-                //startActivity(intencao);
 
-                /* //trecho necessario para iniciar leitua de qrcode
-                final Activity essaactivity = this;
-                IntentIntegrator intencaoIntegradora = new IntentIntegrator(essaactivity);
-                intencaoIntegradora.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                intencaoIntegradora.setPrompt("Camera Scan");
-                intencaoIntegradora.setCameraId(0);
-                intencaoIntegradora.initiateScan();*/
+               Intent intencao = new Intent(essaactivity, AdicionarComprasManualActivity.class);
+               startActivity(intencao);
 
-
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Vai adicionar um botão", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -75,48 +67,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    //inicio dos metodos relacionados ao qrcode
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-        if(intentResult != null){
-            if(intentResult.getContents() != null){
-                alertar(intentResult.getContents());
-            }else{
-                alertar("Scan Cancelado");
-            }
-
-        }else {
-
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    private void alertar (String msg){
-        abrirLink(msg);
-        //Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
-
-    }
-    //fim dos metodos relacionados ao qrcode
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }*/
-
-    //metodo com intent explicita de abrir o navegador
-    public void abrirLink(String link){
-        Uri pagina = Uri.parse(link);
-
-        Intent intent = new Intent(Intent.ACTION_VIEW, pagina);
-        if (intent.resolveActivity(getPackageManager()) != null){
-            startActivity(intent);
-        }
-
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
