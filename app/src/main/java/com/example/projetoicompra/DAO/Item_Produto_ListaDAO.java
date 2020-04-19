@@ -16,45 +16,7 @@ import com.example.projetoicompra.model.Produto;
 import java.util.List;
 
 @Dao
-public interface ICompraDAO {
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertProduto (Produto produto);
-
-    @Update
-    void updateProduto (Produto produto);
-
-    @Delete
-    void deleteProduto (Produto produto);
-
-    @Query("SELECT * FROM produto")
-    LiveData<List<Produto>> getTodosProdutos();
-
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertLocalCompra (Local_Compra localCompra);
-
-    @Update
-    void updateLocalCompra (Local_Compra localCompra);
-
-    @Delete
-    void deleteLocalCompra (Local_Compra localCompra);
-
-    @Query("SELECT * FROM Local_Compra")
-    LiveData<List<Local_Compra>> getTodoLocalCompra();
-
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertListaCompra (Lista_Compra listacompra);
-
-    @Update
-    void updateListaCompra (Lista_Compra listacompra);
-
-    @Delete
-    void deleteLista_Compra (Lista_Compra listacompra);
-
-    @Query("SELECT * FROM lista_compra")
-    LiveData<List<Lista_Compra>> getTodaListaCompra();
+public interface Item_Produto_ListaDAO {
 
     @Insert
     void insertItemProdutoLista (Item_Produto_Lista item_produto_lista);
@@ -69,14 +31,14 @@ public interface ICompraDAO {
             "INNER JOIN item_produto_lista  "+
             "ON produto.produto_id=item_produto_lista.produto_item_id "+
             "WHERE item_produto_lista.lista_item_compra_id=:lista_item_compra_id")
-    LiveData<List<Produto>> getProdutosQueEstaLista(final int lista_item_compra_id);
+    LiveData<List<Produto>> getProdutosQueEstaLista( int lista_item_compra_id);
 
 
     @Query("SELECT * FROM lista_compra "+
             "INNER JOIN item_produto_lista "+
             "ON lista_compra.lista_compra_id=item_produto_lista.lista_item_compra_id "+
             "WHERE item_produto_lista.produto_item_id=:produto_item_id")
-    LiveData<List<Lista_Compra>> getListaPorProdutos (final int produto_item_id);
+    LiveData<List<Lista_Compra>> getListaPorProdutos ( int produto_item_id);
 
 
 
