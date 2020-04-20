@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Data da compra"
+                android:hint="Data da compra (dd/mm/aaaa)"
                 android:inputType="date" />
 
             <EditText

@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    public static final int REQUEST_CODE_ADD_MANUAL_LISTA = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                Intent intencao = new Intent(essaactivity, AdicionarComprasManualActivity.class);
-               startActivity(intencao);
+               startActivityForResult(intencao, REQUEST_CODE_ADD_MANUAL_LISTA);
 
                 //Snackbar.make(view, "Vai adicionar um botão", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }

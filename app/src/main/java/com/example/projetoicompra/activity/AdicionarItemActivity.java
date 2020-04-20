@@ -44,7 +44,7 @@ public class AdicionarItemActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
 
         switch (item.getItemId()){
-            case R.id.itemSalvar :
+            case R.id.itemSalvarItem :
                 Toast.makeText(AdicionarItemActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
