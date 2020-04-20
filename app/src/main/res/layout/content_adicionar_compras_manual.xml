@@ -106,7 +106,8 @@
                 android:id="@+id/total_compra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Total da Compra" />
+                android:text="Total da Compra"
+                android:textAppearance="@android:style/TextAppearance.Medium"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_item"
