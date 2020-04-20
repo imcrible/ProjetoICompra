@@ -2,8 +2,10 @@ package com.example.projetoicompra.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +20,13 @@ public class AdicionarItemActivity extends AppCompatActivity {
     private EditText valor_unit_produto;
     private EditText quantidade_produto;
     private TextView valor_total;
+
+    public static final String EXTRANOME_PRODUTO = "com.example.projetoicompra.activity.NOME_PRODUTO";
+    public static final String EXTRAVALOR_UNIT_PRODUTO = "com.example.projetoicompra.activity.VALORUNITPRODUTO";
+    public static final String EXTRAQUANTIDADE_PRODUTO = "com.example.projetoicompra.activity.QUANTIDADE_PRODUTO";
+    public static final String EXTRAVALOR_TOTAL = "com.example.projetoicompra.activity.VALOR_TOTAL";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +43,51 @@ public class AdicionarItemActivity extends AppCompatActivity {
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu){
+    private void salvarItem(){
+        String nomeproduto = nome_produto.getEditText().toString();
+        int qtdproduto = Integer.parseInt(quantidade_produto.getText().toString());
+        Double valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
 
-        getMenuInflater().inflate(R.menu.menu_add_item, menu);
+        Double valortotalproduto = qtdproduto * valorproduto;
+        valor_total.setText(valortotalproduto.toString());
 
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-
-        switch (item.getItemId()){
-            case R.id.itemSalvarItem :
-                Toast.makeText(AdicionarItemActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
-                break;
+        if(nomeproduto.trim().isEmpty()){
+            Toast.makeText(this, "Coloque o nome do produto", Toast.LENGTH_SHORT).show();
         }
 
-        return super.onOptionsItemSelected(item);
+        Intent arquivo = new Intent();
+
+        arquivo.putExtra(EXTRANOME_PRODUTO, nomeproduto);
+        arquivo.putExtra(EXTRAVALOR_UNIT_PRODUTO, valorproduto);
+        arquivo.putExtra(EXTRAQUANTIDADE_PRODUTO, qtdproduto);
+        arquivo.putExtra(EXTRAVALOR_TOTAL, valortotalproduto);
+
+        setResult(RESULT_OK, arquivo);
+        finish();
+
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_add_item, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.itemSalvarItem:
+
+                salvarItem();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+
+
     }
 }

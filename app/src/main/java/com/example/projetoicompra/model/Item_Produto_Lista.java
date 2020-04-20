@@ -3,6 +3,7 @@ package com.example.projetoicompra.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 
 @Entity(tableName = "item_produto_lista",
@@ -39,8 +40,16 @@ public class Item_Produto_Lista {
         this.lista_item_compra_id = lista_item_compra_id;
     }
 
+    @Ignore
     public Item_Produto_Lista(int produto_item_id, int lista_item_compra_id) {
         this.produto_item_id = produto_item_id;
         this.lista_item_compra_id = lista_item_compra_id;
     }
+
+    public Item_Produto_Lista(int produto_item_id) {
+        this.produto_item_id = produto_item_id;
+    }
+
+
+
 }

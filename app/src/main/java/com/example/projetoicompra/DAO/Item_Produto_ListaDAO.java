@@ -21,6 +21,7 @@ public interface Item_Produto_ListaDAO {
     @Insert
     void insertItemProdutoLista (Item_Produto_Lista item_produto_lista);
 
+
     @Update
     void updateItemProdutoLista (Item_Produto_Lista item_produto_lista);
 

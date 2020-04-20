@@ -7,6 +7,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity(tableName = "lista_compra",
         foreignKeys = @ForeignKey(entity = Local_Compra.class,
                                             parentColumns = "cnpj_local",
@@ -32,7 +34,7 @@ public class Lista_Compra {
 
     @NonNull
     @ColumnInfo (name = "total_compra")
-    private Double total_compra;
+    private String total_compra;
 
     @NonNull
     @ColumnInfo (name = "cnpj_local_lista")
@@ -74,11 +76,11 @@ public class Lista_Compra {
     }
 
     @NonNull
-    public Double getTotal_compra() {
+    public String getTotal_compra() {
         return total_compra;
     }
 
-    public void setTotal_compra(@NonNull Double total_compra) {
+    public void setTotal_compra(@NonNull String total_compra) {
         this.total_compra = total_compra;
     }
 
@@ -91,7 +93,7 @@ public class Lista_Compra {
         this.cnpj_local_lista = cnpj_local_lista;
     }
 
-    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull Double total_compra, @NonNull String cnpj_local_lista) {
+    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista) {
         this.hora_compra = hora_compra;
         this.data_compra = data_compra;
         this.nota_fiscal = nota_fiscal;

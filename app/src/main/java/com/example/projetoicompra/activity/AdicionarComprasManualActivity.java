@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ItemListAdapter;
+import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Produto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -14,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -48,7 +50,6 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     public static final String EXTRA_TOTAL_COMPRA = "com.example.projetoicompra.activity.EXTRA_TOTAL_COMPRA";
 
 
-
     private ICompraViewModel iCompraViewModel;
 
     private static final int REQUEST_CODE_ADD_ITEM = 1;
@@ -69,7 +70,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbarLista);
         setSupportActionBar(toolbar);
 
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
         //findViewById
         nome_local = findViewById(R.id.nome_local);
@@ -98,7 +99,6 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             }
         });
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +107,32 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
                 startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_ADD_ITEM && resultCode==RESULT_OK){
+            String nomeproduto = data.getStringExtra(AdicionarItemActivity.EXTRANOME_PRODUTO);
+            int qtdproduto = data.getIntExtra(AdicionarItemActivity.EXTRAQUANTIDADE_PRODUTO, 0);
+            Double vl_unit_produto = data.getDoubleExtra(AdicionarItemActivity.EXTRAVALOR_UNIT_PRODUTO,0.0);
+            Double valortotalproduto = data.getDoubleExtra(AdicionarItemActivity.EXTRAVALOR_TOTAL,0.0);
+
+            //public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
+            Produto produto = new Produto(nomeproduto, vl_unit_produto, qtdproduto, valortotalproduto);
+            iCompraViewModel.insertVm_Produto(produto);
+
+            //para adicionar a chave estrangeira
+            //int idproduto = produto.getProduto_id();
+            //Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto);
+            //iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
+
+            Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(this, "Houve um problema para adicionar o item", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void salvarLista() throws ParseException {
@@ -124,12 +150,12 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         String horacompra = hora_compra.getText().toString();
 
         //total da compra vai precisar da soma dos itens;
-        String totalcompra ="";
+        String totalcompra ="2.0";
 
-        if(nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacomprastring.trim().isEmpty()){
-            Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        //if(nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacomprastring.trim().isEmpty()){
+          //  Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();
+          //  return;
+        //}
 
         Intent arquivo = new Intent();
         arquivo.putExtra(EXTRA_NOME_LOCAL, nomelocal);

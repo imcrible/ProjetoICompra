@@ -57,19 +57,19 @@ public class ICompraViewModel extends AndroidViewModel {
         return getVm_ListaPorProdutos;
     }
 
-    void insertVm_Produto (Produto produto){
+    public void insertVm_Produto (Produto produto){
         repositorio.insertRe_Produto(produto);
     }
 
-    void insertVm_LocalCompra (Local_Compra localCompra){
+    public void insertVm_LocalCompra (Local_Compra localCompra){
         repositorio.insertRe_LocalCompra(localCompra);
     }
 
-    void insertVm_ListaCompra (Lista_Compra listaCompra){
+    public void insertVm_ListaCompra (Lista_Compra listaCompra){
         repositorio.insertRe_ListaCompra(listaCompra);
     }
 
-    void insertVm_ItemProdutoLista (Item_Produto_Lista itemProdutoLista){
+    public void insertVm_ItemProdutoLista (Item_Produto_Lista itemProdutoLista){
         repositorio.inserirRe_ItemProdutoLista(itemProdutoLista);
     }
 }
