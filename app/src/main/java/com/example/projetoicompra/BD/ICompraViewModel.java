@@ -24,7 +24,7 @@ public class ICompraViewModel extends AndroidViewModel {
     private LiveData<List<Lista_Compra>> getVm_ListaPorProdutos;
 
 
-    public ICompraViewModel(@NonNull Application application) {
+    public ICompraViewModel(Application application) {
         super(application);
 
         repositorio = new ICompraRepositorio(application);

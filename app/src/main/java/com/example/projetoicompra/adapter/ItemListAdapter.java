@@ -1,5 +1,6 @@
 package com.example.projetoicompra.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,27 +18,32 @@ import java.util.List;
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> {
     private List<Produto> produtos = new ArrayList<>();
 
-    @NonNull
-    @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    private final LayoutInflater itemInflater;
 
-        View itemViewitem = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recyclerview_item, parent, false);
+    public ItemListAdapter(Context context) {
+        itemInflater = LayoutInflater.from(context);
+    }
+
+
+
+    @Override
+    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemViewitem = itemInflater.inflate(R.layout.recyclerview_item, parent, false);
 
         return new ItemViewHolder(itemViewitem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+    public void onBindViewHolder(ItemViewHolder holder, int position) {
 
-        if(produtos !=null){
+        //if(produtos !=null){
             Produto produtoatual = produtos.get(position);
             holder.nome_produto.setText(produtoatual.getNome_produto());
             holder.quantidade_produto.setText(produtoatual.getQuantidade());
             holder.valor_total.setText(String.valueOf(produtoatual.getPreco_total()));
-        }else{
-            holder.nome_produto.setText("Sem itens adicionados");
-        }
+        //}else{
+          //  holder.nome_produto.setText("Sem itens adicionados");
+        //}
 
 
     }

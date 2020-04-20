@@ -28,14 +28,14 @@ public interface Item_Produto_ListaDAO {
     @Delete
     void deleteItemProdutoLista (Item_Produto_Lista item_produto_lista);
 
-    @Query("SELECT * FROM produto "+
+    @Query("SELECT produto_id, nome_produto, preco_produto, quatidade, preco_total FROM produto "+
             "INNER JOIN item_produto_lista  "+
             "ON produto.produto_id=item_produto_lista.produto_item_id "+
             "WHERE item_produto_lista.lista_item_compra_id=:lista_item_compra_id")
     LiveData<List<Produto>> getProdutosQueEstaLista( int lista_item_compra_id);
 
 
-    @Query("SELECT * FROM lista_compra "+
+    @Query("SELECT lista_compra_id, hora_compra, data_compra, nota_fiscal, total_compra, cnpj_local_lista FROM lista_compra "+
             "INNER JOIN item_produto_lista "+
             "ON lista_compra.lista_compra_id=item_produto_lista.lista_item_compra_id "+
             "WHERE item_produto_lista.produto_item_id=:produto_item_id")

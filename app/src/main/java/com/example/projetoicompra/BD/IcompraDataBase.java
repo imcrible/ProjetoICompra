@@ -20,7 +20,7 @@ import com.example.projetoicompra.model.Produto;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class}, version = 2, exportSchema = false)
+@Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class}, version = 3, exportSchema = false)
   abstract class IcompraDataBase extends RoomDatabase {
 
      private static final String NOME_BD = "icompradatabase";

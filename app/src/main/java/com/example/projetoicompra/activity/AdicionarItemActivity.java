@@ -41,6 +41,7 @@ public class AdicionarItemActivity extends AppCompatActivity {
         valor_total = findViewById(R.id.valor_total);
 
 
+
     }
 
     private void salvarItem(){

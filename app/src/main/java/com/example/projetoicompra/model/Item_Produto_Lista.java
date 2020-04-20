@@ -15,7 +15,8 @@ import androidx.room.Index;
                         @ForeignKey(entity = Lista_Compra.class,
                                 parentColumns = "lista_compra_id",
                                 childColumns = "lista_item_compra_id")},
-        indices = {@Index(value = {"produto_item_id", "lista_item_compra_id"})} )
+        indices = {@Index(value = {"produto_item_id"}),
+                    @Index(value = {"lista_item_compra_id"})} )
 
 public class Item_Produto_Lista {
 

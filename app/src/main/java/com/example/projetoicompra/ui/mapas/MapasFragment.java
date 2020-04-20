@@ -3,6 +3,7 @@ package com.example.projetoicompra.ui.mapas;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -44,9 +45,10 @@ public class MapasFragment extends Fragment {
         //recyclerViewLista.setLayoutManager(new LinearLayoutManager(this));
 
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
+
         iCompraViewModel.getVm_TodaListaCompra().observe(getViewLifecycleOwner(), new Observer<List<Lista_Compra>>() {
             @Override
-            public void onChanged(List<Lista_Compra> lista_compras) {
+            public void onChanged(@Nullable final List<Lista_Compra> lista_compras) {
                 adapterlista.setListacompras(lista_compras);
             }
         });

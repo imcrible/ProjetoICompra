@@ -7,13 +7,9 @@ import android.os.Bundle;
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ItemListAdapter;
-import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Produto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.zxing.integration.android.IntentIntegrator;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,13 +27,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 public class AdicionarComprasManualActivity extends AppCompatActivity {
 
@@ -86,14 +79,14 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         final Activity essaactivity = this;
 
         RecyclerView recyclerViewItem = findViewById(R.id.recycler_item);
-        ItemListAdapter adapteritem = new ItemListAdapter();
+        ItemListAdapter adapteritem = new ItemListAdapter(this);
         recyclerViewItem.setAdapter(adapteritem);
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
 
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_ProdutosQueEstaLista().observe(this, new Observer<List<Produto>>() {
             @Override
-            public void onChanged(List<Produto> produtos) {
+            public void onChanged(@Nullable final List<Produto> produtos) {
                 adapteritem.setProdutos(produtos);
 
             }
