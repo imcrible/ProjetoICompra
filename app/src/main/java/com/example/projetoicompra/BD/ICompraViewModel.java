@@ -37,23 +37,23 @@ public class ICompraViewModel extends AndroidViewModel {
 
     }
 
-    LiveData<List<Produto>> getVm_TodosProdutos(){
+    public LiveData<List<Produto>> getVm_TodosProdutos(){
         return getVm_TodosProdutos;
     }
 
-    LiveData<List<Local_Compra>> getVm_TodoLocalCompra(){
+    public LiveData<List<Local_Compra>> getVm_TodoLocalCompra(){
         return getVm_TodoLocalCompra;
     }
 
-    LiveData<List<Lista_Compra>> getVm_TodaListaCompra(){
+    public LiveData<List<Lista_Compra>> getVm_TodaListaCompra(){
         return getVm_TodaListaCompra;
     }
 
-    LiveData<List<Produto>> getVm_ProdutosQueEstaLista(){
+    public LiveData<List<Produto>> getVm_ProdutosQueEstaLista(){
         return getVm_ProdutosQueEstaLista;
     }
 
-    LiveData<List<Lista_Compra>> getVm_ListaPorProdutos(){
+    public LiveData<List<Lista_Compra>> getVm_ListaPorProdutos(){
         return getVm_ListaPorProdutos;
     }
 

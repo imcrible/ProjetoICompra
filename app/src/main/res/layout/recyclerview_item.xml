@@ -12,7 +12,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/valor_total"
+            android:id="@+id/rv_valor_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -21,23 +21,23 @@
             android:layout_alignParentRight="true" />
 
         <TextView
-            android:id="@+id/nome_produto"
+            android:id="@+id/rv_nome_produto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome do Produto"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:maxLines="1"
-            android:layout_toStartOf="@+id/valor_total"
+            android:layout_toStartOf="@+id/rv_valor_total"
             android:layout_alignParentStart="true"
             android:ellipsize="end"
-            android:layout_toLeftOf="@+id/valor_total"
+            android:layout_toLeftOf="@+id/rv_valor_total"
             android:layout_alignParentLeft="true" />
 
         <TextView
-            android:id="@+id/quantidade_produto"
+            android:id="@+id/rv_quantidade_produto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/nome_produto"
+            android:layout_below="@id/rv_nome_produto"
             android:text="0"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
