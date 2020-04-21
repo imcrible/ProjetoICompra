@@ -35,7 +35,7 @@ public class ICompraRepositorio {
     private LiveData<List<Lista_Compra>> re_ListaPorProdutos;
     //fim instancia do tipo liveData que consulta as tabelas
 
-    public ICompraRepositorio(Application application){
+    public ICompraRepositorio(Application application) {
         //Linha abaixo faz a instancia do banco de dados passando como paramento a aplicação
         IcompraDataBase icompraDataBase = IcompraDataBase.getInstance(application);
 
@@ -57,19 +57,19 @@ public class ICompraRepositorio {
     }
 
     //Inicio bloco insert do repositorio, aqui que as outras classes vão se comunicar
-    public void insertRe_Produto (Produto produto){
+    public void insertRe_Produto(Produto produto) {
         new InsertProdutoAsyncTask(produtoDAO).execute(produto);
     }
 
-    public void insertRe_ListaCompra(Lista_Compra listaCompra){
+    public void insertRe_ListaCompra(Lista_Compra listaCompra) {
         new InsertListaCompraAsyncTask(listaCompraDAO).execute(listaCompra);
     }
 
-    public void insertRe_LocalCompra(Local_Compra localCompra){
+    public void insertRe_LocalCompra(Local_Compra localCompra) {
         new InsertLocalCompraAsyncTask(localCompraDAO).execute(localCompra);
     }
 
-    public void insertRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista){
+    public void insertRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
         new InsertItemProdutoListaAsyncTask(itemProdutoListaDAO).execute(itemProdutoLista);
     }
 
@@ -77,23 +77,23 @@ public class ICompraRepositorio {
 
 
     //Inicio bloco liveData/select que vai se comunicar com outras classes
-    public LiveData<List<Produto>> getRe_TodosProdutos(){
+    public LiveData<List<Produto>> getRe_TodosProdutos() {
         return re_TodosProdutos;
     }
 
-    public LiveData<List<Lista_Compra>> getRe_TodaListaCompra(){
+    public LiveData<List<Lista_Compra>> getRe_TodaListaCompra() {
         return re_TodaListaCompra;
     }
 
-    public LiveData<List<Local_Compra>> getRe_TodoLocalCompra(){
+    public LiveData<List<Local_Compra>> getRe_TodoLocalCompra() {
         return re_TodoLocalCompra;
     }
 
-    public LiveData<List<Produto>> getRe_ProdutosQueEstaLista(){
+    public LiveData<List<Produto>> getRe_ProdutosQueEstaLista() {
         return re_ProdutosQueEstaLista;
     }
 
-    public LiveData<List<Lista_Compra>> getRe_ListaPorProdutos(){
+    public LiveData<List<Lista_Compra>> getRe_ListaPorProdutos() {
         return re_ListaPorProdutos;
     }
     //Fim bloco liveData/select que vai se comunicar com outras classes
@@ -101,10 +101,10 @@ public class ICompraRepositorio {
 
     //inicio bloco Insert Async Task
 
-    private static class InsertProdutoAsyncTask extends AsyncTask<Produto, Void, Void>{
+    private static class InsertProdutoAsyncTask extends AsyncTask<Produto, Void, Void> {
         private ProdutoDAO produtoDAO;
 
-        private InsertProdutoAsyncTask(ProdutoDAO produtoDAO){
+        private InsertProdutoAsyncTask(ProdutoDAO produtoDAO) {
             this.produtoDAO = produtoDAO;
         }
 
@@ -129,24 +129,24 @@ public class ICompraRepositorio {
         }
     }
 
-     private static class InsertLocalCompraAsyncTask extends AsyncTask<Local_Compra, Void, Void>{
-            private Local_CompraDAO localCompraDAO;
+    private static class InsertLocalCompraAsyncTask extends AsyncTask<Local_Compra, Void, Void> {
+        private Local_CompraDAO localCompraDAO;
 
-            private InsertLocalCompraAsyncTask(Local_CompraDAO local_compraDAO){
-                this.localCompraDAO = local_compraDAO;
-            }
+        private InsertLocalCompraAsyncTask(Local_CompraDAO local_compraDAO) {
+            this.localCompraDAO = local_compraDAO;
+        }
 
-         @Override
-         protected Void doInBackground(Local_Compra... local_compras) {
-             localCompraDAO.insertLocalCompra(local_compras[0]);
-             return null;
-         }
-     }
+        @Override
+        protected Void doInBackground(Local_Compra... local_compras) {
+            localCompraDAO.insertLocalCompra(local_compras[0]);
+            return null;
+        }
+    }
 
-    private static class InsertItemProdutoListaAsyncTask extends AsyncTask<Item_Produto_Lista, Void, Void>{
+    private static class InsertItemProdutoListaAsyncTask extends AsyncTask<Item_Produto_Lista, Void, Void> {
         private Item_Produto_ListaDAO itemProdutoListaDAO;
 
-        private InsertItemProdutoListaAsyncTask(Item_Produto_ListaDAO itemProdutoListaDAO){
+        private InsertItemProdutoListaAsyncTask(Item_Produto_ListaDAO itemProdutoListaDAO) {
             this.itemProdutoListaDAO = itemProdutoListaDAO;
         }
 
@@ -158,10 +158,6 @@ public class ICompraRepositorio {
     }
 
     //Fim do bloco Insert Async Task
-
-
-
-
 
 
 }

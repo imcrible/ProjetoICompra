@@ -16,13 +16,13 @@ import java.util.List;
 public interface ProdutoDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertProduto (Produto produto);
+    void insertProduto(Produto produto);
 
     @Update
-    void updateProduto (Produto produto);
+    void updateProduto(Produto produto);
 
     @Delete
-    void deleteProduto (Produto produto);
+    void deleteProduto(Produto produto);
 
     @Query("SELECT * FROM produto")
     LiveData<List<Produto>> getTodosProdutos();

@@ -24,7 +24,7 @@ public class ICompraViewModel extends AndroidViewModel {
     private LiveData<List<Lista_Compra>> vm_ListaPorProdutos;
 
 
-    public ICompraViewModel(Application application) {
+    public ICompraViewModel(@NonNull Application application) {
         super(application);
 
         repositorio = new ICompraRepositorio(application);
@@ -37,39 +37,39 @@ public class ICompraViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<Produto>> getVm_TodosProdutos(){
+    public LiveData<List<Produto>> getVm_TodosProdutos() {
         return vm_TodosProdutos;
     }
 
-    public LiveData<List<Local_Compra>> getVm_TodoLocalCompra(){
+    public LiveData<List<Local_Compra>> getVm_TodoLocalCompra() {
         return vm_TodoLocalCompra;
     }
 
-    public LiveData<List<Lista_Compra>> getVm_TodaListaCompra(){
+    public LiveData<List<Lista_Compra>> getVm_TodaListaCompra() {
         return vm_TodaListaCompra;
     }
 
-    public LiveData<List<Produto>> getVm_ProdutosQueEstaLista(){
+    public LiveData<List<Produto>> getVm_ProdutosQueEstaLista() {
         return vm_ProdutosQueEstaLista;
     }
 
-    public LiveData<List<Lista_Compra>> getVm_ListaPorProdutos(){
+    public LiveData<List<Lista_Compra>> getVm_ListaPorProdutos() {
         return vm_ListaPorProdutos;
     }
 
-    public void insertVm_Produto (Produto produto){
+    public void insertVm_Produto(Produto produto) {
         repositorio.insertRe_Produto(produto);
     }
 
-    public void insertVm_LocalCompra (Local_Compra localCompra){
+    public void insertVm_LocalCompra(Local_Compra localCompra) {
         repositorio.insertRe_LocalCompra(localCompra);
     }
 
-    public void insertVm_ListaCompra (Lista_Compra listaCompra){
+    public void insertVm_ListaCompra(Lista_Compra listaCompra) {
         repositorio.insertRe_ListaCompra(listaCompra);
     }
 
-    public void insertVm_ItemProdutoLista (Item_Produto_Lista itemProdutoLista){
+    public void insertVm_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
         repositorio.insertRe_ItemProdutoLista(itemProdutoLista);
     }
 }

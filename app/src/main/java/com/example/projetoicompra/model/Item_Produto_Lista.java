@@ -9,14 +9,14 @@ import androidx.room.Index;
 @Entity(tableName = "item_produto_lista",
         primaryKeys = {"produto_item_id", "lista_item_compra_id"},
         foreignKeys = {
-                        @ForeignKey(entity = Produto.class,
-                                parentColumns = "produto_id",
-                                childColumns = "produto_item_id"),
-                        @ForeignKey(entity = Lista_Compra.class,
-                                parentColumns = "lista_compra_id",
-                                childColumns = "lista_item_compra_id")},
+                @ForeignKey(entity = Produto.class,
+                        parentColumns = "produto_id",
+                        childColumns = "produto_item_id"),
+                @ForeignKey(entity = Lista_Compra.class,
+                        parentColumns = "lista_compra_id",
+                        childColumns = "lista_item_compra_id")},
         indices = {@Index(value = {"produto_item_id"}),
-                    @Index(value = {"lista_item_compra_id"})} )
+                @Index(value = {"lista_item_compra_id"})})
 
 public class Item_Produto_Lista {
 
@@ -50,7 +50,6 @@ public class Item_Produto_Lista {
     public Item_Produto_Lista(int produto_item_id) {
         this.produto_item_id = produto_item_id;
     }
-
 
 
 }

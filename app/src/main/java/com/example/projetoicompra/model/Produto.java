@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "produto")
 public class Produto {
 
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "produto_id")
     private int produto_id;
 
@@ -26,7 +26,7 @@ public class Produto {
 
     @NonNull
     @ColumnInfo(name = "preco_total")
-    private Double  preco_total;
+    private Double preco_total;
 
 
     public int getProduto_id() {
@@ -59,7 +59,7 @@ public class Produto {
         return quantidade;
     }
 
-    public void setQuantidade( int quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 

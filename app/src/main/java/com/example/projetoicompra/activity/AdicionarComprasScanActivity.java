@@ -1,13 +1,13 @@
 package com.example.projetoicompra.activity;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projetoicompra.R;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -37,25 +37,25 @@ public class AdicionarComprasScanActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-        if(intentResult != null){
-            if(intentResult.getContents() != null){
+        if (intentResult != null) {
+            if (intentResult.getContents() != null) {
                 alertar(intentResult.getContents());
                 //Intent intencao = new Intent(this, ScanFragment.class);
                 //intencao.putExtra("", intentResult.getContents());
                 finish();
-            }else{
+            } else {
                 alertar("Scan Cancelado");
                 //tentar adicionar algum metodo de atraso antes do finish para lançar o toast
                 finish();
             }
 
-        }else {
+        } else {
 
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    private void alertar (String msg){
+    private void alertar(String msg) {
         abrirLink(msg);
         //Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
     }
@@ -63,11 +63,11 @@ public class AdicionarComprasScanActivity extends AppCompatActivity {
 
 
     //metodo com intent explicita de abrir o navegador
-    public void abrirLink(String link){
+    public void abrirLink(String link) {
         Uri pagina = Uri.parse(link);
 
         Intent intent = new Intent(Intent.ACTION_VIEW, pagina);
-        if (intent.resolveActivity(getPackageManager()) != null){
+        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
 

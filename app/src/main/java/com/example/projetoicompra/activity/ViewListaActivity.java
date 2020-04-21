@@ -1,15 +1,12 @@
 package com.example.projetoicompra.activity;
 
-import androidx.annotation.Nullable;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
@@ -33,19 +30,26 @@ public class ViewListaActivity extends AppCompatActivity {
         recyclerViewLista.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewLista.setHasFixedSize(true);
 
-        ListaListAdapter adapterlista = new ListaListAdapter();
+        final ListaListAdapter adapterlista = new ListaListAdapter();
         recyclerViewLista.setAdapter(adapterlista);
 
 
-        iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
+        iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
+        iCompraViewModel.getVm_TodaListaCompra().observe(this, new Observer<List<Lista_Compra>>() {
+            @Override
+            public void onChanged(List<Lista_Compra> lista_compras) {
+                adapterlista.setListacompras(lista_compras);
+            }
+        });
 
+        /*iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodaListaCompra().observe(this, new Observer<List<Lista_Compra>>() {
             @Override
             public void onChanged(@Nullable final List<Lista_Compra> lista_compras) {
                 adapterlista.setListacompras(lista_compras);
-                //Toast.makeText(ViewListaActivity.this, "Lista de lista de compras", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ViewListaActivity.this, "é pra aparecer a lista", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
 
     }

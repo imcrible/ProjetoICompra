@@ -17,7 +17,7 @@ public class Local_Compra {
     @ColumnInfo(name = "razao_social")
     private String razao_social;
 
-    @ColumnInfo (name = "coordenadas")
+    @ColumnInfo(name = "coordenadas")
     private String coordenadas;
 
     @NonNull

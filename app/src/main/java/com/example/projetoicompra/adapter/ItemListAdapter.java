@@ -1,13 +1,10 @@
 package com.example.projetoicompra.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetoicompra.R;
@@ -30,13 +27,13 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
 
-        if(produtos !=null){
+        if (produtos != null) {
             Produto produtoatual = produtos.get(position);
             holder.nome_produto.setText(produtoatual.getNome_produto());
             holder.quantidade_produto.setText(String.valueOf(produtoatual.getQuantidade()));
             holder.valor_total.setText(String.valueOf(produtoatual.getPreco_total()));
-        }else{
-           holder.nome_produto.setText("Sem itens adicionados");
+        } else {
+            holder.nome_produto.setText("Sem itens adicionados");
         }
 
 
@@ -44,16 +41,15 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
     @Override
     public int getItemCount() {
-            return produtos.size();
+        return produtos.size();
     }
 
-    public void setProdutos(List<Produto> produtos){
+    public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
-
         notifyDataSetChanged();
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder{
+    class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView valor_total;
         private TextView nome_produto;
         private TextView quantidade_produto;

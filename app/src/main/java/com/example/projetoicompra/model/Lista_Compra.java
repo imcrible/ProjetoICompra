@@ -7,37 +7,35 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity(tableName = "lista_compra",
         foreignKeys = @ForeignKey(entity = Local_Compra.class,
-                                            parentColumns = "cnpj_local",
-                                            childColumns = "cnpj_local_lista"),
-        indices = {@Index(value = {"cnpj_local_lista"})} )
+                parentColumns = "cnpj_local",
+                childColumns = "cnpj_local_lista"),
+        indices = {@Index(value = {"cnpj_local_lista"})})
 public class Lista_Compra {
 
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "lista_compra_id")
     private int lista_compra_id;
 
     @NonNull
-    @ColumnInfo (name = "hora_compra")
+    @ColumnInfo(name = "hora_compra")
     private String hora_compra;
 
     @NonNull
-    @ColumnInfo (name = "data_compra")
+    @ColumnInfo(name = "data_compra")
     private String data_compra;
 
     @NonNull
-    @ColumnInfo (name = "nota_fiscal")
+    @ColumnInfo(name = "nota_fiscal")
     private String nota_fiscal;
 
     @NonNull
-    @ColumnInfo (name = "total_compra")
+    @ColumnInfo(name = "total_compra")
     private String total_compra;
 
     @NonNull
-    @ColumnInfo (name = "cnpj_local_lista")
+    @ColumnInfo(name = "cnpj_local_lista")
     private String cnpj_local_lista;
 
     public int getLista_compra_id() {

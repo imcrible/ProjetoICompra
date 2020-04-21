@@ -2,47 +2,28 @@ package com.example.projetoicompra.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-
-import com.example.projetoicompra.BD.ICompraViewModel;
-import com.example.projetoicompra.R;
-import com.example.projetoicompra.adapter.ListaListAdapter;
-import com.example.projetoicompra.model.Item_Produto_Lista;
-import com.example.projetoicompra.model.Lista_Compra;
-import com.example.projetoicompra.model.Local_Compra;
-import com.example.projetoicompra.ui.scan.ScanFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.projetoicompra.BD.ICompraViewModel;
+import com.example.projetoicompra.R;
+import com.example.projetoicompra.model.Lista_Compra;
+import com.example.projetoicompra.model.Local_Compra;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.Menu;
-import android.widget.Toast;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,21 +47,20 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intencao = new Intent(essaactivity, AdicionarComprasManualActivity.class);
-               startActivityForResult(intencao, REQUEST_CODE_ADD_MANUAL_LISTA);
+                Intent intencao = new Intent(essaactivity, AdicionarComprasManualActivity.class);
+                startActivityForResult(intencao, REQUEST_CODE_ADD_MANUAL_LISTA);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_inicial, R.id.nav_historico, R.id.nav_mapas, R.id.nav_scan )
+                R.id.nav_inicial, R.id.nav_historico, R.id.nav_mapas, R.id.nav_scan)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
 
 
     }
@@ -89,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == REQUEST_CODE_ADD_MANUAL_LISTA && resultCode==RESULT_OK){
+        if (requestCode == REQUEST_CODE_ADD_MANUAL_LISTA && resultCode == RESULT_OK) {
 
             //tabela local
             String nome_local = data.getStringExtra(AdicionarComprasManualActivity.EXTRA_NOME_LOCAL);
@@ -127,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Lista Salva", Toast.LENGTH_SHORT).show();
 
-        }else{
+        } else {
             Toast.makeText(this, "Houve um problema para salvar a lista", Toast.LENGTH_SHORT).show();
         }
     }

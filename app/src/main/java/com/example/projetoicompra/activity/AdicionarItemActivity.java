@@ -1,7 +1,5 @@
 package com.example.projetoicompra.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +8,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projetoicompra.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -27,7 +27,6 @@ public class AdicionarItemActivity extends AppCompatActivity {
     public static final String EXTRAVALOR_TOTAL = "com.example.projetoicompra.activity.VALOR_TOTAL";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +40,9 @@ public class AdicionarItemActivity extends AppCompatActivity {
         valor_total = findViewById(R.id.valor_total);
 
 
-
     }
 
-    private void salvarItem(){
+    private void salvarItem() {
         String nomeproduto = nome_produto.getEditText().toString();
         int qtdproduto = Integer.parseInt(quantidade_produto.getText().toString());
         Double valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
@@ -52,8 +50,9 @@ public class AdicionarItemActivity extends AppCompatActivity {
         Double valortotalproduto = qtdproduto * valorproduto;
         valor_total.setText(valortotalproduto.toString());
 
-        if(nomeproduto.trim().isEmpty()){
+        if (nomeproduto.trim().isEmpty()) {
             Toast.makeText(this, "Coloque o nome do produto", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         Intent arquivo = new Intent();

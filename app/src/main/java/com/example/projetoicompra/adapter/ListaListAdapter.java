@@ -18,9 +18,8 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
     private List<Lista_Compra> listacompras = new ArrayList<>();
 
 
-
     @Override
-    public ListaViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+    public ListaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemViewlista = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_lista, parent, false);
 
         return new ListaViewHolder(itemViewlista);
@@ -29,35 +28,35 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
     @Override
     public void onBindViewHolder(@NonNull ListaViewHolder holder, int position) {
 
-        if(listacompras !=null){
-            Lista_Compra listaatual = listacompras.get(position);
-            holder.data_compra.setText(listaatual.getData_compra());
-            holder.nome_local.setText(listaatual.getCnpj_local_lista());
-            holder.total_compra.setText(listaatual.getTotal_compra());
-        }else{
-          holder.nome_local.setText("Sem Listas Adicionadas");
-        }
+        //if(listacompras !=null){
+        Lista_Compra listaatual = listacompras.get(position);
+        holder.data_compra.setText(listaatual.getData_compra());
+        holder.nome_local.setText(listaatual.getCnpj_local_lista());
+        holder.total_compra.setText(listaatual.getTotal_compra());
+        //}else{
+        //holder.nome_local.setText("Sem Listas Adicionadas");
+        //}
 
 
     }
 
     @Override
     public int getItemCount() {
-         return listacompras.size();
+        return listacompras.size();
 
     }
 
-    public void setListacompras(List<Lista_Compra> listacompras){
+    public void setListacompras(List<Lista_Compra> listacompras) {
         this.listacompras = listacompras;
         notifyDataSetChanged();
     }
 
-    class ListaViewHolder extends RecyclerView.ViewHolder{
-        private final TextView total_compra;
-        private final TextView nome_local;
-        private final TextView data_compra;
+    class ListaViewHolder extends RecyclerView.ViewHolder {
+        private TextView total_compra;
+        private TextView nome_local;
+        private TextView data_compra;
 
-        private ListaViewHolder (View listaview){
+        private ListaViewHolder(View listaview) {
             super(listaview);
             total_compra = listaview.findViewById(R.id.rv_total_compra);
             nome_local = listaview.findViewById(R.id.rv_nome_local);

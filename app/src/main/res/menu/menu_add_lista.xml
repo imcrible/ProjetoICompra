@@ -6,7 +6,6 @@
         android:title="Salvar"
         android:orderInCategory="2"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_save_white_24dp"
-        />
+        android:icon="@drawable/ic_save_white_24dp" />
 
 </menu>
