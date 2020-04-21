@@ -18,23 +18,24 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
     private List<Lista_Compra> listacompras = new ArrayList<>();
 
 
-    @NonNull
+
     @Override
-    public ListaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemViewlista = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recyclerview_lista, parent, false);
+    public ListaViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+        View itemViewlista = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_lista, parent, false);
 
         return new ListaViewHolder(itemViewlista);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ListaViewHolder holder, int position) {
+
         if(listacompras !=null){
             Lista_Compra listaatual = listacompras.get(position);
             holder.data_compra.setText(listaatual.getData_compra());
             holder.nome_local.setText(listaatual.getCnpj_local_lista());
+            holder.total_compra.setText(listaatual.getTotal_compra());
         }else{
-            holder.nome_local.setText("Sem Listas Adicionadas");
+          holder.nome_local.setText("Sem Listas Adicionadas");
         }
 
 
@@ -42,9 +43,8 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
 
     @Override
     public int getItemCount() {
-        if(listacompras != null){
-            return listacompras.size();
-        }else return 0;
+         return listacompras.size();
+
     }
 
     public void setListacompras(List<Lista_Compra> listacompras){

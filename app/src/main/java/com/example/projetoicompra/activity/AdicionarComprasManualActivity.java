@@ -45,6 +45,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
     private ICompraViewModel iCompraViewModel;
 
+    private RecyclerView recyclerViewItem;
+
     private static final int REQUEST_CODE_ADD_ITEM = 1;
 
     private TextInputLayout nome_local;
@@ -76,19 +78,24 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
 
 
-        final Activity essaactivity = this;
+        //final Activity sessaactivity = this;
 
-        RecyclerView recyclerViewItem = findViewById(R.id.recycler_item);
-        ItemListAdapter adapteritem = new ItemListAdapter(this);
-        recyclerViewItem.setAdapter(adapteritem);
+        //configura o recycler
+        recyclerViewItem = findViewById(R.id.recycler_item);
+
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewItem.setHasFixedSize(true);
+
+        ItemListAdapter adapteritem = new ItemListAdapter();
+
+        recyclerViewItem.setAdapter(adapteritem);
 
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
-        iCompraViewModel.getVm_ProdutosQueEstaLista().observe(this, new Observer<List<Produto>>() {
+        iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
             @Override
             public void onChanged(@Nullable final List<Produto> produtos) {
                 adapteritem.setProdutos(produtos);
-
+                //Toast.makeText(getApplicationContext(), "Aqui era pra aparecer os itens", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -96,11 +103,13 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intencao = new Intent(essaactivity, AdicionarItemActivity.class);
+                Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
                 startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
             }
         });
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

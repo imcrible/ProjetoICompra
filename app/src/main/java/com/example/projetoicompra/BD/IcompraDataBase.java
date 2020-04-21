@@ -1,6 +1,7 @@
 package com.example.projetoicompra.BD;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -20,8 +21,8 @@ import com.example.projetoicompra.model.Produto;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class}, version = 3, exportSchema = false)
-  abstract class IcompraDataBase extends RoomDatabase {
+@Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class}, version = 1, exportSchema = false)
+  public abstract class IcompraDataBase extends RoomDatabase {
 
      private static final String NOME_BD = "icompradatabase";
 
@@ -37,26 +38,47 @@ import java.util.concurrent.Executors;
 
     private static final int NUM_DE_THREADS = 4;
 
-    static final ExecutorService salvaBanco = Executors.newFixedThreadPool(NUM_DE_THREADS);
-
     public static synchronized IcompraDataBase getInstance(Context context){
-        if(INSTANCIA == null){
-            INSTANCIA = Room.databaseBuilder(context.getApplicationContext(),
-                    IcompraDataBase.class, NOME_BD)
+        if (INSTANCIA == null){
+            INSTANCIA = Room.databaseBuilder(context.getApplicationContext(), IcompraDataBase.class, NOME_BD)
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback).build();
         }
-
         return INSTANCIA;
-    }
+    };
+
+
 
 
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
+            new PopularDbAsyncTask(INSTANCIA).execute();
+
         }
     };
+
+    private static class PopularDbAsyncTask extends AsyncTask<Void, Void, Void>{
+        private Lista_CompraDAO listaCompraDAO;
+        private Local_CompraDAO localCompraDAO;
+        private ProdutoDAO produtoDAO;
+        private Item_Produto_ListaDAO itemProdutoListaDAO;
+
+        private PopularDbAsyncTask(IcompraDataBase db){
+            listaCompraDAO = db.listaCompraDAO();
+            localCompraDAO = db.localCompraDAO();
+            produtoDAO = db.produtoDAO();
+            itemProdutoListaDAO = db.itemProdutoListaDAO();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            //public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista)
+            listaCompraDAO.insertListaCompra((new Lista_Compra("14:00:00", "12/02/2020", "12181815", "20.0", "1236515231")));
+            return null;
+        }
+    }
 
 
 }

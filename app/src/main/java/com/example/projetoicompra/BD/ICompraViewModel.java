@@ -17,11 +17,11 @@ public class ICompraViewModel extends AndroidViewModel {
 
     private ICompraRepositorio repositorio;
 
-    private LiveData<List<Produto>> getVm_TodosProdutos;
-    private LiveData<List<Local_Compra>> getVm_TodoLocalCompra;
-    private LiveData<List<Lista_Compra>> getVm_TodaListaCompra;
-    private LiveData<List<Produto>> getVm_ProdutosQueEstaLista;
-    private LiveData<List<Lista_Compra>> getVm_ListaPorProdutos;
+    private LiveData<List<Produto>> vm_TodosProdutos;
+    private LiveData<List<Local_Compra>> vm_TodoLocalCompra;
+    private LiveData<List<Lista_Compra>> vm_TodaListaCompra;
+    private LiveData<List<Produto>> vm_ProdutosQueEstaLista;
+    private LiveData<List<Lista_Compra>> vm_ListaPorProdutos;
 
 
     public ICompraViewModel(Application application) {
@@ -29,32 +29,32 @@ public class ICompraViewModel extends AndroidViewModel {
 
         repositorio = new ICompraRepositorio(application);
 
-        getVm_TodosProdutos = repositorio.getRe_TodosProdutos();
-        getVm_TodoLocalCompra = repositorio.getRe_TodoLocalCompra();
-        getVm_TodaListaCompra = repositorio.getRe_TodaListaCompras();
-        getVm_ProdutosQueEstaLista = repositorio.getRe_ProdutosQueEstaLista();
-        getVm_ListaPorProdutos = repositorio.getRe_ListaPorProdutos();
+        vm_TodosProdutos = repositorio.getRe_TodosProdutos();
+        vm_TodoLocalCompra = repositorio.getRe_TodoLocalCompra();
+        vm_TodaListaCompra = repositorio.getRe_TodaListaCompra();
+        vm_ProdutosQueEstaLista = repositorio.getRe_ProdutosQueEstaLista();
+        vm_ListaPorProdutos = repositorio.getRe_ListaPorProdutos();
 
     }
 
     public LiveData<List<Produto>> getVm_TodosProdutos(){
-        return getVm_TodosProdutos;
+        return vm_TodosProdutos;
     }
 
     public LiveData<List<Local_Compra>> getVm_TodoLocalCompra(){
-        return getVm_TodoLocalCompra;
+        return vm_TodoLocalCompra;
     }
 
     public LiveData<List<Lista_Compra>> getVm_TodaListaCompra(){
-        return getVm_TodaListaCompra;
+        return vm_TodaListaCompra;
     }
 
     public LiveData<List<Produto>> getVm_ProdutosQueEstaLista(){
-        return getVm_ProdutosQueEstaLista;
+        return vm_ProdutosQueEstaLista;
     }
 
     public LiveData<List<Lista_Compra>> getVm_ListaPorProdutos(){
-        return getVm_ListaPorProdutos;
+        return vm_ListaPorProdutos;
     }
 
     public void insertVm_Produto (Produto produto){
@@ -70,6 +70,6 @@ public class ICompraViewModel extends AndroidViewModel {
     }
 
     public void insertVm_ItemProdutoLista (Item_Produto_Lista itemProdutoLista){
-        repositorio.inserirRe_ItemProdutoLista(itemProdutoLista);
+        repositorio.insertRe_ItemProdutoLista(itemProdutoLista);
     }
 }

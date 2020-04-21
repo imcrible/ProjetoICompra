@@ -63,14 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
 
-        iCompraViewModel.getVm_TodaListaCompra().observe(this, new Observer<List<Lista_Compra>>() {
-            @Override
-            public void onChanged(List<Lista_Compra> lista_compras) {
-
-            }
-        });
-
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
