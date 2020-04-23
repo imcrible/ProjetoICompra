@@ -11,17 +11,9 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <TextView
-            android:id="@+id/rv_total_compra"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="R$ 0,00"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_alignParentRight="true" />
 
         <TextView
-            android:id="@+id/rv_nome_local_lista"
+            android:id="@+id/rv_nome_local"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome Local"
@@ -34,12 +26,22 @@
             android:layout_alignParentLeft="true" />
 
         <TextView
-            android:id="@+id/rv_data_compra"
+            android:id="@+id/rv_cnpj_local"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rv_nome_local_lista"
-            android:text="00/00/0000"
+            android:layout_below="@id/rv_nome_local"
+            android:text="00.000.000.0000/00"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/rv_local_compra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/rv_cnpj_local"
+            android:text="Rua tal, 0000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentRight="true" />
 
 
     </RelativeLayout>

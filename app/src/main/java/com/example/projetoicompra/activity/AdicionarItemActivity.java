@@ -16,7 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class AdicionarItemActivity extends AppCompatActivity {
 
-    private TextInputLayout nome_produto;
+    private EditText nome_produto;
     private EditText valor_unit_produto;
     private EditText quantidade_produto;
     private TextView valor_total;
@@ -43,7 +43,7 @@ public class AdicionarItemActivity extends AppCompatActivity {
     }
 
     private void salvarItem() {
-        String nomeproduto = nome_produto.getEditText().toString();
+        String nomeproduto = nome_produto.getText().toString();
         int qtdproduto = Integer.parseInt(quantidade_produto.getText().toString());
         Double valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
 
@@ -61,6 +61,7 @@ public class AdicionarItemActivity extends AppCompatActivity {
         arquivo.putExtra(EXTRAVALOR_UNIT_PRODUTO, valorproduto);
         arquivo.putExtra(EXTRAQUANTIDADE_PRODUTO, qtdproduto);
         arquivo.putExtra(EXTRAVALOR_TOTAL, valortotalproduto);
+
 
         setResult(RESULT_OK, arquivo);
         finish();

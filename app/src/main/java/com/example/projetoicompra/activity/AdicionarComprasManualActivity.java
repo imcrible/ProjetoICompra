@@ -45,10 +45,10 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_ADD_ITEM = 1;
 
-    private TextInputLayout nome_local;
-    protected TextInputLayout cnpj_local;
-    private TextInputLayout endereco_local;
-    private TextInputLayout num_nota_fiscal;
+    private EditText nome_local;
+    protected EditText cnpj_local;
+    private EditText endereco_local;
+    private EditText num_nota_fiscal;
     private EditText data_compra;
     private EditText hora_compra;
     private TextView total_compra;
@@ -66,7 +66,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         //findViewById
         nome_local = findViewById(R.id.nome_local);
         cnpj_local = findViewById(R.id.cnpj_local);
-        endereco_local = findViewById(R.id.endereço_local);
+        endereco_local = findViewById(R.id.end_local);
         num_nota_fiscal = findViewById(R.id.num_nota_fiscal);
         data_compra = findViewById(R.id.data_compra);
         hora_compra = findViewById(R.id.hora_compra);
@@ -121,9 +121,11 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             Double vl_unit_produto = data.getDoubleExtra(AdicionarItemActivity.EXTRAVALOR_UNIT_PRODUTO, 0.0);
             Double valortotalproduto = data.getDoubleExtra(AdicionarItemActivity.EXTRAVALOR_TOTAL, 0.0);
 
+
             //public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
             Produto produto = new Produto(nomeproduto, vl_unit_produto, qtdproduto, valortotalproduto);
             iCompraViewModel.insertVm_Produto(produto);
+
 
             //para adicionar a chave estrangeira
             //int idproduto = produto.getProduto_id();
@@ -139,12 +141,12 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
     private void salvarLista() {
         //tabela local
-        String nomelocal = nome_local.getEditText().toString();
-        String cnpjlocal = cnpj_local.getEditText().toString();
-        String enderecolocal = endereco_local.getEditText().toString();
+        String nomelocal = nome_local.getText().toString();
+        String cnpjlocal = cnpj_local.getText().toString();
+        String enderecolocal = endereco_local.getText().toString();
 
         //tabela lista
-        String numnotafiscal = num_nota_fiscal.getEditText().toString();
+        String numnotafiscal = num_nota_fiscal.getText().toString();
         SimpleDateFormat dataformato = new SimpleDateFormat("dd/MM/yyyy");
         String datacompra = data_compra.getText().toString();
         //Date datacompra = dataformato.parse(datacomprastring);

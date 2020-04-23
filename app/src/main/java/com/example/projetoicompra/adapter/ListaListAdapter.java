@@ -59,7 +59,7 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
         private ListaViewHolder(View listaview) {
             super(listaview);
             total_compra = listaview.findViewById(R.id.rv_total_compra);
-            nome_local = listaview.findViewById(R.id.rv_nome_local);
+            nome_local = listaview.findViewById(R.id.rv_nome_local_lista);
             data_compra = listaview.findViewById(R.id.rv_data_compra);
 
 

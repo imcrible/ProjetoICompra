@@ -28,41 +28,28 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
+
+
+            <EditText
                 android:id="@+id/nome_local"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="Digite o nome da loja"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hint_nome_local"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite o nome da loja" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
+            <EditText
                 android:id="@+id/cnpj_local"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="Digite o CNPJ conforme está na nota"
+                android:inputType="number" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hint_cnpj_local"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite o CNPJ conforme está na nota" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/endereço_local"
+            <EditText
+                android:id="@+id/end_local"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:hint="Endereço da Loja" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hint_endereco_local"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Endereço da loja" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/text_info_lista"
@@ -74,17 +61,11 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/num_nota_fiscal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hint_nota_fiscal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Digite o numero da nota fiscal, caso tenha" />
-            </com.google.android.material.textfield.TextInputLayout>
+           <EditText
+               android:id="@+id/num_nota_fiscal"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:hint="Digite o numero da nota fiscal, caso tenha" />
 
             <EditText
                 android:id="@+id/data_compra"
