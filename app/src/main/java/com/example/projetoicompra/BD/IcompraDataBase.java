@@ -73,10 +73,10 @@ public abstract class IcompraDataBase extends RoomDatabase {
         protected Void doInBackground(Void... voids) {
             //public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista)
             //public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
-            localCompraDAO.insertLocalCompra((new Local_Compra("1236515231", "Guanabara", "Rua Ciclano") ));
-            listaCompraDAO.insertListaCompra((new Lista_Compra("14:00:00", "12/03/2020", "12181815", "20.0", "1236515231")));
+            //localCompraDAO.insertLocalCompra((new Local_Compra("1236515231", "Guanabara", "Rua Ciclano") ));
+            //listaCompraDAO.insertListaCompra((new Lista_Compra("14:00:00", "12/03/2020", "12181815", "20.0", "1236515231")));
             //produtoDAO.insertProduto((new Produto("Farinha", 6.66, 5, 33.3)));
-            produtoDAO.insertProduto((new Produto("Leite", 3.50, 12, 3.5*12)));
+            //produtoDAO.insertProduto((new Produto("Leite", 3.50, 12, 3.5*12)));
             return null;
         }
     }

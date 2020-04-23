@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             String num_nota = data.getStringExtra(AdicionarComprasManualActivity.EXTRA_NUM_NOTA);
             String hora_compra = data.getStringExtra(AdicionarComprasManualActivity.EXTRA_HORA_COMPRA);
             String totalcompra = data.getStringExtra(AdicionarComprasManualActivity.EXTRA_TOTAL_COMPRA);
-
             String datacomprastring = data.getStringExtra(AdicionarComprasManualActivity.EXTRA_DATA_COMPRA);
 
             SimpleDateFormat dataformato = new SimpleDateFormat("dd/MM/yyyy");
@@ -96,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             Local_Compra localCompra = new Local_Compra(cnpj_local, nome_local, end_local);
             iCompraViewModel.insertVm_LocalCompra(localCompra);
 
-            //public Lista_Compra(@NonNull String hora_compra, @NonNull Date data_compra, @NonNull String nota_fiscal, @NonNull Double total_compra, @NonNull String cnpj_local_lista)
+            //public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista)
             Lista_Compra listaCompra = new Lista_Compra(hora_compra, datacomprastring, num_nota, totalcompra, cnpj_local);
             iCompraViewModel.insertVm_ListaCompra(listaCompra);
 

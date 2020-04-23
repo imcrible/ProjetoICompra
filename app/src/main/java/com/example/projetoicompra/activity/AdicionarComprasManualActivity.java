@@ -169,7 +169,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         arquivo.putExtra(EXTRA_NUM_NOTA, numnotafiscal);
         arquivo.putExtra(EXTRA_DATA_COMPRA, datacompra);
         arquivo.putExtra(EXTRA_HORA_COMPRA, horacompra);
-        arquivo.putExtra(EXTRA_NOME_LOCAL, totalcompra);
+        arquivo.putExtra(EXTRA_TOTAL_COMPRA, totalcompra);
 
         setResult(RESULT_OK, arquivo);
         finish();

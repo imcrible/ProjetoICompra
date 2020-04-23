@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:hint="Digite o CNPJ conforme está na nota"
-                android:inputType="number" />
+                android:inputType="date" />
 
             <EditText
                 android:id="@+id/end_local"

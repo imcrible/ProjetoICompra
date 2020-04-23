@@ -58,7 +58,7 @@ public class HistoricoFragment extends Fragment {
             @Override
             public void onChanged(List<Lista_Compra> lista_compras) {
                 adapterlista.setListacompras(lista_compras);
-                Toast.makeText(getContext(), "Era para aparecer a lista", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Era para aparecer a lista", Toast.LENGTH_SHORT).show();
             }
         });
 
