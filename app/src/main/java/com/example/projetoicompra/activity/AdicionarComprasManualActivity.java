@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ItemListAdapter;
+import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Produto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -52,6 +54,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     private EditText data_compra;
     private EditText hora_compra;
     private TextView total_compra;
+    Double somatotalcompra =0.0;
 
 
     @Override
@@ -83,23 +86,23 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
         recyclerViewItem.setAdapter(adapteritem);
 
-        iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
+        /*iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
             @Override
             public void onChanged(List<Produto> produtos) {
                 adapteritem.setProdutos(produtos);
             }
-        });
-
-        /*iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
+        });*/
+        //configura a viewModel e chama o apdater do recycler
+        iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
             @Override
             public void onChanged(@Nullable final List<Produto> produtos) {
                 adapteritem.setProdutos(produtos);
-                //Toast.makeText(getApplicationContext(), "Aqui era pra aparecer os itens", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
+        //botão de adicionar produto
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +114,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     }
 
 
+    //Metodo que é chamado apos o retorno da intent acionado no botão de adicionar produto
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -121,11 +125,13 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             Double vl_unit_produto = data.getDoubleExtra(AdicionarItemActivity.EXTRAVALOR_UNIT_PRODUTO, 0.0);
             Double valortotalproduto = data.getDoubleExtra(AdicionarItemActivity.EXTRAVALOR_TOTAL, 0.0);
 
+            //pegando o valor total do produto e adicionando ao total da compra para saber o total da compra
+            somatotalcompra = somatotalcompra + valortotalproduto;
+            total_compra.setText(somatotalcompra.toString());
 
             //public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
             Produto produto = new Produto(nomeproduto, vl_unit_produto, qtdproduto, valortotalproduto);
             iCompraViewModel.insertVm_Produto(produto);
-
 
             //para adicionar a chave estrangeira
             //int idproduto = produto.getProduto_id();
@@ -154,7 +160,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         String horacompra = hora_compra.getText().toString();
 
         //total da compra vai precisar da soma dos itens;
-        String totalcompra = "2.0";
+        String totalcompra = somatotalcompra.toString();
 
         if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty()) {
             Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();

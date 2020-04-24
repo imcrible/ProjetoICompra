@@ -32,6 +32,7 @@ public class AdicionarItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_item);
 
+        //Adiciona o botão de fechar no menu
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
         nome_produto = findViewById(R.id.nome_produto);
@@ -80,7 +81,6 @@ public class AdicionarItemActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.itemSalvarItem:
-
                 salvarItem();
                 return true;
 
