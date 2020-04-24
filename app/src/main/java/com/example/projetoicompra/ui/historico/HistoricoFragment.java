@@ -44,7 +44,7 @@ public class HistoricoFragment extends Fragment {
         startActivity(intencao);
 
 
-        recyclerViewLista = view.findViewById(R.id.recycler_lista);
+        /*recyclerViewLista = view.findViewById(R.id.recycler_lista);
 
         recyclerViewLista.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewLista.setHasFixedSize(true);
@@ -54,13 +54,13 @@ public class HistoricoFragment extends Fragment {
 
 
         iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
-        iCompraViewModel.getVm_TodaListaCompra().observe(getActivity(), new Observer<List<Lista_Compra>>() {
+        iCompraViewModel.getVm_TodaListaCompra().observe(getViewLifecycleOwner(), new Observer<List<Lista_Compra>>() {
             @Override
             public void onChanged(List<Lista_Compra> lista_compras) {
                 adapterlista.setListacompras(lista_compras);
                 //Toast.makeText(getContext(), "Era para aparecer a lista", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
 
         return inflater.inflate(R.layout.fragment_historico, container, false);

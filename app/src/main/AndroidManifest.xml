@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ViewLocalActivity"></activity>
-        <activity android:name=".activity.ViewListaActivity" />
-        <activity android:name=".activity.AdicionarItemActivity" />
+        <activity android:name=".activity.ViewLocalActivity"
+            android:parentActivityName=".activity.MainActivity"></activity>
+        <activity android:name=".activity.ViewListaActivity"
+            android:parentActivityName=".activity.MainActivity"/>
+
+        <activity android:name=".activity.AdicionarItemActivity"
+            android:parentActivityName=".activity.AdicionarComprasManualActivity"/>
         <activity
             android:name=".activity.AdicionarComprasManualActivity"
             android:label="@string/app_name"
