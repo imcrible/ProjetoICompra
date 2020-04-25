@@ -61,8 +61,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_compras_manual);
-        Toolbar toolbar = findViewById(R.id.toolbarLista);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbarLista);
+        //setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
@@ -103,14 +103,14 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         });
 
         //botão de adicionar produto
-        FloatingActionButton fab = findViewById(R.id.fab);
+        /*FloatingActionButton fab = findViewById(R.id.fab_add_produto);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
                 startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
             }
-        });
+        });*/
     }
 
 
@@ -194,6 +194,10 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.itemSalvarLista:
                 salvarLista();
+                return true;
+            case R.id.itemAdicionarProduto:
+                Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
+                startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

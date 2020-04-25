@@ -1,33 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activity.AdicionarComprasManualActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarLista"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:orientation="vertical">
 
-    </com.google.android.material.appbar.AppBarLayout>
+           <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_add_produto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginRight="7dp"
+                app:srcCompat="@drawable/ic_menu_add_" /> -->
 
-    <include layout="@layout/content_adicionar_compras_manual" />
+            <TextView
+                android:id="@+id/text_local"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Informações do Local de Compra"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add" />
+            <EditText
+                android:id="@+id/nome_local"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Digite o nome da loja" />
+
+            <EditText
+                android:id="@+id/cnpj_local"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="Digite o CNPJ conforme está na nota"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/end_local"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Endereço da Loja" />
+
+            <TextView
+                android:id="@+id/text_info_lista"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Informações da Nota fiscal/Lista"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/num_nota_fiscal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Digite o numero da nota fiscal, caso tenha" />
+
+            <EditText
+                android:id="@+id/data_compra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Data da compra (dd/mm/aaaa)"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/hora_compra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Hora da compra"
+                android:inputType="time" />
+
+            <TextView
+                android:id="@+id/total_compra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total da Compra"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginBottom="7dp"
+                tools:listitem="@layout/recyclerview_item" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

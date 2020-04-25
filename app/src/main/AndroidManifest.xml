@@ -10,18 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.ViewLocalActivity"
-            android:parentActivityName=".activity.MainActivity"></activity>
+            android:parentActivityName=".activity.MainActivity">
+        </activity>
         <activity android:name=".activity.ViewListaActivity"
             android:parentActivityName=".activity.MainActivity"/>
 
         <activity android:name=".activity.AdicionarItemActivity"
-            android:parentActivityName=".activity.AdicionarComprasManualActivity"/>
+            android:parentActivityName=".activity.AdicionarComprasManualActivity">
+        </activity>
         <activity
             android:name=".activity.AdicionarComprasManualActivity"
-            android:label="@string/app_name"
-            android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.AdicionarComprasScanActivity" />
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.AdicionarComprasScanActivity">
+        </activity>
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
