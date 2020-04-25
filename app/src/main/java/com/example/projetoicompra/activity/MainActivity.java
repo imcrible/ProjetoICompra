@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
+import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Local_Compra;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -100,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
             iCompraViewModel.insertVm_ListaCompra(listaCompra);
 
             //para adicionar a chave estrangeira
-            //int idlistaCompra = listaCompra.getLista_compra_id();
-            //Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idlistaCompra);
-            //iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
+            int idlistaCompra = listaCompra.getLista_compra_id();
+            Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idlistaCompra);
+            iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
 
             Toast.makeText(this, "Lista Salva", Toast.LENGTH_SHORT).show();
 

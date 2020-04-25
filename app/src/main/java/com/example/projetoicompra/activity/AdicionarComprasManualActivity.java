@@ -134,9 +134,9 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             iCompraViewModel.insertVm_Produto(produto);
 
             //para adicionar a chave estrangeira
-            //int idproduto = produto.getProduto_id();
-            //Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto);
-            //iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
+            int idproduto = produto.getProduto_id();
+            Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto);
+            iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
 
             Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
 
