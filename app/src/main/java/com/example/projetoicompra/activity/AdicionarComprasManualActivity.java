@@ -5,29 +5,23 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ItemListAdapter;
-import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Local_Compra;
 import com.example.projetoicompra.model.Produto;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -45,7 +39,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
     private ICompraViewModel iCompraViewModel;
 
-    private RecyclerView recyclerViewItem;
+
 
     private static final int REQUEST_CODE_ADD_ITEM = 1;
 
@@ -78,15 +72,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         total_compra = findViewById(R.id.total_compra);
 
 
-        //configura o recycler
-        recyclerViewItem = findViewById(R.id.recycler_item);
 
-        recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewItem.setHasFixedSize(true);
-
-        ItemListAdapter adapteritem = new ItemListAdapter();
-
-        recyclerViewItem.setAdapter(adapteritem);
+        iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
 
         /*iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
@@ -96,13 +83,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             }
         });*/
         //configura a viewModel e chama o apdater do recycler
-        iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
-        iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
-            @Override
-            public void onChanged(@Nullable final List<Produto> produtos) {
-                adapteritem.setProdutos(produtos);
-            }
-        });
+
 
         //botão de adicionar produto
         /*FloatingActionButton fab = findViewById(R.id.fab_add_produto);
@@ -214,7 +195,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
 
-        menuInflater.inflate(R.menu.menu_add_lista, menu);
+        menuInflater.inflate(R.menu.menu_salvar_lista, menu);
 
         return true;
     }

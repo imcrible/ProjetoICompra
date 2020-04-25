@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Produto;
-import com.google.android.material.textfield.TextInputLayout;
 
 public class AdicionarItemActivity extends AppCompatActivity {
 
@@ -66,6 +65,9 @@ public class AdicionarItemActivity extends AppCompatActivity {
             Produto produto = new Produto(nomeproduto, valorproduto, qtdproduto, valortotalproduto);
             iCompraViewModel.insertVm_Produto(produto);
             Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, ListarProdutoActivity.class);
+            startActivity(intent);
         }
 
         /*Intent arquivo = new Intent();
@@ -86,7 +88,7 @@ public class AdicionarItemActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_add_item, menu);
+        menuInflater.inflate(R.menu.menu_salvar_item, menu);
 
         return true;
     }

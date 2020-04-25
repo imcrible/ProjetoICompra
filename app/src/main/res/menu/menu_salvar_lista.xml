@@ -8,12 +8,7 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_save_white_24dp" />
 
-    <item
-        android:id="@+id/itemAdicionarProduto"
-        android:title="Adicionar"
-        android:orderInCategory="3"
-        app:showAsAction="never"
-        android:icon="@drawable/ic_menu_add_"/>
+
 
 
 
