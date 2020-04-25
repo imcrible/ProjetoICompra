@@ -23,6 +23,8 @@ import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ItemListAdapter;
 import com.example.projetoicompra.model.Item_Produto_Lista;
+import com.example.projetoicompra.model.Lista_Compra;
+import com.example.projetoicompra.model.Local_Compra;
 import com.example.projetoicompra.model.Produto;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -119,7 +121,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_ADD_ITEM && resultCode == RESULT_OK) {
+        /*if (requestCode == REQUEST_CODE_ADD_ITEM && resultCode == RESULT_OK) {
             String nomeproduto = data.getStringExtra(AdicionarItemActivity.EXTRANOME_PRODUTO);
             int qtdproduto = data.getIntExtra(AdicionarItemActivity.EXTRAQUANTIDADE_PRODUTO, 0);
             Double vl_unit_produto = data.getDoubleExtra(AdicionarItemActivity.EXTRAVALOR_UNIT_PRODUTO, 0.0);
@@ -135,14 +137,17 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
             //para adicionar a chave estrangeira
             int idproduto = produto.getProduto_id();
-            Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto);
-            iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
+            //public Item_Produto_Lista(int produto_item_id, int lista_item_compra_id)
+            //Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto);
+            //iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
 
-            Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
+            //Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
+            //startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
 
         } else {
-            Toast.makeText(this, "Houve um problema para adicionar o item", Toast.LENGTH_SHORT).show();
-        }
+            //Toast.makeText(this, "Houve um problema para adicionar o item", Toast.LENGTH_SHORT).show();
+        }*/
     }
 
     private void salvarLista() {
@@ -165,9 +170,30 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty()) {
             Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();
             return;
+        }else{
+
+            //public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas)
+            Local_Compra localCompra = new Local_Compra(cnpjlocal, nomelocal, enderecolocal);
+            iCompraViewModel.insertVm_LocalCompra(localCompra);
+
+            //public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista)
+            Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
+            iCompraViewModel.insertVm_ListaCompra(listaCompra);
+
+            //para adicionar a chave estrangeira
+            //int idlistaCompra = listaCompra.getLista_compra_id();
+            //Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idlistaCompra);
+            //iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
+
+            Toast.makeText(this, "Lista Salva! ", Toast.LENGTH_SHORT).show();
+
+            Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
+            //startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
+            startActivity(intencao);
+
         }
 
-        Intent arquivo = new Intent();
+        /*Intent arquivo = new Intent();
         arquivo.putExtra(EXTRA_NOME_LOCAL, nomelocal);
         arquivo.putExtra(EXTRA_CNPJ_LOCAL, cnpjlocal);
         arquivo.putExtra(EXTRA_END_LOCAL, enderecolocal);
@@ -177,8 +203,11 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         arquivo.putExtra(EXTRA_HORA_COMPRA, horacompra);
         arquivo.putExtra(EXTRA_TOTAL_COMPRA, totalcompra);
 
-        setResult(RESULT_OK, arquivo);
-        finish();
+        setResult(RESULT_OK, arquivo);*/
+
+
+
+        //finish();
 
     }
 
@@ -196,8 +225,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
                 salvarLista();
                 return true;
             case R.id.itemAdicionarProduto:
-                Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
-                startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
+                //Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
+                //startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

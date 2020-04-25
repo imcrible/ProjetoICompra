@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intencao = new Intent(essaactivity, AdicionarComprasManualActivity.class);
-                startActivityForResult(intencao, REQUEST_CODE_ADD_MANUAL_LISTA);
+                //startActivityForResult(intencao, REQUEST_CODE_ADD_MANUAL_LISTA);
+                startActivity(intencao);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_ADD_MANUAL_LISTA && resultCode == RESULT_OK) {
+        /*if (requestCode == REQUEST_CODE_ADD_MANUAL_LISTA && resultCode == RESULT_OK) {
 
             //tabela local
             String nome_local = data.getStringExtra(AdicionarComprasManualActivity.EXTRA_NOME_LOCAL);
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }*/
 
 
-            //public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas)
+           /* //public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas)
             Local_Compra localCompra = new Local_Compra(cnpj_local, nome_local, end_local);
             iCompraViewModel.insertVm_LocalCompra(localCompra);
 
@@ -101,15 +102,15 @@ public class MainActivity extends AppCompatActivity {
             iCompraViewModel.insertVm_ListaCompra(listaCompra);
 
             //para adicionar a chave estrangeira
-            int idlistaCompra = listaCompra.getLista_compra_id();
-            Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idlistaCompra);
-            iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
+            //int idlistaCompra = listaCompra.getLista_compra_id();
+            //Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idlistaCompra);
+            //iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
 
             Toast.makeText(this, "Lista Salva", Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(this, "Houve um problema para salvar a lista", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     @Override

@@ -10,8 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
+import com.example.projetoicompra.model.Produto;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class AdicionarItemActivity extends AppCompatActivity {
@@ -26,6 +29,7 @@ public class AdicionarItemActivity extends AppCompatActivity {
     public static final String EXTRAQUANTIDADE_PRODUTO = "com.example.projetoicompra.activity.QUANTIDADE_PRODUTO";
     public static final String EXTRAVALOR_TOTAL = "com.example.projetoicompra.activity.VALOR_TOTAL";
 
+    private ICompraViewModel iCompraViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class AdicionarItemActivity extends AppCompatActivity {
         valor_unit_produto = findViewById(R.id.valor_unit_produto);
         quantidade_produto = findViewById(R.id.quantidade_produto);
         valor_total = findViewById(R.id.valor_total);
+
+        iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
 
 
     }
@@ -54,9 +60,15 @@ public class AdicionarItemActivity extends AppCompatActivity {
         if (nomeproduto.trim().isEmpty()) {
             Toast.makeText(this, "Coloque o nome do produto", Toast.LENGTH_SHORT).show();
             return;
+        }else{
+
+            //public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
+            Produto produto = new Produto(nomeproduto, valorproduto, qtdproduto, valortotalproduto);
+            iCompraViewModel.insertVm_Produto(produto);
+            Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
         }
 
-        Intent arquivo = new Intent();
+        /*Intent arquivo = new Intent();
 
         arquivo.putExtra(EXTRANOME_PRODUTO, nomeproduto);
         arquivo.putExtra(EXTRAVALOR_UNIT_PRODUTO, valorproduto);
@@ -64,8 +76,10 @@ public class AdicionarItemActivity extends AppCompatActivity {
         arquivo.putExtra(EXTRAVALOR_TOTAL, valortotalproduto);
 
 
-        setResult(RESULT_OK, arquivo);
-        finish();
+        setResult(RESULT_OK, arquivo);*/
+
+
+
 
     }
 

@@ -12,7 +12,7 @@
         android:id="@+id/itemAdicionarProduto"
         android:title="Adicionar"
         android:orderInCategory="3"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:icon="@drawable/ic_menu_add_"/>
 
 
