@@ -10,10 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
+import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Produto;
 
 public class AdicionarItemActivity extends AppCompatActivity {
@@ -57,14 +59,17 @@ public class AdicionarItemActivity extends AppCompatActivity {
         valor_total.setText(valortotalproduto.toString());
 
         if (nomeproduto.trim().isEmpty()) {
-            Toast.makeText(this, "Coloque o nome do produto", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Digite o nome do produto", Toast.LENGTH_SHORT).show();
             return;
         }else{
 
             //public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
             Produto produto = new Produto(nomeproduto, valorproduto, qtdproduto, valortotalproduto);
             iCompraViewModel.insertVm_Produto(produto);
+
             Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
+
+            //addChaveEstrangeira();
 
             Intent intent = new Intent(this, ListarProdutoActivity.class);
             startActivity(intent);
@@ -79,10 +84,26 @@ public class AdicionarItemActivity extends AppCompatActivity {
 
 
         setResult(RESULT_OK, arquivo);*/
+    }
+
+    public void addChaveEstrangeira(){
 
 
+        LiveData<Integer> listidproduto = iCompraViewModel.getVm_LastIdProduto() ;
+        LiveData<Integer> listidlistaCompra = iCompraViewModel.getVm_LastIdListaCompra();
+        if (listidproduto == null || listidlistaCompra== null){
+            Toast.makeText(this, "ID PRODUTO ou ID LISTA vazio", Toast.LENGTH_SHORT).show();
+        }else {
 
+            int idproduto = listidproduto.getValue();
 
+            int idlistaCompra = listidlistaCompra.getValue();
+
+            //public Item_Produto_Lista(int produto_item_id, int lista_item_compra_id)
+            Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto, idlistaCompra);
+
+            iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

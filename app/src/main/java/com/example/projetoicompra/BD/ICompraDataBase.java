@@ -19,11 +19,11 @@ import com.example.projetoicompra.model.Local_Compra;
 import com.example.projetoicompra.model.Produto;
 
 @Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class}, version = 2, exportSchema = false)
-public abstract class IcompraDataBase extends RoomDatabase {
+public abstract class ICompraDataBase extends RoomDatabase {
 
     private static final String NOME_BD = "icompradatabase";
 
-    private static IcompraDataBase INSTANCIA;
+    private static ICompraDataBase INSTANCIA;
 
     public abstract Item_Produto_ListaDAO itemProdutoListaDAO();
 
@@ -35,9 +35,9 @@ public abstract class IcompraDataBase extends RoomDatabase {
 
     private static final int NUM_DE_THREADS = 4;
 
-    public static synchronized IcompraDataBase getInstance(Context context) {
+    public static synchronized ICompraDataBase getInstance(Context context) {
         if (INSTANCIA == null) {
-            INSTANCIA = Room.databaseBuilder(context.getApplicationContext(), IcompraDataBase.class, NOME_BD)
+            INSTANCIA = Room.databaseBuilder(context.getApplicationContext(), ICompraDataBase.class, NOME_BD)
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback).build();
         }
@@ -62,7 +62,7 @@ public abstract class IcompraDataBase extends RoomDatabase {
         private ProdutoDAO produtoDAO;
         private Item_Produto_ListaDAO itemProdutoListaDAO;
 
-        private PopularDbAsyncTask(IcompraDataBase db) {
+        private PopularDbAsyncTask(ICompraDataBase db) {
             listaCompraDAO = db.listaCompraDAO();
             localCompraDAO = db.localCompraDAO();
             produtoDAO = db.produtoDAO();

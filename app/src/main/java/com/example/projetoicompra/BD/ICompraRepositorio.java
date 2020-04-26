@@ -2,6 +2,7 @@ package com.example.projetoicompra.BD;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
 
 import androidx.lifecycle.LiveData;
 
@@ -33,16 +34,20 @@ public class ICompraRepositorio {
     private LiveData<List<Lista_Compra>> re_TodaListaCompra;
     private LiveData<List<Produto>> re_ProdutosQueEstaLista;
     private LiveData<List<Lista_Compra>> re_ListaPorProdutos;
+    private LiveData<Integer> re_LastIdProduto;
+    private LiveData<Integer> reLastIdListaCompra;
     //fim instancia do tipo liveData que consulta as tabelas
 
     public ICompraRepositorio(Application application) {
         //Linha abaixo faz a instancia do banco de dados passando como paramento a aplicação
-        IcompraDataBase icompraDataBase = IcompraDataBase.getInstance(application);
+        ICompraDataBase icompraDataBase = ICompraDataBase.getInstance(application);
 
         //criação de objetos para uso nessa classe, puxando da DAO
         itemProdutoListaDAO = icompraDataBase.itemProdutoListaDAO();
         re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(1);
         re_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(1);
+        re_LastIdProduto = itemProdutoListaDAO.getLastIdProduto();
+        reLastIdListaCompra = itemProdutoListaDAO.getLastIdListaCompra();
 
         listaCompraDAO = icompraDataBase.listaCompraDAO();
         re_TodaListaCompra = listaCompraDAO.getTodaListaCompra();
@@ -52,6 +57,8 @@ public class ICompraRepositorio {
 
         produtoDAO = icompraDataBase.produtoDAO();
         re_TodosProdutos = produtoDAO.getTodosProdutos();
+
+
         //fim criação de objetos para uso nessa classe, puxando da DAO
 
     }
@@ -95,6 +102,14 @@ public class ICompraRepositorio {
 
     public LiveData<List<Lista_Compra>> getRe_ListaPorProdutos() {
         return re_ListaPorProdutos;
+    }
+
+    public LiveData<Integer> getRe_LastIdProduto(){
+        return re_LastIdProduto;
+    }
+
+    public LiveData<Integer> getRe_LastIdListaCompra(){
+        return reLastIdListaCompra;
     }
     //Fim bloco liveData/select que vai se comunicar com outras classes
 

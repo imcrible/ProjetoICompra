@@ -2,6 +2,7 @@ package com.example.projetoicompra.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,8 @@ import android.view.MenuItem;
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ItemListAdapter;
+import com.example.projetoicompra.model.Item_Produto_Lista;
+import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Produto;
 
 import java.util.List;
@@ -24,6 +27,8 @@ public class ListarProdutoActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewItem;
     private ICompraViewModel iCompraViewModel;
+    private Lista_Compra listaCompra;
+    private Produto produto;
 
 
     @Override
@@ -49,6 +54,17 @@ public class ListarProdutoActivity extends AppCompatActivity {
             }
         });
 
+        /*LiveData<Integer> listidproduto = iCompraViewModel.getVm_LastIdProduto() ;
+        int idproduto = listidproduto.getValue();
+
+        LiveData<Integer> listidlistaCompra = iCompraViewModel.getVm_LastIdListaCompra();
+        int idlistaCompra = listidlistaCompra.getValue();
+
+        //public Item_Produto_Lista(int produto_item_id, int lista_item_compra_id)
+        Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto, idlistaCompra);
+
+        iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);*/
+
 
     }
 
@@ -68,6 +84,7 @@ public class ListarProdutoActivity extends AppCompatActivity {
                 startActivity(intencao);
                 return true;
             case R.id.itemConfirmar:
+                finish();
 
             default:
                 return super.onOptionsItemSelected(item);

@@ -39,5 +39,12 @@ public interface Item_Produto_ListaDAO {
             "WHERE item_produto_lista.produto_item_id=:produto_item_id")
     LiveData<List<Lista_Compra>> getListaPorProdutos(int produto_item_id);
 
+    @Query("SELECT produto_id from produto order by produto_id DESC limit 1")
+    LiveData<Integer> getLastIdProduto();
+
+    @Query("SELECT lista_compra_id from lista_compra order by lista_compra_id DESC limit 1")
+    LiveData<Integer> getLastIdListaCompra();
+
+
 
 }
