@@ -42,9 +42,10 @@ public class ICompraRepositorio {
         //Linha abaixo faz a instancia do banco de dados passando como paramento a aplicação
         ICompraDataBase icompraDataBase = ICompraDataBase.getInstance(application);
 
+        int n = 0;
         //criação de objetos para uso nessa classe, puxando da DAO
         itemProdutoListaDAO = icompraDataBase.itemProdutoListaDAO();
-        re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(2905);
+        re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(n);
         re_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(1);
         re_LastIdProduto = itemProdutoListaDAO.getLastIdProduto();
         reLastIdListaCompra = itemProdutoListaDAO.getLastIdListaCompra();
@@ -96,7 +97,7 @@ public class ICompraRepositorio {
         return re_TodoLocalCompra;
     }
 
-    public LiveData<List<Produto>> getRe_ProdutosQueEstaLista() {
+    public LiveData<List<Produto>> getRe_ProdutosQueEstaLista(int n) {
         return re_ProdutosQueEstaLista;
     }
 

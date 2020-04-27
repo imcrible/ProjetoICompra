@@ -59,7 +59,7 @@ public class ListarProdutoActivity extends AppCompatActivity {
         recyclerViewItem.setAdapter(adapteritem);
 
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
-        iCompraViewModel.getVm_ProdutosQueEstaLista().observe(this, new Observer<List<Produto>>() {
+        iCompraViewModel.getVm_ProdutosQueEstaLista(nnf).observe(this, new Observer<List<Produto>>() {
             @Override
             public void onChanged(@Nullable final List<Produto> produtos) {
                 adapteritem.setProdutos(produtos);

@@ -31,10 +31,11 @@ public class ICompraViewModel extends AndroidViewModel {
 
         repositorio = new ICompraRepositorio(application);
 
+        int n=0;
         vm_TodosProdutos = repositorio.getRe_TodosProdutos();
         vm_TodoLocalCompra = repositorio.getRe_TodoLocalCompra();
         vm_TodaListaCompra = repositorio.getRe_TodaListaCompra();
-        vm_ProdutosQueEstaLista = repositorio.getRe_ProdutosQueEstaLista();
+        vm_ProdutosQueEstaLista = repositorio.getRe_ProdutosQueEstaLista(n);
         vm_ListaPorProdutos = repositorio.getRe_ListaPorProdutos();
         vm_LastIdProduto = repositorio.getRe_LastIdProduto();
         vm_LastIdListaCompra= repositorio.getRe_LastIdListaCompra();
@@ -53,7 +54,7 @@ public class ICompraViewModel extends AndroidViewModel {
         return vm_TodaListaCompra;
     }
 
-    public LiveData<List<Produto>> getVm_ProdutosQueEstaLista() {
+    public LiveData<List<Produto>> getVm_ProdutosQueEstaLista(int n) {
         return vm_ProdutosQueEstaLista;
     }
 
