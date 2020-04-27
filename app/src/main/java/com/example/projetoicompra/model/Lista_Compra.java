@@ -15,9 +15,10 @@ import androidx.room.PrimaryKey;
         indices = {@Index(value = {"cnpj_local_lista"})})
 public class Lista_Compra {
 
-    @PrimaryKey(autoGenerate = true)
+    /*@PrimaryKey(autoGenerate = true)
+    @NonNull
     @ColumnInfo(name = "lista_compra_id")
-    private int lista_compra_id;
+    private int lista_compra_id;*/
 
     @NonNull
     @ColumnInfo(name = "hora_compra")
@@ -27,9 +28,10 @@ public class Lista_Compra {
     @ColumnInfo(name = "data_compra")
     private String data_compra;
 
+    @PrimaryKey
     @NonNull
     @ColumnInfo(name = "nota_fiscal")
-    private String nota_fiscal;
+    private Integer nota_fiscal;
 
     @NonNull
     @ColumnInfo(name = "total_compra")
@@ -39,13 +41,13 @@ public class Lista_Compra {
     @ColumnInfo(name = "cnpj_local_lista")
     private String cnpj_local_lista;
 
-    public int getLista_compra_id() {
+    /*public int getLista_compra_id() {
         return lista_compra_id;
     }
 
     public void setLista_compra_id(int lista_compra_id) {
         this.lista_compra_id = lista_compra_id;
-    }
+    }*/
 
     @NonNull
     public String getHora_compra() {
@@ -66,11 +68,11 @@ public class Lista_Compra {
     }
 
     @NonNull
-    public String getNota_fiscal() {
+    public Integer getNota_fiscal() {
         return nota_fiscal;
     }
 
-    public void setNota_fiscal(@NonNull String nota_fiscal) {
+    public void setNota_fiscal(@NonNull Integer nota_fiscal) {
         this.nota_fiscal = nota_fiscal;
     }
 
@@ -92,7 +94,7 @@ public class Lista_Compra {
         this.cnpj_local_lista = cnpj_local_lista;
     }
 
-    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista) {
+    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull Integer nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista) {
         this.hora_compra = hora_compra;
         this.data_compra = data_compra;
         this.nota_fiscal = nota_fiscal;

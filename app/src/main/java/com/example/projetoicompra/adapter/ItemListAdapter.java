@@ -32,6 +32,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             holder.nome_produto.setText(produtoatual.getNome_produto());
             holder.quantidade_produto.setText(String.valueOf(produtoatual.getQuantidade()));
             holder.valor_total.setText(String.valueOf(produtoatual.getPreco_total()));
+            holder.id_produto.setText(String.valueOf(produtoatual.getCodigo_produto()));
         } else {
             holder.nome_produto.setText("Sem itens adicionados");
         }
@@ -53,6 +54,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         private TextView valor_total;
         private TextView nome_produto;
         private TextView quantidade_produto;
+        private TextView id_produto;
 
 
         public ItemViewHolder(View itemView) {
@@ -61,6 +63,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             valor_total = itemView.findViewById(R.id.rv_valor_total);
             nome_produto = itemView.findViewById(R.id.rv_nome_produto);
             quantidade_produto = itemView.findViewById(R.id.rv_quantidade_produto);
+            id_produto = itemView.findViewById(R.id.rv_id_produto);
+
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Dao
 public interface Item_Produto_ListaDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertItemProdutoLista(Item_Produto_Lista item_produto_lista);
 
 
@@ -26,23 +27,23 @@ public interface Item_Produto_ListaDAO {
     @Delete
     void deleteItemProdutoLista(Item_Produto_Lista item_produto_lista);
 
-    @Query("SELECT produto_id, nome_produto, preco_produto, quatidade, preco_total FROM produto " +
+    @Query("SELECT codigo_produto, nome_produto, preco_produto, quatidade, preco_total FROM produto " +
             "INNER JOIN item_produto_lista  " +
-            "ON produto.produto_id=item_produto_lista.produto_item_id " +
+            "ON produto.codigo_produto=item_produto_lista.produto_item_id " +
             "WHERE item_produto_lista.lista_item_compra_id=:lista_item_compra_id")
     LiveData<List<Produto>> getProdutosQueEstaLista(int lista_item_compra_id);
 
 
-    @Query("SELECT lista_compra_id, hora_compra, data_compra, nota_fiscal, total_compra, cnpj_local_lista FROM lista_compra " +
+    @Query("SELECT  hora_compra, data_compra, nota_fiscal, total_compra, cnpj_local_lista FROM lista_compra " +
             "INNER JOIN item_produto_lista " +
-            "ON lista_compra.lista_compra_id=item_produto_lista.lista_item_compra_id " +
+            "ON lista_compra.nota_fiscal=item_produto_lista.lista_item_compra_id " +
             "WHERE item_produto_lista.produto_item_id=:produto_item_id")
     LiveData<List<Lista_Compra>> getListaPorProdutos(int produto_item_id);
 
-    @Query("SELECT produto_id from produto order by produto_id DESC limit 1")
+    @Query("SELECT codigo_produto from produto order by codigo_produto DESC limit 2")
     LiveData<Integer> getLastIdProduto();
 
-    @Query("SELECT lista_compra_id from lista_compra order by lista_compra_id DESC limit 1")
+    @Query("SELECT nota_fiscal from lista_compra order by nota_fiscal DESC limit 2")
     LiveData<Integer> getLastIdListaCompra();
 
 

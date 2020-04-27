@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
+import com.example.projetoicompra.DAO.Item_Produto_ListaDAO;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ItemListAdapter;
 import com.example.projetoicompra.model.Item_Produto_Lista;
@@ -30,6 +31,11 @@ public class ListarProdutoActivity extends AppCompatActivity {
     private Lista_Compra listaCompra;
     private Produto produto;
 
+    private String nunnotafiscal;
+    Integer nnf;
+    private static final int PASSAR_NUM_NOTA=3;
+    public static final String NUM_NOTA_FISCAL = "com.example.projetoicompra.activity.NUM_NOTA_FISCAL";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +48,33 @@ public class ListarProdutoActivity extends AppCompatActivity {
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.setHasFixedSize(true);
 
+        Intent intencaonunnota = getIntent();
+        if(intencaonunnota.hasExtra(NUM_NOTA_FISCAL)){
+            nunnotafiscal = intencaonunnota.getStringExtra(NUM_NOTA_FISCAL);
+            nnf = Integer.parseInt(nunnotafiscal);
+        }
+
         ItemListAdapter adapteritem = new ItemListAdapter();
 
         recyclerViewItem.setAdapter(adapteritem);
 
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
+        iCompraViewModel.getVm_ProdutosQueEstaLista().observe(this, new Observer<List<Produto>>() {
+            @Override
+            public void onChanged(@Nullable final List<Produto> produtos) {
+                adapteritem.setProdutos(produtos);
+
+
+            }
+        });
+
+        /*iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
             @Override
             public void onChanged(@Nullable final List<Produto> produtos) {
                 adapteritem.setProdutos(produtos);
             }
-        });
+        });*/
 
         /*LiveData<Integer> listidproduto = iCompraViewModel.getVm_LastIdProduto() ;
         int idproduto = listidproduto.getValue();
@@ -81,6 +103,7 @@ public class ListarProdutoActivity extends AppCompatActivity {
             case R.id.itemAdicionarProduto:
 
                 Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
+                intencao.putExtra(AdicionarItemActivity.NUM_NOTA_FISCAL, nunnotafiscal);
                 startActivity(intencao);
                 return true;
             case R.id.itemConfirmar:

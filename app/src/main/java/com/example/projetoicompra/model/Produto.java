@@ -8,9 +8,16 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "produto")
 public class Produto {
 
-    @PrimaryKey(autoGenerate = true)
+
+    /**@PrimaryKey(autoGenerate = true)
+    @NonNull
     @ColumnInfo(name = "produto_id")
-    private int produto_id;
+    private int produto_id;*/
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "codigo_produto")
+    private Integer codigo_produto;
 
     @NonNull
     @ColumnInfo(name = "nome_produto")
@@ -29,13 +36,13 @@ public class Produto {
     private Double preco_total;
 
 
-    public int getProduto_id() {
+    /*public int getProduto_id() {
         return produto_id;
-    }
+    }*/
 
-    public void setProduto_id(int produto_id) {
+    /*public void setProduto_id(int produto_id) {
         this.produto_id = produto_id;
-    }
+    }*/
 
     @NonNull
     public String getNome_produto() {
@@ -72,11 +79,20 @@ public class Produto {
         this.preco_total = preco_total;
     }
 
+    public Integer getCodigo_produto() {
+        return codigo_produto;
+    }
 
-    public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total) {
+    public void setCodigo_produto(Integer codigo_produto) {
+        this.codigo_produto = codigo_produto;
+    }
+
+    public Produto(@NonNull Integer codigo_produto, @NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total) {
+        this.codigo_produto = codigo_produto;
         this.nome_produto = nome_produto;
         this.preco_produto = preco_produto;
         this.quantidade = quantidade;
         this.preco_total = preco_total;
     }
+
 }

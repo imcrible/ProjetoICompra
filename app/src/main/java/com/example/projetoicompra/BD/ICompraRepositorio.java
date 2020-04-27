@@ -44,7 +44,7 @@ public class ICompraRepositorio {
 
         //criação de objetos para uso nessa classe, puxando da DAO
         itemProdutoListaDAO = icompraDataBase.itemProdutoListaDAO();
-        re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(1);
+        re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(2905);
         re_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(1);
         re_LastIdProduto = itemProdutoListaDAO.getLastIdProduto();
         reLastIdListaCompra = itemProdutoListaDAO.getLastIdListaCompra();

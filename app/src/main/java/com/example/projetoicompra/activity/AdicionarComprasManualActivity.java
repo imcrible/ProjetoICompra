@@ -42,6 +42,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
 
     private static final int REQUEST_CODE_ADD_ITEM = 1;
+    private static final int PASSAR_NUM_NOTA=3;
 
     private EditText nome_local;
     protected EditText cnpj_local;
@@ -138,7 +139,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         String enderecolocal = endereco_local.getText().toString();
 
         //tabela lista
-        String numnotafiscal = num_nota_fiscal.getText().toString();
+        Integer numnotafiscal = Integer.parseInt(num_nota_fiscal.getText().toString());
         SimpleDateFormat dataformato = new SimpleDateFormat("dd/MM/yyyy");
         String datacompra = data_compra.getText().toString();
         //Date datacompra = dataformato.parse(datacomprastring);
@@ -148,7 +149,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         //total da compra vai precisar da soma dos itens;
         String totalcompra = somatotalcompra.toString();
 
-        if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty()) {
+        if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty() ) {
             Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();
             return;
         }else{
@@ -169,8 +170,9 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             Toast.makeText(this, "Lista Salva! ", Toast.LENGTH_SHORT).show();
 
             Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
-            //startActivityForResult(intencao, REQUEST_CODE_ADD_ITEM);
-            startActivity(intencao);
+            intencao.putExtra(AdicionarItemActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
+            startActivityForResult(intencao, PASSAR_NUM_NOTA);
+            //startActivity(intencao);
 
         }
 

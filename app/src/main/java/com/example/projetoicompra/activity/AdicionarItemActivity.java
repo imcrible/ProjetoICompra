@@ -14,21 +14,30 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
+import com.example.projetoicompra.DAO.Item_Produto_ListaDAO;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Produto;
 
 public class AdicionarItemActivity extends AppCompatActivity {
 
+    private EditText codigoproduto;
     private EditText nome_produto;
     private EditText valor_unit_produto;
     private EditText quantidade_produto;
     private TextView valor_total;
+    private String numnotafiscal;
+    Integer nnf;
+
+    LiveData<Integer> listidproduto;
+    LiveData<Integer> listidlistaCompra;
+
 
     public static final String EXTRANOME_PRODUTO = "com.example.projetoicompra.activity.NOME_PRODUTO";
     public static final String EXTRAVALOR_UNIT_PRODUTO = "com.example.projetoicompra.activity.VALORUNITPRODUTO";
     public static final String EXTRAQUANTIDADE_PRODUTO = "com.example.projetoicompra.activity.QUANTIDADE_PRODUTO";
     public static final String EXTRAVALOR_TOTAL = "com.example.projetoicompra.activity.VALOR_TOTAL";
+    public static final String NUM_NOTA_FISCAL = "com.example.projetoicompra.activity.NUM_NOTA_FISCAL";
 
     private ICompraViewModel iCompraViewModel;
 
@@ -40,6 +49,7 @@ public class AdicionarItemActivity extends AppCompatActivity {
         //Adiciona o botão de fechar no menu
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
+        codigoproduto = findViewById(R.id.codigo_produto);
         nome_produto = findViewById(R.id.nome_produto);
         valor_unit_produto = findViewById(R.id.valor_unit_produto);
         quantidade_produto = findViewById(R.id.quantidade_produto);
@@ -47,10 +57,23 @@ public class AdicionarItemActivity extends AppCompatActivity {
 
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
 
+       listidproduto = iCompraViewModel.getVm_LastIdProduto();
+       listidlistaCompra = iCompraViewModel.getVm_LastIdListaCompra();
+
+
+       Intent intencaonumnota = getIntent();
+       if (intencaonumnota.hasExtra(NUM_NOTA_FISCAL)){
+           numnotafiscal = intencaonumnota.getStringExtra(NUM_NOTA_FISCAL);
+           //Toast.makeText(this, numnotafiscal, Toast.LENGTH_SHORT).show();
+           nnf = Integer.parseInt(numnotafiscal);
+       }
+
+
 
     }
 
     private void salvarItem() {
+        Integer codigo_produto = Integer.parseInt( codigoproduto.getText().toString() );
         String nomeproduto = nome_produto.getText().toString();
         int qtdproduto = Integer.parseInt(quantidade_produto.getText().toString());
         Double valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
@@ -63,15 +86,18 @@ public class AdicionarItemActivity extends AppCompatActivity {
             return;
         }else{
 
-            //public Produto(@NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
-            Produto produto = new Produto(nomeproduto, valorproduto, qtdproduto, valortotalproduto);
+            //public Produto(int codigo_produto, @NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
+            Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
             iCompraViewModel.insertVm_Produto(produto);
 
             Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
 
-            //addChaveEstrangeira();
+
+
+            addChaveEstrangeira(codigo_produto);
 
             Intent intent = new Intent(this, ListarProdutoActivity.class);
+            intent.putExtra(NUM_NOTA_FISCAL, nnf.toString());
             startActivity(intent);
         }
 
@@ -86,24 +112,17 @@ public class AdicionarItemActivity extends AppCompatActivity {
         setResult(RESULT_OK, arquivo);*/
     }
 
-    public void addChaveEstrangeira(){
+    public void addChaveEstrangeira(Integer codigo_produto){
+
+            //public Item_Produto_Lista(@NonNull String produto_item_id, @NonNull String lista_item_compra_id)
 
 
-        LiveData<Integer> listidproduto = iCompraViewModel.getVm_LastIdProduto() ;
-        LiveData<Integer> listidlistaCompra = iCompraViewModel.getVm_LastIdListaCompra();
-        if (listidproduto == null || listidlistaCompra== null){
-            Toast.makeText(this, "ID PRODUTO ou ID LISTA vazio", Toast.LENGTH_SHORT).show();
-        }else {
+            Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(codigo_produto, nnf);
 
-            int idproduto = listidproduto.getValue();
-
-            int idlistaCompra = listidlistaCompra.getValue();
-
-            //public Item_Produto_Lista(int produto_item_id, int lista_item_compra_id)
-            Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto, idlistaCompra);
+            Toast.makeText(this, codigo_produto+" "+nnf, Toast.LENGTH_SHORT).show();
 
             iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
-        }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
