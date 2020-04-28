@@ -48,7 +48,7 @@ public class ICompraRepositorio {
 
         //criação de objetos para uso nessa classe, puxando da DAO
         itemProdutoListaDAO = icompraDataBase.itemProdutoListaDAO();
-        re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(n);
+
         re_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(n);
         re_LastIdProduto = itemProdutoListaDAO.getLastIdProduto();
         reLastIdListaCompra = itemProdutoListaDAO.getLastIdListaCompra();
@@ -101,8 +101,8 @@ public class ICompraRepositorio {
     }
 
     public LiveData<List<Produto>> getRe_ProdutosQueEstaLista(Integer num) {
-        n = num;
-        return re_ProdutosQueEstaLista;
+
+        return re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(num);
     }
 
     public LiveData<List<Lista_Compra>> getRe_ListaPorProdutos() {
