@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
     }
 
     @Override
@@ -91,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }*/
-
 
            /* //public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas)
             Local_Compra localCompra = new Local_Compra(cnpj_local, nome_local, end_local);

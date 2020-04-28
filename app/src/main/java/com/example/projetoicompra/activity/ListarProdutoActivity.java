@@ -64,7 +64,6 @@ public class ListarProdutoActivity extends AppCompatActivity {
             public void onChanged(@Nullable final List<Produto> produtos) {
                 adapteritem.setProdutos(produtos);
 
-
             }
         });
 
@@ -87,7 +86,6 @@ public class ListarProdutoActivity extends AppCompatActivity {
 
         iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);*/
 
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -98,7 +96,6 @@ public class ListarProdutoActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.itemAdicionarProduto:
 
@@ -114,6 +111,5 @@ public class ListarProdutoActivity extends AppCompatActivity {
 
         }
     }
-
 
 }

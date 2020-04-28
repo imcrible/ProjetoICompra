@@ -40,7 +40,6 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     private ICompraViewModel iCompraViewModel;
 
 
-
     private static final int REQUEST_CODE_ADD_ITEM = 1;
     private static final int PASSAR_NUM_NOTA=3;
 
@@ -58,8 +57,6 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_compras_manual);
-        //Toolbar toolbar = findViewById(R.id.toolbarLista);
-        //setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
@@ -73,9 +70,9 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         total_compra = findViewById(R.id.total_compra);
 
 
-
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
 
+        //configura a viewModel e chama o apdater do recycler
         /*iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
             @Override
@@ -83,8 +80,6 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
                 adapteritem.setProdutos(produtos);
             }
         });*/
-        //configura a viewModel e chama o apdater do recycler
-
 
         //botão de adicionar produto
         /*FloatingActionButton fab = findViewById(R.id.fab_add_produto);
@@ -96,7 +91,6 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             }
         });*/
     }
-
 
     //Metodo que é chamado apos o retorno da intent acionado no botão de adicionar produto
     @Override
@@ -162,10 +156,6 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
             iCompraViewModel.insertVm_ListaCompra(listaCompra);
 
-            //para adicionar a chave estrangeira
-            //int idlistaCompra = listaCompra.getLista_compra_id();
-            //Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idlistaCompra);
-            //iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
 
             Toast.makeText(this, "Lista Salva! ", Toast.LENGTH_SHORT).show();
 
@@ -188,17 +178,12 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
         setResult(RESULT_OK, arquivo);*/
 
-
-
         //finish();
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-
         menuInflater.inflate(R.menu.menu_salvar_lista, menu);
-
         return true;
     }
 
@@ -216,7 +201,5 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
         }
 
-
     }
-
 }

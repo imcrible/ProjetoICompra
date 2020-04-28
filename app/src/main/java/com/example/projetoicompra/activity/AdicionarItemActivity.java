@@ -68,8 +68,6 @@ public class AdicionarItemActivity extends AppCompatActivity {
            nnf = Integer.parseInt(numnotafiscal);
        }
 
-
-
     }
 
     private void salvarItem() {
@@ -91,8 +89,6 @@ public class AdicionarItemActivity extends AppCompatActivity {
             iCompraViewModel.insertVm_Produto(produto);
 
             Toast.makeText(this, "Item salvo com sucesso!", Toast.LENGTH_SHORT).show();
-
-
 
             addChaveEstrangeira(codigo_produto);
 
@@ -126,15 +122,12 @@ public class AdicionarItemActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_salvar_item, menu);
-
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.itemSalvarItem:
                 salvarItem();
@@ -144,7 +137,6 @@ public class AdicionarItemActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
-
 
     }
 }

@@ -67,6 +67,4 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
 
         }
     }
-
-
 }

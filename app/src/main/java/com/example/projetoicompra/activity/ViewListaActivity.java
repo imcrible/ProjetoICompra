@@ -48,7 +48,6 @@ public class ViewListaActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<Lista_Compra> lista_compras) {
                 adapterlista.setListacompras(lista_compras);
-                //Toast.makeText(ViewListaActivity.this, "é pra aparecer a lista", Toast.LENGTH_SHORT).show();
             }
         });*/
 

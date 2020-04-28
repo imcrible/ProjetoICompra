@@ -49,7 +49,7 @@ public class ICompraRepositorio {
         //criação de objetos para uso nessa classe, puxando da DAO
         itemProdutoListaDAO = icompraDataBase.itemProdutoListaDAO();
 
-        re_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(n);
+
         re_LastIdProduto = itemProdutoListaDAO.getLastIdProduto();
         reLastIdListaCompra = itemProdutoListaDAO.getLastIdListaCompra();
 
@@ -83,7 +83,6 @@ public class ICompraRepositorio {
     public void insertRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
         new InsertItemProdutoListaAsyncTask(itemProdutoListaDAO).execute(itemProdutoLista);
     }
-
     //Fim bloco insert do repositorio, aqui que as outras classes vão se comunicar
 
 
@@ -101,12 +100,11 @@ public class ICompraRepositorio {
     }
 
     public LiveData<List<Produto>> getRe_ProdutosQueEstaLista(Integer num) {
-
         return re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(num);
     }
 
-    public LiveData<List<Lista_Compra>> getRe_ListaPorProdutos() {
-        return re_ListaPorProdutos;
+    public LiveData<List<Lista_Compra>> getRe_ListaPorProdutos(Integer num) {
+        return  re_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(num);
     }
 
     public LiveData<Integer> getRe_LastIdProduto(){

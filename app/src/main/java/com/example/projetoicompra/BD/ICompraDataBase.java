@@ -44,9 +44,6 @@ public abstract class ICompraDataBase extends RoomDatabase {
         return INSTANCIA;
     }
 
-    ;
-
-
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -88,6 +85,5 @@ public abstract class ICompraDataBase extends RoomDatabase {
             return null;
         }
     }
-
 
 }
