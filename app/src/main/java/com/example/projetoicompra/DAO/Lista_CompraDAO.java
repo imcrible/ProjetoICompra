@@ -26,4 +26,6 @@ public interface Lista_CompraDAO {
 
     @Query("SELECT * FROM lista_compra")
     LiveData<List<Lista_Compra>> getTodaListaCompra();
+
+
 }

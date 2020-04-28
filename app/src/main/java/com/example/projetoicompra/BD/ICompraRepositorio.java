@@ -1,6 +1,7 @@
 package com.example.projetoicompra.BD;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 
@@ -32,21 +33,23 @@ public class ICompraRepositorio {
     private LiveData<List<Produto>> re_TodosProdutos;
     private LiveData<List<Local_Compra>> re_TodoLocalCompra;
     private LiveData<List<Lista_Compra>> re_TodaListaCompra;
-    private LiveData<List<Produto>> re_ProdutosQueEstaLista;
+    private LiveData<List<Produto>> re_ProdutosQueEstaLista ;
     private LiveData<List<Lista_Compra>> re_ListaPorProdutos;
     private LiveData<Integer> re_LastIdProduto;
     private LiveData<Integer> reLastIdListaCompra;
     //fim instancia do tipo liveData que consulta as tabelas
 
+    Integer n;
+
     public ICompraRepositorio(Application application) {
         //Linha abaixo faz a instancia do banco de dados passando como paramento a aplicação
         ICompraDataBase icompraDataBase = ICompraDataBase.getInstance(application);
 
-        int n = 0;
+
         //criação de objetos para uso nessa classe, puxando da DAO
         itemProdutoListaDAO = icompraDataBase.itemProdutoListaDAO();
         re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(n);
-        re_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(1);
+        re_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(n);
         re_LastIdProduto = itemProdutoListaDAO.getLastIdProduto();
         reLastIdListaCompra = itemProdutoListaDAO.getLastIdListaCompra();
 
@@ -97,7 +100,8 @@ public class ICompraRepositorio {
         return re_TodoLocalCompra;
     }
 
-    public LiveData<List<Produto>> getRe_ProdutosQueEstaLista(int n) {
+    public LiveData<List<Produto>> getRe_ProdutosQueEstaLista(Integer num) {
+        n = num;
         return re_ProdutosQueEstaLista;
     }
 
