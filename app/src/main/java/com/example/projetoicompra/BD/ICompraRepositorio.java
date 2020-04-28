@@ -39,7 +39,7 @@ public class ICompraRepositorio {
     private LiveData<Integer> reLastIdListaCompra;
     //fim instancia do tipo liveData que consulta as tabelas
 
-    Integer n;
+    static Integer n;
 
     public ICompraRepositorio(Application application) {
         //Linha abaixo faz a instancia do banco de dados passando como paramento a aplicação

@@ -25,7 +25,7 @@ public class ICompraViewModel extends AndroidViewModel {
     private LiveData<Integer> vm_LastIdProduto;
     private LiveData<Integer> vm_LastIdListaCompra;
 
-    Integer n;
+    static Integer n;
 
     public ICompraViewModel(@NonNull Application application) {
         super(application);
