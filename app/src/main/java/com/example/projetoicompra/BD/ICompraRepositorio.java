@@ -67,25 +67,6 @@ public class ICompraRepositorio {
 
     }
 
-    //Inicio bloco insert do repositorio, aqui que as outras classes vão se comunicar
-    public void insertRe_Produto(Produto produto) {
-        new InsertProdutoAsyncTask(produtoDAO).execute(produto);
-    }
-
-    public void insertRe_ListaCompra(Lista_Compra listaCompra) {
-        new InsertListaCompraAsyncTask(listaCompraDAO).execute(listaCompra);
-    }
-
-    public void insertRe_LocalCompra(Local_Compra localCompra) {
-        new InsertLocalCompraAsyncTask(localCompraDAO).execute(localCompra);
-    }
-
-    public void insertRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
-        new InsertItemProdutoListaAsyncTask(itemProdutoListaDAO).execute(itemProdutoLista);
-    }
-    //Fim bloco insert do repositorio, aqui que as outras classes vão se comunicar
-
-
     //Inicio bloco liveData/select que vai se comunicar com outras classes
     public LiveData<List<Produto>> getRe_TodosProdutos() {
         return re_TodosProdutos;
@@ -117,7 +98,63 @@ public class ICompraRepositorio {
     //Fim bloco liveData/select que vai se comunicar com outras classes
 
 
-    //inicio bloco Insert Async Task
+    //Inicio bloco insert do repositorio, aqui que as outras classes vão se comunicar
+    public void insertRe_Produto(Produto produto) {
+        new InsertProdutoAsyncTask(produtoDAO).execute(produto);
+    }
+
+    public void insertRe_ListaCompra(Lista_Compra listaCompra) {
+        new InsertListaCompraAsyncTask(listaCompraDAO).execute(listaCompra);
+    }
+
+    public void insertRe_LocalCompra(Local_Compra localCompra) {
+        new InsertLocalCompraAsyncTask(localCompraDAO).execute(localCompra);
+    }
+
+    public void insertRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
+        new InsertItemProdutoListaAsyncTask(itemProdutoListaDAO).execute(itemProdutoLista);
+    }
+    //Fim bloco insert do repositorio, aqui que as outras classes vão se comunicar
+
+    //Inicio bloco update do repositorio
+    public void updateRe_Produto(Produto produto){
+        new UpdateProdutoAsyncTask(produtoDAO).execute(produto);
+    }
+
+    public void updateRe_ListaCompra(Lista_Compra listaCompra){
+        new UpdateListaCompraAsyncTask(listaCompraDAO).execute(listaCompra);
+    }
+
+    public void updateRe_LocalCompra(Local_Compra localCompra){
+        new UpdateLocalCompraAsyncTask(localCompraDAO).execute(localCompra);
+
+    }
+
+    public void updateRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista){
+        new UpdateItemProdutoListaAsyncTask(itemProdutoListaDAO).execute(itemProdutoLista);
+    }
+    //Fim do bloco update do repositorio
+
+    //Inicio do bloco delete do repositorio
+    public void deleteRe_Produto(Produto produto){
+        new DeleteProdutoAsyncTask(produtoDAO).execute(produto);
+    }
+
+    public void deleteRe_ListaCompra(Lista_Compra listaCompra){
+        new DeleteListaCompraAsyncTask(listaCompraDAO).execute(listaCompra);
+    }
+
+    public void deleteRe_LocalCompra(Local_Compra localCompra){
+        new DeleteLocalCompraAsyncTask(localCompraDAO).execute(localCompra);
+    }
+
+    public void deleteRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista){
+        new DeleteItemProdutoListaAsyncTask(itemProdutoListaDAO).execute(itemProdutoLista);
+
+    }
+
+
+        //inicio bloco Insert Async Task
 
     private static class InsertProdutoAsyncTask extends AsyncTask<Produto, Void, Void> {
         private ProdutoDAO produtoDAO;
@@ -174,30 +211,125 @@ public class ICompraRepositorio {
             return null;
         }
     }
-
     //Fim do bloco Insert Async Task
 
+    //Inicio do bloco Update asyncTask
+
+    private static class UpdateProdutoAsyncTask extends AsyncTask<Produto, Void, Void>{
+        private ProdutoDAO produtoDAO;
+
+        private UpdateProdutoAsyncTask(ProdutoDAO produtoDAO){
+            this.produtoDAO = produtoDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Produto... produtos) {
+            produtoDAO.updateProduto(produtos[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateListaCompraAsyncTask extends AsyncTask<Lista_Compra, Void, Void>{
+        private Lista_CompraDAO listaCompraDAO;
+
+        private UpdateListaCompraAsyncTask(Lista_CompraDAO listaCompraDAO){
+            this.listaCompraDAO = listaCompraDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Lista_Compra... lista_compras) {
+            listaCompraDAO.updateListaCompra(lista_compras[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateLocalCompraAsyncTask extends AsyncTask<Local_Compra, Void, Void>{
+        private Local_CompraDAO localCompraDAO;
+
+        private UpdateLocalCompraAsyncTask(Local_CompraDAO localCompraDAO){
+            this.localCompraDAO = localCompraDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Local_Compra... local_compras) {
+            localCompraDAO.updateLocalCompra(local_compras[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateItemProdutoListaAsyncTask extends AsyncTask<Item_Produto_Lista, Void, Void> {
+        private Item_Produto_ListaDAO itemProdutoListaDAO;
+
+        private UpdateItemProdutoListaAsyncTask(Item_Produto_ListaDAO itemProdutoListaDAO) {
+            this.itemProdutoListaDAO = itemProdutoListaDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Item_Produto_Lista... item_produto_listas) {
+            itemProdutoListaDAO.updateItemProdutoLista(item_produto_listas[0]);
+            return null;
+        }
+    }
+    //Fim do bloco Update asyncTask
+
+    //Inicio do bloco Delete asyncTask
+    private static class DeleteProdutoAsyncTask extends AsyncTask<Produto, Void, Void>{
+        private ProdutoDAO produtoDAO;
+
+        private DeleteProdutoAsyncTask(ProdutoDAO produtoDAO){
+            this.produtoDAO = produtoDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Produto... produtos) {
+            produtoDAO.deleteProduto(produtos[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteListaCompraAsyncTask extends AsyncTask<Lista_Compra, Void, Void>{
+        private Lista_CompraDAO listaCompraDAO;
+
+        private DeleteListaCompraAsyncTask(Lista_CompraDAO listaCompraDAO){
+            this.listaCompraDAO = listaCompraDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Lista_Compra... lista_compras) {
+            listaCompraDAO.deleteLista_Compra(lista_compras[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteLocalCompraAsyncTask extends AsyncTask<Local_Compra, Void, Void>{
+        private Local_CompraDAO localCompraDAO;
+
+        private DeleteLocalCompraAsyncTask(Local_CompraDAO localCompraDAO){
+            this.localCompraDAO = localCompraDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Local_Compra... local_compras) {
+            localCompraDAO.deleteLocalCompra(local_compras[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteItemProdutoListaAsyncTask extends AsyncTask<Item_Produto_Lista, Void, Void> {
+        private Item_Produto_ListaDAO itemProdutoListaDAO;
+
+        private DeleteItemProdutoListaAsyncTask(Item_Produto_ListaDAO itemProdutoListaDAO) {
+            this.itemProdutoListaDAO = itemProdutoListaDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Item_Produto_Lista... item_produto_listas) {
+            itemProdutoListaDAO.deleteItemProdutoLista(item_produto_listas[0]);
+            return null;
+        }
+    }
 
 }
-
-
-    /*ICompraRepositorio(Application application){
-        IcompraDataBase bd = IcompraDataBase.getInstance(application);
-        produtoDAO = bd.produtoDAO();
-        getRe_TodosProdutos = produtoDAO.getTodosProdutos();
-
-        localCompraDAO = bd.localCompraDAO();
-        getRe_TodoLocalCompra = localCompraDAO.getTodoLocalCompra();
-
-        listaCompraDAO = bd.listaCompraDAO();
-        getRe_TodaListaCompra = listaCompraDAO.getTodaListaCompra();
-
-        int n=0;
-        itemProdutoListaDAO = bd.itemProdutoListaDAO();
-        /*Precisa passar dado getRe_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(n) ;
-        /*Precisa passar dado getRe_ListaPorProdutos = itemProdutoListaDAO.getListaPorProdutos(n);
-
-    }*/
 
 
 

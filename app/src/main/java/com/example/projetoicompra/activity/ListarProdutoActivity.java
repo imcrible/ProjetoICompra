@@ -67,6 +67,8 @@ public class ListarProdutoActivity extends AppCompatActivity {
             }
         });
 
+
+
         /*iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
             @Override
@@ -104,7 +106,9 @@ public class ListarProdutoActivity extends AppCompatActivity {
                 startActivity(intencao);
                 return true;
             case R.id.itemConfirmar:
-                finish();
+                //finish();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
 
             default:
                 return super.onOptionsItemSelected(item);

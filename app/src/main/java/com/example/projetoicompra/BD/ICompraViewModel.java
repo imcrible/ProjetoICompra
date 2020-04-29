@@ -32,11 +32,9 @@ public class ICompraViewModel extends AndroidViewModel {
 
         repositorio = new ICompraRepositorio(application);
 
-
         vm_TodosProdutos = repositorio.getRe_TodosProdutos();
         vm_TodoLocalCompra = repositorio.getRe_TodoLocalCompra();
         vm_TodaListaCompra = repositorio.getRe_TodaListaCompra();
-
 
         vm_LastIdProduto = repositorio.getRe_LastIdProduto();
         vm_LastIdListaCompra= repositorio.getRe_LastIdListaCompra();
@@ -71,6 +69,7 @@ public class ICompraViewModel extends AndroidViewModel {
         return vm_LastIdListaCompra;
     }
 
+    //Inicio Bloco Insert
     public void insertVm_Produto(Produto produto) {
         repositorio.insertRe_Produto(produto);
     }
@@ -86,4 +85,42 @@ public class ICompraViewModel extends AndroidViewModel {
     public void insertVm_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
         repositorio.insertRe_ItemProdutoLista(itemProdutoLista);
     }
+    //Fim Bloco Insert
+
+    //Inicio Bloco Update
+    public void updateVm_Produto(Produto produto) {
+        repositorio.updateRe_Produto(produto);
+    }
+
+    public void updateVm_LocalCompra(Local_Compra localCompra) {
+        repositorio.updateRe_LocalCompra(localCompra);
+    }
+
+    public void updateVm_ListaCompra(Lista_Compra listaCompra) {
+        repositorio.updateRe_ListaCompra(listaCompra);
+    }
+
+    public void updateVm_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
+        repositorio.updateRe_ItemProdutoLista(itemProdutoLista);
+    }
+    //Fim do bloco Update
+
+    //Inicio do bloco Delete
+    public void deleteVm_Produto(Produto produto) {
+        repositorio.deleteRe_Produto(produto);
+    }
+
+    public void deleteVm_LocalCompra(Local_Compra localCompra) {
+        repositorio.deleteRe_LocalCompra(localCompra);
+    }
+
+    public void deleteVm_ListaCompra(Lista_Compra listaCompra) {
+        repositorio.deleteRe_ListaCompra(listaCompra);
+    }
+
+    public void deleteVm_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
+        repositorio.deleteRe_ItemProdutoLista(itemProdutoLista);
+    }
+    //Fim do bloco delete
+
 }

@@ -47,6 +47,10 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
         notifyDataSetChanged();
     }
 
+    public Lista_Compra getPosicaoListaCompra(int position){
+        return listacompras.get(position);
+    }
+
     class ListaViewHolder extends RecyclerView.ViewHolder {
         private TextView total_compra;
         private TextView nome_local;
