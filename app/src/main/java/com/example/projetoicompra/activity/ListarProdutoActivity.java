@@ -1,10 +1,11 @@
 package com.example.projetoicompra.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,12 +14,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
-import com.example.projetoicompra.DAO.Item_Produto_ListaDAO;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ItemListAdapter;
-import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Produto;
 
@@ -34,7 +34,16 @@ public class ListarProdutoActivity extends AppCompatActivity {
     private String nunnotafiscal;
     Integer nnf;
     private static final int PASSAR_NUM_NOTA=3;
+    private static final int EDITAR_PRODUTO=2;
     public static final String NUM_NOTA_FISCAL = "com.example.projetoicompra.activity.NUM_NOTA_FISCAL";
+
+    public static final String EXTRA_PASSAR_CODIGO_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_CODIGO_PRODUTO";
+    public static final String EXTRA_PASSAR_NOME_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_NOME_PRODUTO";
+    public static final String EXTRA_PASSAR_QTD_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_QTD_PRODUTO";
+    public static final String EXTRA_PASSAR_VL_UNIT_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_VL_UNIT_PRODUTO";
+    public static final String EXTRA_PASSAR_VL_TOTAL_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_VL_TOTAL_PRODUTO";
+
+
 
 
     @Override
@@ -63,6 +72,39 @@ public class ListarProdutoActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<Produto> produtos) {
                 adapteritem.setProdutos(produtos);
+
+            }
+        });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                iCompraViewModel.deleteVm_Produto(adapteritem.getPosicaoProduto(viewHolder.getAdapterPosition()));
+                Toast.makeText(ListarProdutoActivity.this, "Produto Apagado", Toast.LENGTH_SHORT).show();
+
+            }
+        }).attachToRecyclerView(recyclerViewItem);
+
+
+        adapteritem.setOnItemClickListener(new ItemListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Produto produto) {
+                Intent intencao = new Intent(ListarProdutoActivity.this, AdicionarEditItemActivity.class);
+
+                intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_CODIGO_PRODUTO, produto.getCodigo_produto());
+                //Toast.makeText(ListarProdutoActivity.this, produto.getCodigo_produto(), Toast.LENGTH_SHORT).show();
+                intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_NOME_PRODUTO, produto.getNome_produto());
+                intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_QTD_PRODUTO, produto.getQuantidade());
+                intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_VL_UNIT_PRODUTO, produto.getPreco_produto());
+                intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_VL_TOTAL_PRODUTO, produto.getPreco_total());
+
+                startActivityForResult(intencao, EDITAR_PRODUTO);
 
             }
         });
@@ -101,8 +143,8 @@ public class ListarProdutoActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.itemAdicionarProduto:
 
-                Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
-                intencao.putExtra(AdicionarItemActivity.NUM_NOTA_FISCAL, nunnotafiscal);
+                Intent intencao = new Intent(getApplicationContext(), AdicionarEditItemActivity.class);
+                intencao.putExtra(AdicionarEditItemActivity.NUM_NOTA_FISCAL, nunnotafiscal);
                 startActivity(intencao);
                 return true;
             case R.id.itemConfirmar:

@@ -19,7 +19,7 @@ import java.util.List;
 public interface Item_Produto_ListaDAO {
 
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     void insertItemProdutoLista(Item_Produto_Lista item_produto_lista);
 
 

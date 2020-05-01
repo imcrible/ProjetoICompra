@@ -15,6 +15,7 @@ import java.util.List;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> {
     private List<Produto> produtos = new ArrayList<>();
+    private OnItemClickListener ouvidor;
 
 
     @Override
@@ -50,6 +51,10 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         notifyDataSetChanged();
     }
 
+    public Produto getPosicaoProduto(int posicao) {
+        return produtos.get(posicao);
+    }
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private TextView valor_total;
         private TextView nome_produto;
@@ -65,6 +70,25 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             quantidade_produto = itemView.findViewById(R.id.rv_quantidade_produto);
             id_produto = itemView.findViewById(R.id.rv_id_produto);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int posicao = getAdapterPosition();
+                    if (ouvidor != null && posicao != RecyclerView.NO_POSITION) {
+                        ouvidor.onItemClick(produtos.get(posicao));
+                    }
+                }
+            });
+
         }
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(Produto produto);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener ouvidor) {
+        this.ouvidor = ouvidor;
+    }
+
 }

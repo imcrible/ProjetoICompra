@@ -11,20 +11,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
-import com.example.projetoicompra.adapter.ItemListAdapter;
 import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Local_Compra;
-import com.example.projetoicompra.model.Produto;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 public class AdicionarComprasManualActivity extends AppCompatActivity {
 
@@ -159,8 +153,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Lista Salva! ", Toast.LENGTH_SHORT).show();
 
-            Intent intencao = new Intent(getApplicationContext(), AdicionarItemActivity.class);
-            intencao.putExtra(AdicionarItemActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
+            Intent intencao = new Intent(getApplicationContext(), AdicionarEditItemActivity.class);
+            intencao.putExtra(AdicionarEditItemActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
             startActivityForResult(intencao, PASSAR_NUM_NOTA);
             //startActivity(intencao);
 
