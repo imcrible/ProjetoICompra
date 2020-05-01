@@ -53,6 +53,7 @@ public class ListarProdutoActivity extends AppCompatActivity {
 
         //configura o recycler
         recyclerViewItem = findViewById(R.id.recycler_item);
+        setTitle("Lista de Produtos");
 
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.setHasFixedSize(true);
@@ -91,13 +92,12 @@ public class ListarProdutoActivity extends AppCompatActivity {
             }
         }).attachToRecyclerView(recyclerViewItem);
 
-
         adapteritem.setOnItemClickListener(new ItemListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Produto produto) {
                 Intent intencao = new Intent(ListarProdutoActivity.this, AdicionarEditItemActivity.class);
 
-                intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_CODIGO_PRODUTO, produto.getCodigo_produto());
+                intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_CODIGO_PRODUTO, produto.getCodigo_produto().toString());
                 //Toast.makeText(ListarProdutoActivity.this, produto.getCodigo_produto(), Toast.LENGTH_SHORT).show();
                 intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_NOME_PRODUTO, produto.getNome_produto());
                 intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_QTD_PRODUTO, produto.getQuantidade());
@@ -105,11 +105,8 @@ public class ListarProdutoActivity extends AppCompatActivity {
                 intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_VL_TOTAL_PRODUTO, produto.getPreco_total());
 
                 startActivityForResult(intencao, EDITAR_PRODUTO);
-
             }
         });
-
-
 
         /*iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {

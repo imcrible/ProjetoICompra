@@ -27,7 +27,9 @@ public class ViewListaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_lista);
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        setTitle("Historico de Compras");
 
         recyclerViewLista = findViewById(R.id.recycler_lista);
 
