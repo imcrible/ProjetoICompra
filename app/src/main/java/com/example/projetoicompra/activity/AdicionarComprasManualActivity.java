@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,8 +16,6 @@ import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Local_Compra;
-
-import java.text.SimpleDateFormat;
 
 public class AdicionarComprasManualActivity extends AppCompatActivity {
 
@@ -35,7 +32,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
 
     private static final int REQUEST_CODE_ADD_ITEM = 1;
-    private static final int PASSAR_NUM_NOTA=3;
+    private static final int PASSAR_NUM_NOTA = 3;
 
     static boolean edicao = false;
 
@@ -45,17 +42,17 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     private EditText num_nota_fiscal;
     private EditText data_compra;
     private EditText hora_compra;
-    private TextView total_compra;
+    private EditText total_compra;
+    //private TextView total_compra;
 
     String cnpjlocal;
     Integer numnotafiscal;
     String numnotafiscalString;
     String datacompra;
     String horacompra;
+    String totalcompra;
 
-    Double somatotalcompra =0.0;
-
-
+    Double somatotalcompra = 0.0;
 
 
     @Override
@@ -76,13 +73,15 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         total_compra = findViewById(R.id.total_compra);
 
         Intent intencao = getIntent();
-        if (intencao.hasExtra(EXTRA_PASSAR_NUM_NOTA)){
+        if (intencao.hasExtra(EXTRA_PASSAR_NUM_NOTA)) {
             setTitle("Editar Lista");
 
             cnpjlocal = intencao.getStringExtra(EXTRA_PASSAR_CNPJ_LOCAL);
             numnotafiscalString = intencao.getStringExtra(EXTRA_PASSAR_NUM_NOTA);
             datacompra = intencao.getStringExtra(EXTRA_PASSAR_DATA_COMPRA);
             horacompra = intencao.getStringExtra(EXTRA_PASSAR_HORA_COMPRA);
+            totalcompra = intencao.getStringExtra(EXTRA_PASSAR_TOTAL_COMPRA);
+
 
             //Toast.makeText(this, cnpjlocal+" "+numnotafiscalString+" "+data_compra+" "+hora_compra, Toast.LENGTH_SHORT).show();
 
@@ -90,6 +89,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
             num_nota_fiscal.setText(numnotafiscalString);
             data_compra.setText(datacompra);
             hora_compra.setText(horacompra);
+            total_compra.setText(totalcompra);
 
             edicao = true;
         }
@@ -130,15 +130,15 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         horacompra = hora_compra.getText().toString();
 
         //total da compra vai precisar da soma dos itens;
-        String totalcompra = somatotalcompra.toString();
+        totalcompra = total_compra.getText().toString();
 
-        if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty() || numnotafiscalString.trim().isEmpty()  ) {
+        if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty() || numnotafiscalString.trim().isEmpty()) {
             Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();
             return;
-        }else{
+        } else {
             numnotafiscal = Integer.parseInt(num_nota_fiscal.getText().toString());
 
-            if(edicao == true){
+            if (edicao == true) {
                 Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
                 iCompraViewModel.updateVm_ListaCompra(listaCompra);
 
@@ -146,7 +146,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
                 edicao = false;
                 finish();
-            }else{
+            } else {
                 //public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas)
                 Local_Compra localCompra = new Local_Compra(cnpjlocal, nomelocal, enderecolocal);
                 iCompraViewModel.insertVm_LocalCompra(localCompra);
@@ -164,7 +164,6 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
                 //startActivity(intencao);
 
             }
-
 
 
         }

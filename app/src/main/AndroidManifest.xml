@@ -18,8 +18,7 @@
             android:name=".activity.ViewListaActivity"
             android:parentActivityName=".activity.MainActivity" />
         <activity
-            android:name=".activity.AdicionarEditItemActivity"
-            android:parentActivityName=".activity.ListarProdutoActivity"></activity>
+            android:name=".activity.AdicionarEditItemActivity"></activity>
         <activity
             android:name=".activity.AdicionarComprasManualActivity"
             android:parentActivityName=".activity.MainActivity" />

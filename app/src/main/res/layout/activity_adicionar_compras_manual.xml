@@ -90,12 +90,19 @@
                 android:hint="Hora da compra"
                 android:inputType="time" />
 
-            <TextView
+            <EditText
+                android:id="@+id/total_compra"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Total da Compra, conforme a nota"
+                android:inputType="numberDecimal"/>
+
+            <!--<TextView
                 android:id="@+id/total_compra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total da Compra"
-                android:textAppearance="@android:style/TextAppearance.Medium" />
+                android:textAppearance="@android:style/TextAppearance.Medium" /> -->
 
 
 

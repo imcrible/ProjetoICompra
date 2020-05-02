@@ -10,12 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Lista_Compra;
+import com.example.projetoicompra.model.Local_Compra;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.ListaViewHolder> {
     private List<Lista_Compra> listacompras = new ArrayList<>();
+    private List<Local_Compra> localCompras = new ArrayList<>();
     private OnItemClickListener ouvidor;
 
     @Override
@@ -30,7 +32,9 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
 
         if(listacompras !=null){
         Lista_Compra listaatual = listacompras.get(position);
+        //Local_Compra localatual = localCompras.get(position);
         holder.data_compra.setText(listaatual.getData_compra());
+        //holder.nome_local.setText(localatual.getRazao_social());
         holder.nome_local.setText(listaatual.getCnpj_local_lista());
         holder.total_compra.setText(listaatual.getTotal_compra());
         }else{
@@ -43,6 +47,8 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
         return listacompras.size();
     }
 
+
+
     public void setListacompras(List<Lista_Compra> listacompras) {
         this.listacompras = listacompras;
         notifyDataSetChanged();
@@ -51,6 +57,7 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
     public Lista_Compra getPosicaoListaCompra(int position){
         return listacompras.get(position);
     }
+
 
     class ListaViewHolder extends RecyclerView.ViewHolder {
         private TextView total_compra;
@@ -69,6 +76,7 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
                     int posicao = getAdapterPosition();
                     if(ouvidor != null && posicao != RecyclerView.NO_POSITION){
                         ouvidor.onItemClick(listacompras.get(posicao));
+                        //ouvidor.onItemClick(listacompras.get(posicao), localCompras.get(posicao));
                     }
                 }
             });
@@ -79,6 +87,7 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
 
     public interface OnItemClickListener {
         void onItemClick(Lista_Compra listaCompra);
+        //void onItemClick(Lista_Compra listaCompra, Local_Compra localCompra);
     }
 
     public void setOnItemClickListener(OnItemClickListener ouvidor){

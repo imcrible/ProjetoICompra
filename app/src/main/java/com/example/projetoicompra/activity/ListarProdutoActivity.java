@@ -70,8 +70,8 @@ public class ListarProdutoActivity extends AppCompatActivity {
             nnf = Integer.parseInt(nunnotafiscal);
 
             valortotalprodutostring = intencaonunnota.getStringExtra(EXTRA_RECEBER_VL_TOTAL_PRODUTO);
-            valor_total_produto = Double.valueOf(valor_total_produto);
-            sumvltotproduto = sumvltotproduto +valor_total_produto;
+            //valor_total_produto = Double.valueOf(valor_total_produto);
+            //sumvltotproduto = sumvltotproduto +valor_total_produto;
 
         }
 

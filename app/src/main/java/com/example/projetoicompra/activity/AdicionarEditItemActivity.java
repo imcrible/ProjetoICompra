@@ -108,7 +108,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
     }
 
     private void salvarItem() {
-        codigo_produtoString = codigoproduto.getText().toString();
+        codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
         nomeproduto = nome_produto.getText().toString();
         qtdproduto = Integer.parseInt(quantidade_produto.getText().toString());
         valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
@@ -116,7 +116,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
         valortotalproduto = qtdproduto * valorproduto;
         valor_total.setText(valortotalproduto.toString());
 
-        if (nomeproduto.trim().isEmpty() || codigo_produtoString.trim().isEmpty() ) {
+        if (nomeproduto.trim().isEmpty() ) {
             Toast.makeText(this, "Preencha as informações como nome e codigo", Toast.LENGTH_SHORT).show();
             return;
         } else {
@@ -141,7 +141,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(this, ListarProdutoActivity.class);
                 intent.putExtra(NUM_NOTA_FISCAL, nnf.toString());
-                intent.putExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, valortotalproduto.toString());
+                //intent.putExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, valortotalproduto.toString());
                 startActivity(intent);
 
             }
