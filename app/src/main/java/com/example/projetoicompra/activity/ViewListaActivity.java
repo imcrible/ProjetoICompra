@@ -1,5 +1,6 @@
 package com.example.projetoicompra.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class ViewListaActivity extends AppCompatActivity {
 
     private ICompraViewModel iCompraViewModel;
     private RecyclerView recyclerViewLista;
+    private static final int EDITAR_LISTA=2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,21 @@ public class ViewListaActivity extends AppCompatActivity {
 
             }
         }).attachToRecyclerView(recyclerViewLista);
+
+        adapterlista.setOnItemClickListener(new ListaListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Lista_Compra listaCompra) {
+                Intent intencao = new Intent(ViewListaActivity.this, AdicionarComprasManualActivity.class);
+
+                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_CNPJ_LOCAL, listaCompra.getCnpj_local_lista());
+                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_DATA_COMPRA, listaCompra.getData_compra());
+                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_HORA_COMPRA, listaCompra.getHora_compra());
+                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_NUM_NOTA, listaCompra.getNota_fiscal().toString());
+                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_TOTAL_COMPRA, listaCompra.getTotal_compra());
+
+                startActivityForResult(intencao, EDITAR_LISTA );
+            }
+        });
 
 
     }

@@ -108,25 +108,6 @@ public class ListarProdutoActivity extends AppCompatActivity {
             }
         });
 
-        /*iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
-        iCompraViewModel.getVm_TodosProdutos().observe(this, new Observer<List<Produto>>() {
-            @Override
-            public void onChanged(@Nullable final List<Produto> produtos) {
-                adapteritem.setProdutos(produtos);
-            }
-        });*/
-
-        /*LiveData<Integer> listidproduto = iCompraViewModel.getVm_LastIdProduto() ;
-        int idproduto = listidproduto.getValue();
-
-        LiveData<Integer> listidlistaCompra = iCompraViewModel.getVm_LastIdListaCompra();
-        int idlistaCompra = listidlistaCompra.getValue();
-
-        //public Item_Produto_Lista(int produto_item_id, int lista_item_compra_id)
-        Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(idproduto, idlistaCompra);
-
-        iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);*/
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

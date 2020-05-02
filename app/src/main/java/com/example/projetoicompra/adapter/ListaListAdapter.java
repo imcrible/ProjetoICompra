@@ -16,6 +16,7 @@ import java.util.List;
 
 public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.ListaViewHolder> {
     private List<Lista_Compra> listacompras = new ArrayList<>();
+    private OnItemClickListener ouvidor;
 
     @Override
     public ListaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,7 +63,25 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
             nome_local = listaview.findViewById(R.id.rv_nome_local_lista);
             data_compra = listaview.findViewById(R.id.rv_data_compra);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int posicao = getAdapterPosition();
+                    if(ouvidor != null && posicao != RecyclerView.NO_POSITION){
+                        ouvidor.onItemClick(listacompras.get(posicao));
+                    }
+                }
+            });
+
         }
 
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Lista_Compra listaCompra);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener ouvidor){
+        this.ouvidor = ouvidor;
     }
 }

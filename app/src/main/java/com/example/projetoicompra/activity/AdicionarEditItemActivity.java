@@ -81,7 +81,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
             qtdproduto = intencao.getIntExtra(EXTRA_PASSAR_QTD_PRODUTO, 1);
             valortotalproduto = intencao.getDoubleExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, 1);
 
-            Toast.makeText(this, codigo_produtoString+" "+nomeproduto+" "+valorproduto+" "+qtdproduto+" "+valortotalproduto, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, codigo_produtoString+" "+nomeproduto+" "+valorproduto+" "+qtdproduto+" "+valortotalproduto, Toast.LENGTH_LONG).show();
 
             codigoproduto.setText(codigo_produtoString);
             nome_produto.setText(nomeproduto);
@@ -108,7 +108,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
     }
 
     private void salvarItem() {
-        codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
+        codigo_produtoString = codigoproduto.getText().toString();
         nomeproduto = nome_produto.getText().toString();
         qtdproduto = Integer.parseInt(quantidade_produto.getText().toString());
         valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
@@ -116,11 +116,11 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
         valortotalproduto = qtdproduto * valorproduto;
         valor_total.setText(valortotalproduto.toString());
 
-        if (nomeproduto.trim().isEmpty()) {
-            Toast.makeText(this, "Digite o nome do produto", Toast.LENGTH_SHORT).show();
+        if (nomeproduto.trim().isEmpty() || codigo_produtoString.trim().isEmpty() ) {
+            Toast.makeText(this, "Preencha as informações como nome e codigo", Toast.LENGTH_SHORT).show();
             return;
         } else {
-
+            codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
             if (edicao==true) {
                 Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
                 iCompraViewModel.updateVm_Produto(produto);
@@ -148,25 +148,14 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
 
         }
 
-        /*Intent arquivo = new Intent();
-
-        arquivo.putExtra(EXTRANOME_PRODUTO, nomeproduto);
-        arquivo.putExtra(EXTRAVALOR_UNIT_PRODUTO, valorproduto);
-        arquivo.putExtra(EXTRAQUANTIDADE_PRODUTO, qtdproduto);
-        arquivo.putExtra(EXTRAVALOR_TOTAL, valortotalproduto);
-
-
-        setResult(RESULT_OK, arquivo);*/
     }
 
     public void addChaveEstrangeira(Integer codigo_produto) {
 
         //public Item_Produto_Lista(@NonNull String produto_item_id, @NonNull String lista_item_compra_id)
-
-
         Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(codigo_produto, nnf);
 
-        Toast.makeText(this, codigo_produto + " " + nnf, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, codigo_produto + " " + nnf, Toast.LENGTH_SHORT).show();
 
         iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
 

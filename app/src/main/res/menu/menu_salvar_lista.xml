@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/itemVerListaProduto"
+        android:title="listar Produto"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_lista"/>
+
+    <item
         android:id="@+id/itemSalvarLista"
         android:title="Salvar"
         android:orderInCategory="2"
