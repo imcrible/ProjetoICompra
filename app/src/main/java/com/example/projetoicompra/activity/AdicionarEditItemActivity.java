@@ -63,7 +63,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adicionar_item);
 
         //Adiciona o botão de fechar no menu
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         Intent intencao = getIntent();
 
 
@@ -141,6 +141,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(this, ListarProdutoActivity.class);
                 intent.putExtra(NUM_NOTA_FISCAL, nnf.toString());
+                intent.putExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, valortotalproduto.toString());
                 startActivity(intent);
 
             }

@@ -71,7 +71,8 @@
                 android:id="@+id/num_nota_fiscal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Digite o numero da nota fiscal, caso tenha" />
+                android:hint="Digite o numero da nota fiscal, caso tenha"
+                android:inputType="number"/>
 
             <EditText
                 android:id="@+id/data_compra"

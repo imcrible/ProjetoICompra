@@ -33,9 +33,15 @@ public class ListarProdutoActivity extends AppCompatActivity {
 
     private String nunnotafiscal;
     Integer nnf;
+    private String valortotalprodutostring;
+    Double valor_total_produto;
+    Double sumvltotproduto =0.0;
+
     private static final int PASSAR_NUM_NOTA=3;
     private static final int EDITAR_PRODUTO=2;
     public static final String NUM_NOTA_FISCAL = "com.example.projetoicompra.activity.NUM_NOTA_FISCAL";
+    public static final String EXTRA_RECEBER_VL_TOTAL_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_VL_TOTAL_PRODUTO";
+
 
     public static final String EXTRA_PASSAR_CODIGO_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_CODIGO_PRODUTO";
     public static final String EXTRA_PASSAR_NOME_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_NOME_PRODUTO";
@@ -62,6 +68,11 @@ public class ListarProdutoActivity extends AppCompatActivity {
         if(intencaonunnota.hasExtra(NUM_NOTA_FISCAL)){
             nunnotafiscal = intencaonunnota.getStringExtra(NUM_NOTA_FISCAL);
             nnf = Integer.parseInt(nunnotafiscal);
+
+            valortotalprodutostring = intencaonunnota.getStringExtra(EXTRA_RECEBER_VL_TOTAL_PRODUTO);
+            valor_total_produto = Double.valueOf(valor_total_produto);
+            sumvltotproduto = sumvltotproduto +valor_total_produto;
+
         }
 
         ItemListAdapter adapteritem = new ItemListAdapter();
