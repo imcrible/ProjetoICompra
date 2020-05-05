@@ -49,6 +49,8 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
 
 
 
+
+
     public void setListacompras(List<Lista_Compra> listacompras) {
         this.listacompras = listacompras;
         notifyDataSetChanged();

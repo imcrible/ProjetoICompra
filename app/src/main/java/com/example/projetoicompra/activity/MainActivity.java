@@ -17,6 +17,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
+import com.example.projetoicompra.BD.Permissoes;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Lista_Compra;
@@ -25,11 +26,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.text.SimpleDateFormat;
+import android.Manifest;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ICompraViewModel iCompraViewModel;
+
+    private String[] permissoes = new String[]{
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
 
     public static final int REQUEST_CODE_ADD_MANUAL_LISTA = 1;
 
@@ -40,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab_add_lista);
+
+        Permissoes.validarPermissoes(permissoes, this, 1);
 
         final Activity essaactivity = this;
 
