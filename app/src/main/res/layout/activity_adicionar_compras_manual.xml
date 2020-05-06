@@ -57,6 +57,15 @@
                 android:layout_height="match_parent"
                 android:hint="Endereço da Loja" />
 
+            <Button
+                android:id="@+id/btn_VerifcarEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:onClick="verificarEndereco"
+                android:text="Verificar Endereço"
+                android:textColor="#FFFFFF" />
+
             <TextView
                 android:id="@+id/text_info_lista"
                 android:layout_width="match_parent"
