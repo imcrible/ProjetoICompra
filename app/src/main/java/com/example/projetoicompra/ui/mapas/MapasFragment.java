@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.projetoicompra.R;
-import com.example.projetoicompra.activity.LocalMapasActivity;
-import com.example.projetoicompra.activity.ViewLocalActivity;
+import com.example.projetoicompra.activity.ViewMapasActivity;
 
 
 public class MapasFragment extends Fragment {
@@ -26,7 +25,7 @@ public class MapasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Intent intent = new Intent(getContext(), LocalMapasActivity.class);
+        Intent intent = new Intent(getContext(), ViewMapasActivity.class);
         startActivity(intent);
 
 

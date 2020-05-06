@@ -1,8 +1,8 @@
 package com.example.projetoicompra.activity;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projetoicompra.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,18 +12,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class LocalMapasActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_local_mapas);
+        setContentView(R.layout.activity_view_mapas);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        setTitle("Mapa de Compras");
     }
 
 
@@ -46,3 +48,4 @@ public class LocalMapasActivity extends FragmentActivity implements OnMapReadyCa
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
+
