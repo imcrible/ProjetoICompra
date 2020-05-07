@@ -62,6 +62,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     String datacompra;
     String horacompra;
     String totalcompra;
+    String latitude;
+    String longitude;
 
     Double somatotalcompra = 0.0;
 
@@ -132,6 +134,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         cnpjlocal = cnpj_local.getText().toString();
         String enderecolocal = endereco_local.getText().toString();
 
+
         //tabela lista
         numnotafiscalString = num_nota_fiscal.getText().toString();
         //SimpleDateFormat dataformato = new SimpleDateFormat("dd/MM/yyyy");
@@ -143,41 +146,49 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         //total da compra vai precisar da soma dos itens;
         totalcompra = total_compra.getText().toString();
 
-        if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty() || numnotafiscalString.trim().isEmpty()) {
-            Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();
-            return;
-        } else {
-            numnotafiscal = Integer.parseInt(num_nota_fiscal.getText().toString());
 
-            if (edicao == true) {
-                Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
-                iCompraViewModel.updateVm_ListaCompra(listaCompra);
+        if (latitude==null || longitude == null && edicao==false){
+            Toast.makeText(this, "Por favor Confirme o endereço", Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(this, "Lista Atualizada Com suscesso", Toast.LENGTH_SHORT).show();
+        }else{
 
-                edicao = false;
-                finish();
+            if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty() || numnotafiscalString.trim().isEmpty()) {
+                Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();
+                return;
             } else {
-                //public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas)
-                Local_Compra localCompra = new Local_Compra(cnpjlocal, nomelocal, enderecolocal);
-                iCompraViewModel.insertVm_LocalCompra(localCompra);
+                numnotafiscal = Integer.parseInt(num_nota_fiscal.getText().toString());
 
-                //public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista)
-                Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
-                iCompraViewModel.insertVm_ListaCompra(listaCompra);
+                if (edicao == true) {
+                    Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
+                    iCompraViewModel.updateVm_ListaCompra(listaCompra);
+
+                    Toast.makeText(this, "Lista Atualizada Com suscesso", Toast.LENGTH_SHORT).show();
+
+                    edicao = false;
+                    finish();
+                } else {
+                    // public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas, String latitude, String longitude)
+                    Local_Compra localCompra = new Local_Compra(cnpjlocal, nomelocal, enderecolocal, latitude, longitude);
+                    iCompraViewModel.insertVm_LocalCompra(localCompra);
+                    Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
+
+                    //public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista)
+                    Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
+                    iCompraViewModel.insertVm_ListaCompra(listaCompra);
 
 
-                Toast.makeText(this, "Lista Salva! ", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Lista Salva! ", Toast.LENGTH_SHORT).show();
 
-                Intent intencao = new Intent(getApplicationContext(), AdicionarEditItemActivity.class);
-                intencao.putExtra(AdicionarEditItemActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
-                startActivityForResult(intencao, PASSAR_NUM_NOTA);
-                //startActivity(intencao);
+                    Intent intencao = new Intent(getApplicationContext(), AdicionarEditItemActivity.class);
+                    intencao.putExtra(AdicionarEditItemActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
+                    startActivityForResult(intencao, PASSAR_NUM_NOTA);
+                    //startActivity(intencao);
 
+                }
             }
-
-
         }
+
+
 
         /*Intent arquivo = new Intent();
         arquivo.putExtra(EXTRA_NOME_LOCAL, nomelocal);
@@ -213,8 +224,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
                 StringBuilder mensagem = new StringBuilder();
                 mensagem.append("Cidade: "+ baseEndereco.getCidade());
                 mensagem.append("\nRua: "+ baseEndereco.getRua());
-                mensagem.append("\nBairro: "+ baseEndereco.getRua());
-                mensagem.append("\n Número: "+ baseEndereco.getRua());
+                mensagem.append("\nBairro: "+ baseEndereco.getBairro());
+                mensagem.append("\n Número: "+ baseEndereco.getNumero());
                 mensagem.append("\nCEP: "+ baseEndereco.getCep());
 
                 Context context;
@@ -225,6 +236,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 endereco_local.setText(baseEndereco.getRua()+" "+baseEndereco.getNumero()+" - "+baseEndereco.getCep());
+                                latitude = baseEndereco.getLatitude();
+                                longitude = baseEndereco.getLongitude();
                             }
                         }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                             @Override

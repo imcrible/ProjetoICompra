@@ -20,6 +20,12 @@ public class Local_Compra {
     @ColumnInfo(name = "coordenadas")
     private String coordenadas;
 
+    @ColumnInfo(name= "latitude")
+    private String latitude;
+
+    @ColumnInfo(name = "longitude")
+    private String longitude;
+
     @NonNull
     public String getCnpj_local() {
         return cnpj_local;
@@ -46,9 +52,27 @@ public class Local_Compra {
         this.coordenadas = coordenadas;
     }
 
-    public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas) {
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas, String latitude, String longitude) {
         this.cnpj_local = cnpj_local;
         this.razao_social = razao_social;
         this.coordenadas = coordenadas;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }

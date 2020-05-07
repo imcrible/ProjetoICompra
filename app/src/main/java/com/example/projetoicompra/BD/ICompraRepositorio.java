@@ -59,6 +59,7 @@ public class ICompraRepositorio {
         localCompraDAO = icompraDataBase.localCompraDAO();
         re_TodoLocalCompra = localCompraDAO.getTodoLocalCompra();
 
+
         produtoDAO = icompraDataBase.produtoDAO();
         re_TodosProdutos = produtoDAO.getTodosProdutos();
 
@@ -79,6 +80,7 @@ public class ICompraRepositorio {
     public LiveData<List<Local_Compra>> getRe_TodoLocalCompra() {
         return re_TodoLocalCompra;
     }
+
 
     public LiveData<List<Produto>> getRe_ProdutosQueEstaLista(Integer num) {
         return re_ProdutosQueEstaLista = itemProdutoListaDAO.getProdutosQueEstaLista(num);
