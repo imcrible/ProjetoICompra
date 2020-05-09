@@ -27,44 +27,7 @@
                 android:layout_marginRight="7dp"
                 app:srcCompat="@drawable/ic_menu_add_" /> -->
 
-            <TextView
-                android:id="@+id/text_local"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Informações do Local de Compra"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/nome_local"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Digite o nome da loja" />
-
-            <EditText
-                android:id="@+id/cnpj_local"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:hint="Digite o CNPJ conforme está na nota"
-                android:inputType="date" />
-
-            <EditText
-                android:id="@+id/end_local"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="Endereço da Loja" />
-
-            <Button
-                android:id="@+id/btn_VerifcarEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:onClick="verificarEndereco"
-                android:text="Verificar Endereço"
-                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/text_info_lista"

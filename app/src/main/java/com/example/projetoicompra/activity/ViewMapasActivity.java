@@ -1,20 +1,20 @@
 package com.example.projetoicompra.activity;
 
 import android.Manifest;
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.projetoicompra.BD.ICompraRepositorio;
@@ -41,9 +41,9 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
     private ICompraViewModel iCompraViewModel;
     private ICompraRepositorio repositorio;
     private List<Local_Compra> local_compras = new ArrayList<>();
-    int tamanho=555;
+    int tamanho = 555;
 
-    public void setLocaisCompra(List<Local_Compra> local_compras){
+    public void setLocaisCompra(List<Local_Compra> local_compras) {
         this.local_compras = local_compras;
     }
 
@@ -57,8 +57,16 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Mapa de Compras");
+        ////toolbar.setVisibility(View.VISIBLE);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
-        setTitle("Mapa de Compras");
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setTitle("Mapa de Compras");
+        //setSupportActionBar(toolbar);*/
+
 
         //repositorio = new ICompraRepositorio(getApplication());
         //local_compras =  repositorio.getRe_TodoLocalCompra().getValue();
@@ -67,7 +75,6 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
 
         //iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
         iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
-
 
 
         iCompraViewModel.getVm_TodoLocalCompra().observe(this, new Observer<List<Local_Compra>>() {
@@ -84,13 +91,13 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
                 //Toast.makeText(getApplicationContext(), local_compra.get(i).getRazao_social()+ " "+local_compra.get(i).getCoordenadas()+ " "+local_compra.get(i).getLatitude()+ " "+local_compra.get(i).getLongitude()+ " SIZE: "+local_compra.size(), Toast.LENGTH_LONG).show();
 
                 //Toast.makeText(getApplicationContext(), "lat "+local_compra.get(0).getLatitude(), Toast.LENGTH_SHORT).show();
-                if(local_compra.size() >=0) {
+                if (local_compra.size() >= 0) {
 
                     for (int i = 0; i < local_compra.size(); i++) {
 
                         Double latitudecompra = Double.parseDouble(local_compra.get(i).getLatitude());
                         Double longitudecompra = Double.parseDouble(local_compra.get(i).getLongitude());
-                        Toast.makeText(getApplicationContext(), "lat "+local_compra.get(0).getLatitude()+" long: "+local_compra.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "lat "+local_compra.get(0).getLatitude()+" long: "+local_compra.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
 
                         LatLng marcarLocal = new LatLng(latitudecompra, longitudecompra);
                         mMap.addMarker(new MarkerOptions().position(marcarLocal).title(local_compra.get(i).getRazao_social()));
@@ -101,7 +108,6 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
         });
 
         //local_compras = iCompraViewModel.getVm_TodoLocalCompra().getValue();
-
 
 
     }
@@ -136,8 +142,6 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
 
             }
         }*/
-
-
 
 
         //Objeto responsavel por gerenciar a localização do usuario
@@ -175,7 +179,7 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
             }
         };
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
                     0,
@@ -185,11 +189,22 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
 
 
         }
+    }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_mapa, menu);
+        return true;
+    }
 
-
-
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.fechartelamapa:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 
