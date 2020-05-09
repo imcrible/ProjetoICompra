@@ -37,12 +37,15 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
     private LocationManager locationManager;
     private LocationListener locationListener;
 
-    Application application;
 
     private ICompraViewModel iCompraViewModel;
     private ICompraRepositorio repositorio;
     private List<Local_Compra> local_compras = new ArrayList<>();
     int tamanho=555;
+
+    public void setLocaisCompra(List<Local_Compra> local_compras){
+        this.local_compras = local_compras;
+    }
 
 
     @Override
@@ -70,16 +73,36 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
         iCompraViewModel.getVm_TodoLocalCompra().observe(this, new Observer<List<Local_Compra>>() {
             @Override
             public void onChanged(List<Local_Compra> local_compra) {
-                local_compras = local_compra;
-                //Toast.makeText(getApplicationContext(), local_compra.get(0).getRazao_social(), Toast.LENGTH_SHORT).show();
+                //setLocaisCompra(local_compra);
+                //local_compras = local_compra;
+
+                //tamanho = local_compras.size();
+                //Local_Compra loc_compra = local_compras.get(0);
+                //Toast.makeText(getApplicationContext(), "Passando por aqui "+loc_compra.getRazao_social(), Toast.LENGTH_SHORT).show();
+
+                //int i=2;
+                //Toast.makeText(getApplicationContext(), local_compra.get(i).getRazao_social()+ " "+local_compra.get(i).getCoordenadas()+ " "+local_compra.get(i).getLatitude()+ " "+local_compra.get(i).getLongitude()+ " SIZE: "+local_compra.size(), Toast.LENGTH_LONG).show();
+
+                //Toast.makeText(getApplicationContext(), "lat "+local_compra.get(0).getLatitude(), Toast.LENGTH_SHORT).show();
+                if(local_compra.size() >=0) {
+
+                    for (int i = 0; i < local_compra.size(); i++) {
+
+                        Double latitudecompra = Double.parseDouble(local_compra.get(i).getLatitude());
+                        Double longitudecompra = Double.parseDouble(local_compra.get(i).getLongitude());
+                        Toast.makeText(getApplicationContext(), "lat "+local_compra.get(0).getLatitude()+" long: "+local_compra.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
+
+                        LatLng marcarLocal = new LatLng(latitudecompra, longitudecompra);
+                        mMap.addMarker(new MarkerOptions().position(marcarLocal).title(local_compra.get(i).getRazao_social()));
+
+                    }
+                }
             }
         });
 
-        local_compras = iCompraViewModel.getVm_TodoLocalCompra().getValue();
+        //local_compras = iCompraViewModel.getVm_TodoLocalCompra().getValue();
 
-        Local_Compra loc_compra = local_compras.get(0);
 
-        Toast.makeText(this, "Passando por aqui "+loc_compra.getRazao_social(), Toast.LENGTH_SHORT).show();
 
     }
 

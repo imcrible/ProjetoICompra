@@ -34,12 +34,12 @@ public class ViewLocalActivity extends AppCompatActivity {
         final LocalListAdapter adapterlocal = new LocalListAdapter();
         recyclerViewLocal.setAdapter(adapterlocal);
 
-        iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
+        /*iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
         iCompraViewModel.getVm_TodoLocalCompra().observe(this, new Observer<List<Local_Compra>>() {
             @Override
             public void onChanged(List<Local_Compra> local_compras) {
                 adapterlocal.setLocal_compras(local_compras);
             }
-        });
+        });*/
     }
 }
