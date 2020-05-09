@@ -44,7 +44,7 @@
             android:parentActivityName=".activity.MainActivity" />
         <activity android:name=".activity.AdicionarEditItemActivity" />
         <activity
-            android:name=".activity.AdicionarComprasManualActivity"
+            android:name=".activity.AdicionarListaManualActivity"
             android:parentActivityName=".activity.MainActivity" />
         <activity android:name=".activity.AdicionarComprasScanActivity" />
         <activity

@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intencao = new Intent(essaactivity, AdicionarComprasManualActivity.class);
+                Intent intencao = new Intent(essaactivity, AdicionarLocalManual.class);
                 //startActivityForResult(intencao, REQUEST_CODE_ADD_MANUAL_LISTA);
                 startActivity(intencao);
             }

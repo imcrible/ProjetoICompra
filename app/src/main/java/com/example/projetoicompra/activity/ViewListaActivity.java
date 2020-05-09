@@ -16,7 +16,6 @@ import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.adapter.ListaListAdapter;
 import com.example.projetoicompra.model.Lista_Compra;
-import com.example.projetoicompra.model.Local_Compra;
 
 import java.util.List;
 
@@ -78,13 +77,13 @@ public class ViewListaActivity extends AppCompatActivity {
         adapterlista.setOnItemClickListener(new ListaListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Lista_Compra listaCompra) {
-                Intent intencao = new Intent(ViewListaActivity.this, AdicionarComprasManualActivity.class);
+                Intent intencao = new Intent(ViewListaActivity.this, AdicionarListaManualActivity.class);
 
-                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_CNPJ_LOCAL, listaCompra.getCnpj_local_lista());
-                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_DATA_COMPRA, listaCompra.getData_compra());
-                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_HORA_COMPRA, listaCompra.getHora_compra());
-                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_NUM_NOTA, listaCompra.getNota_fiscal().toString());
-                intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_TOTAL_COMPRA, listaCompra.getTotal_compra());
+                intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_CNPJ_LOCAL, listaCompra.getCnpj_local_lista());
+                intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_DATA_COMPRA, listaCompra.getData_compra());
+                intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_HORA_COMPRA, listaCompra.getHora_compra());
+                intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_NUM_NOTA, listaCompra.getNota_fiscal().toString());
+                intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_TOTAL_COMPRA, listaCompra.getTotal_compra());
                 //intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_NOME_LOCAL, localCompra.getRazao_social());
                 //intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_END_LOCAL, localCompra.getCoordenadas());
 

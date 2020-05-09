@@ -1,16 +1,10 @@
 package com.example.projetoicompra.activity;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,15 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
-import com.example.projetoicompra.model.BaseEndereco;
 import com.example.projetoicompra.model.Lista_Compra;
-import com.example.projetoicompra.model.Local_Compra;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-
-public class AdicionarComprasManualActivity extends AppCompatActivity {
+public class AdicionarListaManualActivity extends AppCompatActivity {
 
     public static final String EXTRA_PASSAR_NOME_LOCAL = "com.example.projetoicompra.activity.EXTRA_NOME_LOCAL";
     public static final String EXTRA_PASSAR_CNPJ_LOCAL = "com.example.projetoicompra.activity.EXTRA_CNPJ_LOCAL";
@@ -37,6 +25,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     public static final String EXTRA_PASSAR_DATA_COMPRA = "com.example.projetoicompra.activity.EXTRA_DATA_COMPRA";
     public static final String EXTRA_PASSAR_HORA_COMPRA = "com.example.projetoicompra.activity.EXTRA_HORA_COMPRA";
     public static final String EXTRA_PASSAR_TOTAL_COMPRA = "com.example.projetoicompra.activity.EXTRA_TOTAL_COMPRA";
+    public static final String EXTRA_PASSAR_CNPJ_LOCALADDLOCAL = "com.example.projetoicompra.activity.EXTRA_PASSAR_CNPJ_LOCAL";
 
 
     private ICompraViewModel iCompraViewModel;
@@ -47,9 +36,9 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
     static boolean edicao = false;
 
-    private EditText nome_local;
-    protected EditText cnpj_local;
-    private EditText endereco_local;
+    //private EditText nome_local;
+    //protected EditText cnpj_local;
+    //private EditText endereco_local;
     private EditText num_nota_fiscal;
     private EditText data_compra;
     private EditText hora_compra;
@@ -62,8 +51,8 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     String datacompra;
     String horacompra;
     String totalcompra;
-    String latitude;
-    String longitude;
+    //String latitude;
+    //String longitude;
 
     Double somatotalcompra = 0.0;
 
@@ -71,19 +60,24 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adicionar_compras_manual);
+        setContentView(R.layout.activity_adicionar_lista_manual);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         setTitle("Adicionar Lista");
 
         //findViewById
-        nome_local = findViewById(R.id.nome_local);
-        cnpj_local = findViewById(R.id.cnpj_local);
-        endereco_local = findViewById(R.id.end_local);
+        //nome_local = findViewById(R.id.nome_local);
+        //cnpj_local = findViewById(R.id.cnpj_local);
+        //endereco_local = findViewById(R.id.end_local);
         num_nota_fiscal = findViewById(R.id.num_nota_fiscal);
         data_compra = findViewById(R.id.data_compra);
         hora_compra = findViewById(R.id.hora_compra);
         total_compra = findViewById(R.id.total_compra);
+
+        Intent intencaocnpj = getIntent();
+        if(intencaocnpj.hasExtra(EXTRA_PASSAR_CNPJ_LOCALADDLOCAL)){
+            cnpjlocal = intencaocnpj.getStringExtra(EXTRA_PASSAR_CNPJ_LOCALADDLOCAL);
+        }
 
         Intent intencao = getIntent();
         if (intencao.hasExtra(EXTRA_PASSAR_NUM_NOTA)) {
@@ -98,7 +92,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
             //Toast.makeText(this, cnpjlocal+" "+numnotafiscalString+" "+data_compra+" "+hora_compra, Toast.LENGTH_SHORT).show();
 
-            cnpj_local.setText(cnpjlocal);
+            //cnpj_local.setText(cnpjlocal);
             num_nota_fiscal.setText(numnotafiscalString);
             data_compra.setText(datacompra);
             hora_compra.setText(horacompra);
@@ -130,9 +124,9 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
     private void salvarLista() {
         //tabela local
-        String nomelocal = nome_local.getText().toString();
-        cnpjlocal = cnpj_local.getText().toString();
-        String enderecolocal = endereco_local.getText().toString();
+        //String nomelocal = nome_local.getText().toString();
+        //cnpjlocal = cnpj_local.getText().toString();
+        //String enderecolocal = endereco_local.getText().toString();
 
 
         //tabela lista
@@ -147,12 +141,12 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         totalcompra = total_compra.getText().toString();
 
 
-        if (latitude==null || longitude == null && edicao==false){
-            Toast.makeText(this, "Por favor Confirme o endereço", Toast.LENGTH_SHORT).show();
+        //if (latitude==null || longitude == null && edicao==false){
+          //  Toast.makeText(this, "Por favor Confirme o endereço", Toast.LENGTH_SHORT).show();
 
-        }else{
+        //}else{
 
-            if (nomelocal.trim().isEmpty() || cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty() || numnotafiscalString.trim().isEmpty()) {
+            if (/*nomelocal.trim().isEmpty() ||*/ cnpjlocal.trim().isEmpty() || datacompra.trim().isEmpty() || numnotafiscalString.trim().isEmpty()) {
                 Toast.makeText(this, "Por favor revise os campos e os preencha", Toast.LENGTH_SHORT).show();
                 return;
             } else {
@@ -168,9 +162,9 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
                     finish();
                 } else {
                     // public Local_Compra(@NonNull String cnpj_local, @NonNull String razao_social, String coordenadas, String latitude, String longitude)
-                    Local_Compra localCompra = new Local_Compra(cnpjlocal, nomelocal, enderecolocal, latitude, longitude);
-                    iCompraViewModel.insertVm_LocalCompra(localCompra);
-                    Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
+                    //Local_Compra localCompra = new Local_Compra(cnpjlocal, nomelocal, enderecolocal, latitude, longitude);
+                    //iCompraViewModel.insertVm_LocalCompra(localCompra);
+                    //Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
 
                     //public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull String nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista)
                     Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
@@ -186,7 +180,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
 
                 }
             }
-        }
+        //}
 
 
 
@@ -205,7 +199,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         //finish();
     }
 
-    public void verificarEndereco(View view){
+    /*public void verificarEndereco(View view){
         String verificarendereco = endereco_local.getText().toString();
 
         if( (verificarendereco.equals("") || verificarendereco != null) ){
@@ -271,7 +265,7 @@ public class AdicionarComprasManualActivity extends AppCompatActivity {
         }
 
         return null;
-    }
+    }*/
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
