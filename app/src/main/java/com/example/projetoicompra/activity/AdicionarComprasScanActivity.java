@@ -69,6 +69,7 @@ public class AdicionarComprasScanActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, pagina);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
+            finish();
         }
 
     }

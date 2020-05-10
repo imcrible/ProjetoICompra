@@ -8,10 +8,13 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+
+
 @Entity(tableName = "lista_compra",
         foreignKeys = @ForeignKey(entity = Local_Compra.class,
                 parentColumns = "cnpj_local",
-                childColumns = "cnpj_local_lista"),
+                childColumns = "cnpj_local_lista",
+                onDelete = 5),
         indices = {@Index(value = {"cnpj_local_lista"})})
 public class Lista_Compra {
 

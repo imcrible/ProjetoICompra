@@ -144,6 +144,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
                 intent.putExtra(NUM_NOTA_FISCAL, nnf.toString());
                 //intent.putExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, valortotalproduto.toString());
                 startActivity(intent);
+                finish();
 
             }
 

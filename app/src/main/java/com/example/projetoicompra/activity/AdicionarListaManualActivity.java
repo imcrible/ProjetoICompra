@@ -128,7 +128,6 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
         //cnpjlocal = cnpj_local.getText().toString();
         //String enderecolocal = endereco_local.getText().toString();
 
-
         //tabela lista
         numnotafiscalString = num_nota_fiscal.getText().toString();
         //SimpleDateFormat dataformato = new SimpleDateFormat("dd/MM/yyyy");
@@ -170,13 +169,12 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
                     Lista_Compra listaCompra = new Lista_Compra(horacompra, datacompra, numnotafiscal, totalcompra, cnpjlocal);
                     iCompraViewModel.insertVm_ListaCompra(listaCompra);
 
-
-                    //Toast.makeText(this, "Lista Salva! ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Lista Salva! ", Toast.LENGTH_SHORT).show();
 
                     Intent intencao = new Intent(getApplicationContext(), AdicionarEditItemActivity.class);
                     intencao.putExtra(AdicionarEditItemActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
                     startActivityForResult(intencao, PASSAR_NUM_NOTA);
-                    //startActivity(intencao);
+                    finish();
 
                 }
             }
@@ -199,73 +197,7 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
         //finish();
     }
 
-    /*public void verificarEndereco(View view){
-        String verificarendereco = endereco_local.getText().toString();
 
-        if( (verificarendereco.equals("") || verificarendereco != null) ){
-            Address enderecoverificado = recuperarendereco(verificarendereco);
-
-            if(enderecoverificado != null){
-                BaseEndereco baseEndereco = new BaseEndereco();
-                baseEndereco.setCidade(enderecoverificado.getAdminArea());
-                baseEndereco.setCep(enderecoverificado.getPostalCode());
-                baseEndereco.setBairro(enderecoverificado.getSubLocality());
-                baseEndereco.setRua(enderecoverificado.getThoroughfare());
-                baseEndereco.setNumero(enderecoverificado.getFeatureName());
-                baseEndereco.setLatitude(String.valueOf(enderecoverificado.getLatitude()));
-                baseEndereco.setLongitude(String.valueOf(enderecoverificado.getLongitude()));
-
-                StringBuilder mensagem = new StringBuilder();
-                mensagem.append("Cidade: "+ baseEndereco.getCidade());
-                mensagem.append("\nRua: "+ baseEndereco.getRua());
-                mensagem.append("\nBairro: "+ baseEndereco.getBairro());
-                mensagem.append("\n Número: "+ baseEndereco.getNumero());
-                mensagem.append("\nCEP: "+ baseEndereco.getCep());
-
-                Context context;
-                AlertDialog.Builder confirmaEnd = new AlertDialog.Builder(this)
-                        .setTitle("Confirme seu Endereço")
-                        .setMessage(mensagem)
-                        .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                endereco_local.setText(baseEndereco.getRua()+" "+baseEndereco.getNumero()+" - "+baseEndereco.getCep());
-                                latitude = baseEndereco.getLatitude();
-                                longitude = baseEndereco.getLongitude();
-                            }
-                        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                return;
-                            }
-                        });
-
-                AlertDialog dialog = confirmaEnd.create();
-                dialog.show();
-
-            }
-        }else{
-            Toast.makeText(this, "Preencha o endereço do local antes", Toast.LENGTH_LONG).show();
-        }
-
-    }
-
-    private Address recuperarendereco(String endereco){
-        Context context;
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-        try {
-            List<Address> listaEndereco = geocoder.getFromLocationName(endereco, 1);
-            if(listaEndereco != null && listaEndereco.size()>0){
-                Address endformat = listaEndereco.get(0);
-                return endformat;
-            }
-        }catch (IOException e ){
-            e.printStackTrace();
-        }
-
-        return null;
-    }*/
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -283,6 +215,7 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
                 Intent intencao = new Intent(getApplicationContext(), ListarProdutoActivity.class);
                 intencao.putExtra(ListarProdutoActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
                 startActivityForResult(intencao, PASSAR_NUM_NOTA);
+                edicao = false;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

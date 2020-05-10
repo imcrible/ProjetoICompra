@@ -145,6 +145,7 @@ public class AdicionarLocalManual extends AppCompatActivity {
                 Intent intencao = new Intent(getApplicationContext(), AdicionarListaManualActivity.class);
                 intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_CNPJ_LOCALADDLOCAL, cnpjlocal);
                 startActivityForResult(intencao, PASSAR_CPNP_LOCAL);
+                finish();
             }
         }
     }

@@ -14,10 +14,12 @@ import androidx.room.Index;
         foreignKeys = {
                 @ForeignKey(entity = Produto.class,
                         parentColumns = "codigo_produto",
-                        childColumns = "produto_item_id"),
+                        childColumns = "produto_item_id",
+                        onDelete = 5),
                 @ForeignKey(entity = Lista_Compra.class,
                         parentColumns = "nota_fiscal",
-                        childColumns = "lista_item_compra_id")},
+                        childColumns = "lista_item_compra_id",
+                        onDelete = 5)},
         indices = {@Index(value = {"produto_item_id"}),
                 @Index(value = {"lista_item_compra_id"})})
 
