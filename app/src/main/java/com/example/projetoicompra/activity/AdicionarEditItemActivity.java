@@ -31,7 +31,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
     Integer codigo_produto;
     String codigo_produtoString;
     String nomeproduto;
-    int qtdproduto;
+    double qtdproduto;
     Double valorproduto;
     Double valortotalproduto;
 
@@ -79,7 +79,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
             codigo_produtoString = intencao.getStringExtra(EXTRA_PASSAR_CODIGO_PRODUTO);
             nomeproduto = intencao.getStringExtra(EXTRA_PASSAR_NOME_PRODUTO);
             valorproduto = intencao.getDoubleExtra(EXTRA_PASSAR_VL_UNIT_PRODUTO, 1);
-            qtdproduto = intencao.getIntExtra(EXTRA_PASSAR_QTD_PRODUTO, 1);
+            qtdproduto = intencao.getDoubleExtra(EXTRA_PASSAR_QTD_PRODUTO, 1);
             valortotalproduto = intencao.getDoubleExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, 1);
 
             //Toast.makeText(this, codigo_produtoString+" "+nomeproduto+" "+valorproduto+" "+qtdproduto+" "+valortotalproduto, Toast.LENGTH_LONG).show();
@@ -111,7 +111,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
     private void salvarItem() {
         codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
         nomeproduto = nome_produto.getText().toString();
-        qtdproduto = Integer.parseInt(quantidade_produto.getText().toString());
+        qtdproduto= Double.parseDouble(quantidade_produto.getText().toString());
         valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
 
         valortotalproduto = qtdproduto * valorproduto;

@@ -68,29 +68,11 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
         //setSupportActionBar(toolbar);*/
 
 
-        //repositorio = new ICompraRepositorio(getApplication());
-        //local_compras =  repositorio.getRe_TodoLocalCompra().getValue();
-        //Local_Compra loc_compra = local_compras.get(0);
-
-
-        //iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
         iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
-
-
         iCompraViewModel.getVm_TodoLocalCompra().observe(this, new Observer<List<Local_Compra>>() {
             @Override
             public void onChanged(List<Local_Compra> local_compra) {
-                //setLocaisCompra(local_compra);
-                //local_compras = local_compra;
 
-                //tamanho = local_compras.size();
-                //Local_Compra loc_compra = local_compras.get(0);
-                //Toast.makeText(getApplicationContext(), "Passando por aqui "+loc_compra.getRazao_social(), Toast.LENGTH_SHORT).show();
-
-                //int i=2;
-                //Toast.makeText(getApplicationContext(), local_compra.get(i).getRazao_social()+ " "+local_compra.get(i).getCoordenadas()+ " "+local_compra.get(i).getLatitude()+ " "+local_compra.get(i).getLongitude()+ " SIZE: "+local_compra.size(), Toast.LENGTH_LONG).show();
-
-                //Toast.makeText(getApplicationContext(), "lat "+local_compra.get(0).getLatitude(), Toast.LENGTH_SHORT).show();
                 if (local_compra.size() >= 0) {
 
                     for (int i = 0; i < local_compra.size(); i++) {
@@ -106,10 +88,6 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
                 }
             }
         });
-
-        //local_compras = iCompraViewModel.getVm_TodoLocalCompra().getValue();
-
-
     }
 
 
@@ -130,19 +108,6 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
-
-        /*if(local_compras.size() <=0) {
-            for (int i = 0; i < local_compras.size(); i++) {
-
-                Double latitudecompra = Double.parseDouble(local_compras.get(i).getLatitude());
-                Double longitudecompra = Double.parseDouble(local_compras.get(i).getLongitude());
-
-                LatLng marcarLocal = new LatLng(latitudecompra, longitudecompra);
-                mMap.addMarker(new MarkerOptions().position(marcarLocal).title(local_compras.get(i).getRazao_social()));
-
-            }
-        }*/
-
 
         //Objeto responsavel por gerenciar a localização do usuario
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -183,7 +148,7 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
                     0,
-                    10,
+                    0,
                     locationListener
             );
 

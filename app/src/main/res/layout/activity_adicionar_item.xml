@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Quantidade"
-        android:inputType="number" />
+        android:inputType="numberDecimal" />
 
     <TextView
         android:id="@+id/valor_total"

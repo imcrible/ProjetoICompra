@@ -29,7 +29,7 @@ public class Produto {
 
 
     @ColumnInfo(name = "quatidade")
-    private int quantidade;
+    private double quantidade;
 
     @NonNull
     @ColumnInfo(name = "preco_total")
@@ -62,11 +62,11 @@ public class Produto {
         this.preco_produto = preco_produto;
     }
 
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
 
@@ -87,7 +87,7 @@ public class Produto {
         this.codigo_produto = codigo_produto;
     }
 
-    public Produto(@NonNull Integer codigo_produto, @NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total) {
+    public Produto(@NonNull Integer codigo_produto, @NonNull String nome_produto, @NonNull Double preco_produto, double quantidade, @NonNull Double preco_total) {
         this.codigo_produto = codigo_produto;
         this.nome_produto = nome_produto;
         this.preco_produto = preco_produto;
