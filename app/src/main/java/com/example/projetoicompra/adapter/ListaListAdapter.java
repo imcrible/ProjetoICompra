@@ -14,6 +14,8 @@ import com.example.projetoicompra.activity.ViewListaActivity;
 import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Local_Compra;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
     private List<Local_Compra> localCompras = new ArrayList<>();
     private OnItemClickListener ouvidor;
 
+    @NotNull
     @Override
     public ListaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemViewlista = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_lista, parent, false);
@@ -37,7 +40,7 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
 
         holder.data_compra.setText(listaatual.getData_compra());
 
-        holder.nome_local.setText(listaatual.getNome_local());
+        holder.nome_local.setText(listaatual.getRazao_social());
 
         holder.total_compra.setText(listaatual.getTotal_compra());
         }else{
@@ -75,14 +78,11 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
             nome_local = listaview.findViewById(R.id.rv_nome_local_lista);
             data_compra = listaview.findViewById(R.id.rv_data_compra);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int posicao = getAdapterPosition();
-                    if(ouvidor != null && posicao != RecyclerView.NO_POSITION){
-                        ouvidor.onItemClick(listacompras.get(posicao));
-                        //ouvidor.onItemClick(listacompras.get(posicao), localCompras.get(posicao));
-                    }
+            itemView.setOnClickListener(v -> {
+                int posicao = getAdapterPosition();
+                if(ouvidor != null && posicao != RecyclerView.NO_POSITION){
+                    ouvidor.onItemClick(listacompras.get(posicao));
+                    //ouvidor.onItemClick(listacompras.get(posicao), localCompras.get(posicao));
                 }
             });
 
