@@ -1,7 +1,11 @@
 package com.example.projetoicompra.activity;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,6 +14,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -42,6 +48,7 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
     private ICompraRepositorio repositorio;
     private List<Local_Compra> local_compras = new ArrayList<>();
     int tamanho = 555;
+    public Activity essaactivity;
 
     public void setLocaisCompra(List<Local_Compra> local_compras) {
         this.local_compras = local_compras;
@@ -59,35 +66,11 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Mapa de Compras");
-        ////toolbar.setVisibility(View.VISIBLE);
+        toolbar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setTitle("Mapa de Compras");
-        //setSupportActionBar(toolbar);*/
-
-
-        iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
-        iCompraViewModel.getVm_TodoLocalCompra().observe(this, new Observer<List<Local_Compra>>() {
-            @Override
-            public void onChanged(List<Local_Compra> local_compra) {
-
-                if (local_compra.size() >= 0) {
-
-                    for (int i = 0; i < local_compra.size(); i++) {
-
-                        Double latitudecompra = Double.parseDouble(local_compra.get(i).getLatitude());
-                        Double longitudecompra = Double.parseDouble(local_compra.get(i).getLongitude());
-                        //Toast.makeText(getApplicationContext(), "lat "+local_compra.get(0).getLatitude()+" long: "+local_compra.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
-
-                        LatLng marcarLocal = new LatLng(latitudecompra, longitudecompra);
-                        mMap.addMarker(new MarkerOptions().position(marcarLocal).title(local_compra.get(i).getRazao_social()));
-
-                    }
-                }
-            }
-        });
+        essaactivity = this;
     }
 
 
@@ -119,12 +102,11 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
                 Double latitudeusuario = location.getLatitude();
                 Double longitudeusuario = location.getLongitude();
 
-
-                // Add a marker in Sydney and move the camera
-                //mMap.clear();
+                mMap.clear();
                 LatLng localusuario = new LatLng(latitudeusuario, longitudeusuario);
                 mMap.addMarker(new MarkerOptions().position(localusuario).title("Você está aqui"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localusuario, 15));
+                definirPontosCompra();
 
             }
 
@@ -140,6 +122,23 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
 
             @Override
             public void onProviderDisabled(String provider) {
+                //Toast.makeText(ViewMapasActivity.this, "Por Favor ative a localização", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder ativarloc = new AlertDialog.Builder(essaactivity)
+                        .setTitle("Serviço de Localização")
+                        .setMessage("Por favor ative o serviço de localização")
+                        .setPositiveButton("Ativar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(callGPSSettingIntent);
+
+                            }
+                        });
+
+                AlertDialog dialog = ativarloc.create();
+                dialog.show();
 
             }
         };
@@ -148,7 +147,7 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
             locationManager.requestLocationUpdates(
                     LocationManager.GPS_PROVIDER,
                     0,
-                    0,
+                    10,
                     locationListener
             );
 
@@ -170,6 +169,29 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void definirPontosCompra(){
+        iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
+        iCompraViewModel.getVm_TodoLocalCompra().observe(this, new Observer<List<Local_Compra>>() {
+            @Override
+            public void onChanged(List<Local_Compra> local_compra) {
+
+                if (local_compra.size() >= 0) {
+
+                    for (int i = 0; i < local_compra.size(); i++) {
+
+                        Double latitudecompra = Double.parseDouble(local_compra.get(i).getLatitude());
+                        Double longitudecompra = Double.parseDouble(local_compra.get(i).getLongitude());
+                        //Toast.makeText(getApplicationContext(), "lat "+local_compra.get(0).getLatitude()+" long: "+local_compra.get(0).getLongitude(), Toast.LENGTH_SHORT).show();
+
+                        LatLng marcarLocal = new LatLng(latitudecompra, longitudecompra);
+                        mMap.addMarker(new MarkerOptions().position(marcarLocal).title(local_compra.get(i).getRazao_social()));
+
+                    }
+                }
+            }
+        });
     }
 }
 

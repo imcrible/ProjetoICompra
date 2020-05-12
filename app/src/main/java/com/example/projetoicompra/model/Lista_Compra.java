@@ -103,6 +103,25 @@ public class Lista_Compra {
         this.nota_fiscal = nota_fiscal;
         this.total_compra = total_compra;
         this.cnpj_local_lista = cnpj_local_lista;
+        nome_local = "vazio";
+    }
+
+    @Ignore
+    private String nome_local;
+
+
+    public String getNome_local() {
+        return nome_local;
+    }
+
+
+    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull Integer nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista, String nome_Local) {
+        this.hora_compra = hora_compra;
+        this.data_compra = data_compra;
+        this.nota_fiscal = nota_fiscal;
+        this.total_compra = total_compra;
+        this.cnpj_local_lista = cnpj_local_lista;
+        this.nome_local = nome_Local;
     }
 
 }

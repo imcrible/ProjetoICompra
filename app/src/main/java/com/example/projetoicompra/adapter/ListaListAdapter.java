@@ -4,11 +4,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetoicompra.R;
+import com.example.projetoicompra.activity.ViewListaActivity;
 import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Local_Compra;
 
@@ -32,10 +34,11 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
 
         if(listacompras !=null){
         Lista_Compra listaatual = listacompras.get(position);
-        //Local_Compra localatual = localCompras.get(position);
+
         holder.data_compra.setText(listaatual.getData_compra());
-        //holder.nome_local.setText(localatual.getRazao_social());
-        holder.nome_local.setText(listaatual.getCnpj_local_lista());
+
+        holder.nome_local.setText(listaatual.getNome_local());
+
         holder.total_compra.setText(listaatual.getTotal_compra());
         }else{
         holder.nome_local.setText("Sem Listas Adicionadas");

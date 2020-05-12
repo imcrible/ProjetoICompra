@@ -47,6 +47,7 @@ public class ViewListaActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Lista_Compra> lista_compras) {
                 adapterlista.setListacompras(lista_compras);
+
             }
         });
 
