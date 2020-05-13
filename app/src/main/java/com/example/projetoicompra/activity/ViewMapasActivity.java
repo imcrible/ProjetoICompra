@@ -71,6 +71,7 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
         //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
         essaactivity = this;
+
     }
 
 

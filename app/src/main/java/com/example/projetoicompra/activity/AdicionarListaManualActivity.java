@@ -180,21 +180,6 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
             }
         //}
 
-
-
-        /*Intent arquivo = new Intent();
-        arquivo.putExtra(EXTRA_NOME_LOCAL, nomelocal);
-        arquivo.putExtra(EXTRA_CNPJ_LOCAL, cnpjlocal);
-        arquivo.putExtra(EXTRA_END_LOCAL, enderecolocal);
-
-        arquivo.putExtra(EXTRA_NUM_NOTA, numnotafiscal);
-        arquivo.putExtra(EXTRA_DATA_COMPRA, datacompra);
-        arquivo.putExtra(EXTRA_HORA_COMPRA, horacompra);
-        arquivo.putExtra(EXTRA_TOTAL_COMPRA, totalcompra);
-
-        setResult(RESULT_OK, arquivo);*/
-
-        //finish();
     }
 
 
@@ -216,6 +201,7 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
                 intencao.putExtra(ListarProdutoActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
                 startActivityForResult(intencao, PASSAR_NUM_NOTA);
                 edicao = false;
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

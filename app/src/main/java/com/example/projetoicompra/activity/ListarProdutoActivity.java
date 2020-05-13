@@ -116,6 +116,7 @@ public class ListarProdutoActivity extends AppCompatActivity {
                 intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_VL_TOTAL_PRODUTO, produto.getPreco_total());
 
                 startActivityForResult(intencao, EDITAR_PRODUTO);
+                finish();
             }
         });
 
