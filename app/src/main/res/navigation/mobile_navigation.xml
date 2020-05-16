@@ -32,8 +32,4 @@
         tools:layout="@layout/activity_adicionar_compras_scan"
         />
 
-
-
-
-
 </navigation>
