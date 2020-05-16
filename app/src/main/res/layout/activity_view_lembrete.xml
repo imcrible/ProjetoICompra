@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ViewLocalActivity">
+    tools:context=".activity.ViewLembreteActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_local"
+        android:id="@+id/recycler_lembrete"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/recyclerview_local" />
+        tools:listitem="@layout/recyclerview_lembrete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

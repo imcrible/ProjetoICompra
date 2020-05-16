@@ -9,10 +9,12 @@ import androidx.lifecycle.LiveData;
 
 import com.example.projetoicompra.DAO.Item_Produto_ListaDAO;
 import com.example.projetoicompra.DAO.Lista_CompraDAO;
+import com.example.projetoicompra.DAO.Lista_Lembrete_DAO;
 import com.example.projetoicompra.DAO.Local_CompraDAO;
 import com.example.projetoicompra.DAO.ProdutoDAO;
 import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Lista_Compra;
+import com.example.projetoicompra.model.Lista_Lembrete;
 import com.example.projetoicompra.model.Local_Compra;
 import com.example.projetoicompra.model.Produto;
 
@@ -25,6 +27,7 @@ public class ICompraRepositorio {
     private Lista_CompraDAO listaCompraDAO;
     private Local_CompraDAO localCompraDAO;
     private ProdutoDAO produtoDAO;
+    private Lista_Lembrete_DAO listaLembreteDAO;
     //fim instancia acesso classes DAO
 
 
@@ -37,6 +40,7 @@ public class ICompraRepositorio {
     private LiveData<List<Lista_Compra>> re_ListaPorProdutos;
     private LiveData<Integer> re_LastIdProduto;
     private LiveData<Integer> reLastIdListaCompra;
+    private LiveData<List<Lista_Lembrete>> re_TodaListaLembrete;
     //fim instancia do tipo liveData que consulta as tabelas
 
     static Integer n;
@@ -62,6 +66,9 @@ public class ICompraRepositorio {
 
         produtoDAO = icompraDataBase.produtoDAO();
         re_TodosProdutos = produtoDAO.getTodosProdutos();
+
+        listaLembreteDAO = icompraDataBase.listaLembreteDao();
+        re_TodaListaLembrete = listaLembreteDAO.getTodaListaLembrete();
 
 
         //fim criação de objetos para uso nessa classe, puxando da DAO
@@ -97,6 +104,10 @@ public class ICompraRepositorio {
     public LiveData<Integer> getRe_LastIdListaCompra(){
         return reLastIdListaCompra;
     }
+
+    public LiveData<List<Lista_Lembrete>> getRe_TodaListaLembrete(){
+        return re_TodaListaLembrete;
+    }
     //Fim bloco liveData/select que vai se comunicar com outras classes
 
 
@@ -115,6 +126,10 @@ public class ICompraRepositorio {
 
     public void insertRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
         new InsertItemProdutoListaAsyncTask(itemProdutoListaDAO).execute(itemProdutoLista);
+    }
+
+    public void insertRe_Lista_Lembrete(Lista_Lembrete listaLembrete){
+        new InsertLista_LembreteAsyncTask(listaLembreteDAO).execute(listaLembrete);
     }
     //Fim bloco insert do repositorio, aqui que as outras classes vão se comunicar
 
@@ -210,6 +225,20 @@ public class ICompraRepositorio {
         @Override
         protected Void doInBackground(Item_Produto_Lista... item_produto_listas) {
             itemProdutoListaDAO.insertItemProdutoLista(item_produto_listas[0]);
+            return null;
+        }
+    }
+
+    private static class InsertLista_LembreteAsyncTask extends AsyncTask<Lista_Lembrete, Void, Void>{
+        private Lista_Lembrete_DAO listaLembreteDAO;
+
+        private InsertLista_LembreteAsyncTask (Lista_Lembrete_DAO listaLembreteDAO){
+            this.listaLembreteDAO = listaLembreteDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Lista_Lembrete... lista_lembretes) {
+            listaLembreteDAO.insertListaLembrete(lista_lembretes[0]);
             return null;
         }
     }

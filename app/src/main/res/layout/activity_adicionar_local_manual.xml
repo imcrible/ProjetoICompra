@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:onClick="verificarEndereco"
-            android:text="Verificar Endereço"
+            android:text="@string/verificar_end"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

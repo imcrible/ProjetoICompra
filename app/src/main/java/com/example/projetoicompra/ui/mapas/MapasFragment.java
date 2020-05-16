@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.projetoicompra.R;
-import com.example.projetoicompra.activity.ViewLocalActivity;
 import com.example.projetoicompra.activity.ViewMapasActivity;
 
 

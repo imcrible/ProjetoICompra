@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#405060</color>
     <color name="colorAccent">#000000</color>
     <color name="botaoMenu">#D0D0D0</color>
+    <color name="FFFFFF" />
 </resources>
