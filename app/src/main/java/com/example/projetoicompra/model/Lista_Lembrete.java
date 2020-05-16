@@ -17,6 +17,9 @@ public class Lista_Lembrete {
     @ColumnInfo(name = "valor_total_lembrete")
     private double valor_total_lembrete;
 
+    @ColumnInfo(name = "ultidprodinsert")
+    private Integer ultiidprodinsert;
+
     public String getNome_lembrete() {
         return nome_lembrete;
     }

@@ -27,4 +27,7 @@ public interface Lista_Lembrete_DAO {
     @Query("SELECT * FROM lista_lembrete")
     LiveData<List<Lista_Lembrete>> getTodaListaLembrete();
 
+    @Query("SELECT MAX(ultidprodinsert) FROM lista_lembrete")
+    LiveData<Integer> getUltProdInsert();
+
 }

@@ -41,6 +41,7 @@ public class ICompraRepositorio {
     private LiveData<Integer> re_LastIdProduto;
     private LiveData<Integer> reLastIdListaCompra;
     private LiveData<List<Lista_Lembrete>> re_TodaListaLembrete;
+    private LiveData<Integer> re_UltProdInsert;
     //fim instancia do tipo liveData que consulta as tabelas
 
     static Integer n;
@@ -69,6 +70,7 @@ public class ICompraRepositorio {
 
         listaLembreteDAO = icompraDataBase.listaLembreteDao();
         re_TodaListaLembrete = listaLembreteDAO.getTodaListaLembrete();
+        re_UltProdInsert = listaLembreteDAO.getUltProdInsert();
 
 
         //fim criação de objetos para uso nessa classe, puxando da DAO
@@ -107,6 +109,10 @@ public class ICompraRepositorio {
 
     public LiveData<List<Lista_Lembrete>> getRe_TodaListaLembrete(){
         return re_TodaListaLembrete;
+    }
+
+    public LiveData<Integer> getRe_UltProdInsert(){
+        return  re_UltProdInsert;
     }
     //Fim bloco liveData/select que vai se comunicar com outras classes
 

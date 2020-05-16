@@ -26,6 +26,7 @@ public class ICompraViewModel extends AndroidViewModel {
     private LiveData<Integer> vm_LastIdProduto;
     private LiveData<Integer> vm_LastIdListaCompra;
     private LiveData<List<Lista_Lembrete>> vm_TodaListaLembrete;
+    private LiveData<Integer> vm_UltProdInsert;
 
     static Integer n;
 
@@ -42,6 +43,7 @@ public class ICompraViewModel extends AndroidViewModel {
         vm_LastIdListaCompra= repositorio.getRe_LastIdListaCompra();
 
         vm_TodaListaLembrete = repositorio.getRe_TodaListaLembrete();
+        vm_UltProdInsert = repositorio.getRe_UltProdInsert();
 
     }
 
@@ -75,6 +77,10 @@ public class ICompraViewModel extends AndroidViewModel {
 
     public LiveData<List<Lista_Lembrete>> getVm_TodaListaLembrete(){
         return vm_TodaListaLembrete;
+    }
+
+    public LiveData<Integer> getVm_UltProdInsert(){
+        return vm_UltProdInsert;
     }
 
     //Inicio Bloco Insert
