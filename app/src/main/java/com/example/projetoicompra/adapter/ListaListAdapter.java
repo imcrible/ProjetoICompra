@@ -21,7 +21,6 @@ import java.util.List;
 
 public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.ListaViewHolder> {
     private List<Lista_Compra> listacompras = new ArrayList<>();
-    private List<Local_Compra> localCompras = new ArrayList<>();
     private OnItemClickListener ouvidor;
 
     @NotNull

@@ -120,8 +120,12 @@ public class InicioFragment extends Fragment {
             public void onItemClick(Lista_Lembrete listaLembrete) {
                 Intent intencao = new Intent(getContext(), ViewProdutoLembreteActivity.class);
 
-                intencao.putExtra(ViewProdutoLembreteActivity.EXTRA_PASSAR_ID_LEMBRETE, listaLembrete.getId_lembrete());
-                //Toast.makeText(getActivity(), listaLembrete.getId_lembrete() , Toast.LENGTH_SHORT).show();
+                intencao.putExtra(ViewProdutoLembreteActivity.EXTRA_PASSAR_ID_LEMBRETE, listaLembrete.getId_lembrete().toString());
+                if (listaLembrete.getId_lembrete() == null){
+                  //  Toast.makeText(getActivity(), "id null", Toast.LENGTH_SHORT).show();
+                }else {
+                //    Toast.makeText(getActivity(), listaLembrete.getNome_lembrete()+" "+listaLembrete.getId_lembrete()  , Toast.LENGTH_SHORT).show();
+                }
 
                 startActivityForResult(intencao, VIEW_PRODUTO );
             }

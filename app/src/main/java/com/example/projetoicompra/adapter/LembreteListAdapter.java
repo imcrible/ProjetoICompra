@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapter.LembreteViewHolder> {
-
-
     private List<Lista_Lembrete> lista_lembretes = new ArrayList<>();
     private LembreteListAdapter.OnItemClickListener ouvidor;
 
@@ -24,6 +22,7 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
     @Override
     public LembreteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemViewlembrete = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_lembrete, parent, false);
+
         return new LembreteViewHolder(itemViewlembrete);
     }
 
@@ -57,7 +56,7 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
     class LembreteViewHolder extends RecyclerView.ViewHolder{
         private TextView nome_lembrete;
         private TextView valor_total_lembrete;
-        private TextView local_compra;
+
 
 
         public LembreteViewHolder(@NonNull View lembreteView) {

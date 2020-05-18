@@ -29,19 +29,20 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_produto_lembrete);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
 
         //configura o recycler
         recyclerViewItem = findViewById(R.id.recycler_item);
-        setTitle("Lista de Produtos");
+        setTitle("Produtos do Lembrete");
 
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.setHasFixedSize(true);
 
-        Intent intencaoidlembrete = getIntent();
-        if(intencaoidlembrete.hasExtra(EXTRA_PASSAR_ID_LEMBRETE)){
-            id = intencaoidlembrete.getStringExtra(EXTRA_PASSAR_ID_LEMBRETE);
-            id_lembrete = Integer.parseInt(id);
+        Intent intent = getIntent();
+        if(intent.hasExtra(EXTRA_PASSAR_ID_LEMBRETE)){
+            id_lembrete = Integer.valueOf(intent.getStringExtra(EXTRA_PASSAR_ID_LEMBRETE));
         }
+
 
         ItemListAdapter adapteritem = new ItemListAdapter();
 

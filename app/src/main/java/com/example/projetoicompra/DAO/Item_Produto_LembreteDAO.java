@@ -27,6 +27,6 @@ public interface Item_Produto_LembreteDAO {
     @Query("SELECT codigo_produto, nome_produto, preco_produto, quatidade, preco_total FROM produto "+
             "INNER JOIN item_produto_lembrete " +
             "ON produto.codigo_produto=item_produto_lembrete.produto_item_id " +
-            "WHERE item_produto_lembrete.produto_item_id=:lembrete_item_produto_id")
+            "WHERE item_produto_lembrete.lembrete_item_id=:lembrete_item_produto_id")
     LiveData<List<Produto>> getProdutoQueEstaLembrete(Integer lembrete_item_produto_id);
 }
