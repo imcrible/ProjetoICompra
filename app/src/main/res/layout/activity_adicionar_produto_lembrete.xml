@@ -4,15 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context=".activity.AdicionarProdutoLembreteActivity">
 
-    <EditText
-        android:id="@+id/codigo_produto_lembrete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Codigo do Produto conforme a nota"
-        android:inputType="number" />
 
     <EditText
         android:id="@+id/nome_produto_lembrete"

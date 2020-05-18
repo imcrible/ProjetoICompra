@@ -197,8 +197,8 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
                 return true;
             case R.id.itemVerListaProduto:
                 numnotafiscal = Integer.parseInt(num_nota_fiscal.getText().toString());
-                Intent intencao = new Intent(getApplicationContext(), ListarProdutoActivity.class);
-                intencao.putExtra(ListarProdutoActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
+                Intent intencao = new Intent(getApplicationContext(), ViewProdutoListaActivity.class);
+                intencao.putExtra(ViewProdutoListaActivity.NUM_NOTA_FISCAL, numnotafiscal.toString());
                 startActivityForResult(intencao, PASSAR_NUM_NOTA);
                 edicao = false;
                 finish();

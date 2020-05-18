@@ -140,7 +140,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
 
                 addChaveEstrangeira(codigo_produto);
 
-                Intent intent = new Intent(this, ListarProdutoActivity.class);
+                Intent intent = new Intent(this, ViewProdutoListaActivity.class);
                 intent.putExtra(NUM_NOTA_FISCAL, nnf.toString());
                 //intent.putExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, valortotalproduto.toString());
                 startActivity(intent);

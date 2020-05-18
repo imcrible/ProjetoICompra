@@ -26,8 +26,9 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-    <string name="add_lembrete">Adicionar Lembrete</string>
+    <string name="add_lembrete">Adicionar Lembrete de compra</string>
     <string name="verificar_end">Verificar Endereço</string>
     <string name="Nome_Lembrete">Nome do Lembrete</string>
+    <string name="data_Lembrete">Data</string>
 
 </resources>

@@ -24,7 +24,7 @@ import com.example.projetoicompra.model.Produto;
 
 import java.util.List;
 
-public class ListarProdutoActivity extends AppCompatActivity {
+public class ViewProdutoListaActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewItem;
     private ICompraViewModel iCompraViewModel;
@@ -55,7 +55,7 @@ public class ListarProdutoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listar_produto);
+        setContentView(R.layout.activity_view_produto_lista);
 
         //configura o recycler
         recyclerViewItem = findViewById(R.id.recycler_item);
@@ -98,7 +98,7 @@ public class ListarProdutoActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 iCompraViewModel.deleteVm_Produto(adapteritem.getPosicaoProduto(viewHolder.getAdapterPosition()));
-                Toast.makeText(ListarProdutoActivity.this, "Produto Apagado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewProdutoListaActivity.this, "Produto Apagado", Toast.LENGTH_SHORT).show();
 
             }
         }).attachToRecyclerView(recyclerViewItem);
@@ -106,7 +106,7 @@ public class ListarProdutoActivity extends AppCompatActivity {
         adapteritem.setOnItemClickListener(new ItemListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Produto produto) {
-                Intent intencao = new Intent(ListarProdutoActivity.this, AdicionarEditItemActivity.class);
+                Intent intencao = new Intent(ViewProdutoListaActivity.this, AdicionarEditItemActivity.class);
 
                 intencao.putExtra(AdicionarEditItemActivity.EXTRA_PASSAR_CODIGO_PRODUTO, produto.getCodigo_produto().toString());
                 //Toast.makeText(ListarProdutoActivity.this, produto.getCodigo_produto(), Toast.LENGTH_SHORT).show();

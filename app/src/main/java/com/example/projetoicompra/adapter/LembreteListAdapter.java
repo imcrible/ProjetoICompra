@@ -14,20 +14,21 @@ import com.example.projetoicompra.model.Lista_Lembrete;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapter.LocalViewHolder> {
+public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapter.LembreteViewHolder> {
 
 
     private List<Lista_Lembrete> lista_lembretes = new ArrayList<>();
+    private LembreteListAdapter.OnItemClickListener ouvidor;
 
     @NonNull
     @Override
-    public LocalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemViewlocal = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_lembrete, parent, false);
-        return new LocalViewHolder(itemViewlocal);
+    public LembreteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemViewlembrete = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_lembrete, parent, false);
+        return new LembreteViewHolder(itemViewlembrete);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LocalViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LembreteViewHolder holder, int position) {
         if (lista_lembretes !=null){
             Lista_Lembrete lembreteatual = lista_lembretes.get(position);
             holder.nome_lembrete.setText(lembreteatual.getNome_lembrete());
@@ -49,20 +50,39 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
         notifyDataSetChanged();
     }
 
-    class LocalViewHolder extends RecyclerView.ViewHolder{
+    public Lista_Lembrete getPosicaoLembrete(int position){
+        return lista_lembretes.get(position);
+    }
+
+    class LembreteViewHolder extends RecyclerView.ViewHolder{
         private TextView nome_lembrete;
         private TextView valor_total_lembrete;
         private TextView local_compra;
 
 
-        public LocalViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public LembreteViewHolder(@NonNull View lembreteView) {
+            super(lembreteView);
 
-            nome_lembrete = itemView.findViewById(R.id.rv_nome_lembrete);
-            valor_total_lembrete = itemView.findViewById(R.id.rv_valor_total_lembrete);
+            nome_lembrete = lembreteView.findViewById(R.id.rv_nome_lembrete);
+            valor_total_lembrete = lembreteView.findViewById(R.id.rv_valor_total_lembrete);
+
+            itemView.setOnClickListener(v -> {
+                int posicao = getAdapterPosition();
+                if(ouvidor != null && posicao != RecyclerView.NO_POSITION){
+                    ouvidor.onItemClick(lista_lembretes.get(posicao));
+                }
+            });
 
 
         }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(Lista_Lembrete listaLembrete);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener ouvidor){
+        this.ouvidor = ouvidor;
     }
 
 }

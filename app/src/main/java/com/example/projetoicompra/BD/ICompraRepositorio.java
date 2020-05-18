@@ -1,17 +1,17 @@
 package com.example.projetoicompra.BD;
 
 import android.app.Application;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.LayoutInflater;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.projetoicompra.DAO.Item_Produto_LembreteDAO;
 import com.example.projetoicompra.DAO.Item_Produto_ListaDAO;
 import com.example.projetoicompra.DAO.Lista_CompraDAO;
 import com.example.projetoicompra.DAO.Lista_Lembrete_DAO;
 import com.example.projetoicompra.DAO.Local_CompraDAO;
 import com.example.projetoicompra.DAO.ProdutoDAO;
+import com.example.projetoicompra.model.Item_Produto_Lembrete;
 import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Lista_Compra;
 import com.example.projetoicompra.model.Lista_Lembrete;
@@ -28,6 +28,7 @@ public class ICompraRepositorio {
     private Local_CompraDAO localCompraDAO;
     private ProdutoDAO produtoDAO;
     private Lista_Lembrete_DAO listaLembreteDAO;
+    private Item_Produto_LembreteDAO itemProdutoLembreteDAO;
     //fim instancia acesso classes DAO
 
 
@@ -41,7 +42,8 @@ public class ICompraRepositorio {
     private LiveData<Integer> re_LastIdProduto;
     private LiveData<Integer> reLastIdListaCompra;
     private LiveData<List<Lista_Lembrete>> re_TodaListaLembrete;
-    private LiveData<Integer> re_UltProdInsert;
+    private LiveData<List<Lista_Lembrete_DAO.Ultimo>> re_UltProdInsert;
+    private LiveData<List<Produto>> Re_ProdutosQueEstaLembrete;
     //fim instancia do tipo liveData que consulta as tabelas
 
     static Integer n;
@@ -53,6 +55,8 @@ public class ICompraRepositorio {
 
         //criação de objetos para uso nessa classe, puxando da DAO
         itemProdutoListaDAO = icompraDataBase.itemProdutoListaDAO();
+
+        itemProdutoLembreteDAO = icompraDataBase.itemProdutoLembreteDAO();
 
 
         re_LastIdProduto = itemProdutoListaDAO.getLastIdProduto();
@@ -68,7 +72,7 @@ public class ICompraRepositorio {
         produtoDAO = icompraDataBase.produtoDAO();
         re_TodosProdutos = produtoDAO.getTodosProdutos();
 
-        listaLembreteDAO = icompraDataBase.listaLembreteDao();
+        listaLembreteDAO = icompraDataBase.listaLembreteDAO();
         re_TodaListaLembrete = listaLembreteDAO.getTodaListaLembrete();
         re_UltProdInsert = listaLembreteDAO.getUltProdInsert();
 
@@ -111,8 +115,12 @@ public class ICompraRepositorio {
         return re_TodaListaLembrete;
     }
 
-    public LiveData<Integer> getRe_UltProdInsert(){
+    public LiveData<List<Lista_Lembrete_DAO.Ultimo>> getRe_UltProdInsert(){
         return  re_UltProdInsert;
+    }
+
+    public LiveData<List<Produto>> getRe_ProdutosQueEstaLembrete(Integer num){
+        return  Re_ProdutosQueEstaLembrete = itemProdutoLembreteDAO.getProdutoQueEstaLembrete(num);
     }
     //Fim bloco liveData/select que vai se comunicar com outras classes
 
@@ -137,6 +145,10 @@ public class ICompraRepositorio {
     public void insertRe_Lista_Lembrete(Lista_Lembrete listaLembrete){
         new InsertLista_LembreteAsyncTask(listaLembreteDAO).execute(listaLembrete);
     }
+
+    public void insertRe_ItemProdutoLembrete(Item_Produto_Lembrete itemProdutoLembrete){
+        new InsertItemProdutoLembreteAsyncTask(itemProdutoLembreteDAO).execute(itemProdutoLembrete);
+    }
     //Fim bloco insert do repositorio, aqui que as outras classes vão se comunicar
 
     //Inicio bloco update do repositorio
@@ -155,6 +167,10 @@ public class ICompraRepositorio {
 
     public void updateRe_ItemProdutoLista(Item_Produto_Lista itemProdutoLista){
         new UpdateItemProdutoListaAsyncTask(itemProdutoListaDAO).execute(itemProdutoLista);
+    }
+
+    public void updateRe_Lista_Lembrete(Lista_Lembrete listaLembrete){
+        new UpdateListaLembreteAsyncTask(listaLembreteDAO).execute(listaLembrete);
     }
     //Fim do bloco update do repositorio
 
@@ -176,8 +192,13 @@ public class ICompraRepositorio {
 
     }
 
+    public void deleteRe_ListaLembrete(Lista_Lembrete listaLembrete){
+        new DeleteListaLembreteAsyncTask(listaLembreteDAO).execute(listaLembrete);
+    }
+    //Fim do bloco delete do repositorio
 
-        //inicio bloco Insert Async Task
+
+    //inicio bloco Insert Async Task
 
     private static class InsertProdutoAsyncTask extends AsyncTask<Produto, Void, Void> {
         private ProdutoDAO produtoDAO;
@@ -248,6 +269,20 @@ public class ICompraRepositorio {
             return null;
         }
     }
+
+    private static class InsertItemProdutoLembreteAsyncTask extends AsyncTask<Item_Produto_Lembrete, Void, Void>{
+        private Item_Produto_LembreteDAO itemProdutoLembreteDAO;
+
+        private InsertItemProdutoLembreteAsyncTask(Item_Produto_LembreteDAO item_produto_lembreteDAO){
+            this.itemProdutoLembreteDAO = item_produto_lembreteDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Item_Produto_Lembrete... item_produto_lembretes) {
+            itemProdutoLembreteDAO.insertItemProdutoLembrete(item_produto_lembretes[0]);
+            return null;
+        }
+    }
     //Fim do bloco Insert Async Task
 
     //Inicio do bloco Update asyncTask
@@ -307,6 +342,20 @@ public class ICompraRepositorio {
             return null;
         }
     }
+
+    public static class UpdateListaLembreteAsyncTask extends AsyncTask<Lista_Lembrete, Void, Void>{
+        private Lista_Lembrete_DAO listaLembreteDAO;
+
+        private UpdateListaLembreteAsyncTask(Lista_Lembrete_DAO listaLembreteDAO){
+            this.listaLembreteDAO = listaLembreteDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Lista_Lembrete... lista_lembretes) {
+            listaLembreteDAO.updateListaLembrete(lista_lembretes[0]);
+            return null;
+        }
+    }
     //Fim do bloco Update asyncTask
 
     //Inicio do bloco Delete asyncTask
@@ -362,6 +411,20 @@ public class ICompraRepositorio {
         @Override
         protected Void doInBackground(Item_Produto_Lista... item_produto_listas) {
             itemProdutoListaDAO.deleteItemProdutoLista(item_produto_listas[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteListaLembreteAsyncTask extends AsyncTask<Lista_Lembrete, Void, Void>{
+        private Lista_Lembrete_DAO listaLembreteDAO;
+
+        private DeleteListaLembreteAsyncTask(Lista_Lembrete_DAO listaLembreteDAO){
+            this.listaLembreteDAO = listaLembreteDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Lista_Lembrete... lista_lembretes) {
+            listaLembreteDAO.deleteListaLembrete(lista_lembretes[0]);
             return null;
         }
     }

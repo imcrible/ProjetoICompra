@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface ProdutoDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertProduto(Produto produto);
 
     @Update
