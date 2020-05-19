@@ -30,5 +30,6 @@
     <string name="verificar_end">Verificar Endereço</string>
     <string name="Nome_Lembrete">Nome do Lembrete</string>
     <string name="data_Lembrete">Data</string>
+    <string name="msg_delete_produto">Produto Apagado</string>
 
 </resources>

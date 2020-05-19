@@ -57,17 +57,20 @@ public class InicioFragment extends Fragment {
 
     private static final int VIEW_PRODUTO=5;
 
+    Boolean mostrar = false;
+
 
 
     Integer codigo_produto;
     String codigo_produtoString;
     String nomeproduto;
-    double qtdproduto;
+    Double qtdproduto;
     Double valorproduto;
     Double valortotalproduto;
     Double valor_total_lembrete = 0.0;
     String nomelembrete;
     String datalembrete;
+
 
     private List<Produto> produtos = new ArrayList<>();
 
@@ -75,12 +78,10 @@ public class InicioFragment extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final InicioFragment essaactivity = this;
         view = inflater.inflate(R.layout.fragment_inicio, container, false);
 
         recyclerViewLembrete = (RecyclerView) view.findViewById(R.id.recycler_lembrete);
@@ -121,15 +122,10 @@ public class InicioFragment extends Fragment {
                 Intent intencao = new Intent(getContext(), ViewProdutoLembreteActivity.class);
 
                 intencao.putExtra(ViewProdutoLembreteActivity.EXTRA_PASSAR_ID_LEMBRETE, listaLembrete.getId_lembrete().toString());
-                if (listaLembrete.getId_lembrete() == null){
-                  //  Toast.makeText(getActivity(), "id null", Toast.LENGTH_SHORT).show();
-                }else {
-                //    Toast.makeText(getActivity(), listaLembrete.getNome_lembrete()+" "+listaLembrete.getId_lembrete()  , Toast.LENGTH_SHORT).show();
-                }
-
                 startActivityForResult(intencao, VIEW_PRODUTO );
             }
         });
+
 
         btnAddLembrete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +147,7 @@ public class InicioFragment extends Fragment {
 
                         nomelembrete = nome_lembrete.getText().toString();
                         datalembrete = data_lembrete.getText().toString();
+                        mostrar = true;
                         iCompraViewModel = ViewModelProviders.of(getActivity()).get(ICompraViewModel.class);
                         // public Lista_Lembrete(String nome_lembrete, double valor_total_lembrete, String data_lembrete, Integer ultiidprodinsert)
                         //Lista_Lembrete listaLembrete = new Lista_Lembrete(nomelembrete, valor_total_lembrete, datalembrete, idparaproduto);
@@ -158,10 +155,14 @@ public class InicioFragment extends Fragment {
                         iCompraViewModel.getVm_UltProdInsert().observe(getViewLifecycleOwner(), new Observer<List<Lista_Lembrete_DAO.Ultimo>>() {
                             @Override
                             public void onChanged(List<Lista_Lembrete_DAO.Ultimo> ultimos) {
-                                if(ultimos.get(0).getUltidprodinsert()== null || ultimos.get(0).getUltidprodinsert() <0){
-                                    acaoPositiva(-1, 0);
-                                }else{
-                                    acaoPositiva(ultimos.get(0).getUltidprodinsert(), (ultimos.get(0).getId_lembrete())+1 );
+                                if(mostrar==true) {
+                                    if (ultimos.get(0).getUltidprodinsert() == null || ultimos.get(0).getUltidprodinsert() < 0) {
+                                        acaoPositiva(-1, 0);
+                                        return;
+                                    } else {
+                                        acaoPositiva(ultimos.get(0).getUltidprodinsert(), (ultimos.get(0).getId_lembrete()) + 1);
+                                        return;
+                                    }
                                 }
                             }
                         });
@@ -185,90 +186,129 @@ public class InicioFragment extends Fragment {
         return view;
     }
 
-    public void acaoPositiva(Integer ultidprod, Integer ultidlembrete){
-            idparaproduto = ultidprod+1;
-            idlembrete = ultidlembrete;
-
+    public void acaoPositiva(Integer ultidprod, Integer ultidlembrete ){
+        idparaproduto = ultidprod+1;
+        idlembrete = ultidlembrete;
 
         AlertDialog.Builder alertapositivo = new AlertDialog.Builder(getContext());
         View layoutpositivo = getLayoutInflater().inflate(R.layout.activity_adicionar_produto_lembrete, null);
+
 
         alertapositivo.setTitle("Adicionar Produto");
         alertapositivo.setView(layoutpositivo);
         alertapositivo.setMessage("Adicione informações do produto");
 
-        alertapositivo.setPositiveButton("Adicionar Mais", new DialogInterface.OnClickListener() {
+        AlertDialog dialogproduto = alertapositivo.create();
+        dialogproduto.show();
+
+
+        Button btaddmais = (Button) layoutpositivo.findViewById(R.id.btn_addmaisprodlembrete);
+        btaddmais.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-               //codigoproduto = layoutpositivo.findViewById(R.id.codigo_produto_lembrete);
-               nome_produto = layoutpositivo.findViewById(R.id.nome_produto_lembrete);
-               quantidade_produto = layoutpositivo.findViewById(R.id.quantidade_produto_lembrete);
-               valor_unit_produto = layoutpositivo.findViewById(R.id.valor_unit_produto_lembrete);
+            public void onClick(View v) {
 
-
-               codigo_produto = idparaproduto;
-               nomeproduto = nome_produto.getText().toString();
-               qtdproduto = Double.parseDouble(quantidade_produto.getText().toString());
-               valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
-               valortotalproduto = qtdproduto * valorproduto;
-               valor_total_lembrete = valor_total_lembrete + valortotalproduto;
-
-               Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
-               produtos.add(produto);
-
-               // public Item_Produto_Lembrete(@NonNull Integer produto_item_id, @NonNull Integer lembrete_item_id)
-               //Item_Produto_Lembrete itemProdutoLembrete = new Item_Produto_Lembrete(idparaproduto, idlembrete);
-               //iCompraViewModel.insertVm_ItemProduroLembrete(itemProdutoLembrete);
-                acaoPositiva(idparaproduto, idlembrete);
-            }
-        });
-
-        alertapositivo.setNegativeButton("Concluir", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //codigoproduto = layoutpositivo.findViewById(R.id.codigo_produto_lembrete);
                 nome_produto = layoutpositivo.findViewById(R.id.nome_produto_lembrete);
                 quantidade_produto = layoutpositivo.findViewById(R.id.quantidade_produto_lembrete);
                 valor_unit_produto = layoutpositivo.findViewById(R.id.valor_unit_produto_lembrete);
 
+                if( nome_produto.getText().toString().isEmpty() ){
+                    Toast.makeText(getContext(), "Preencha o nome do produto", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
+                    if ( (quantidade_produto.getText().toString().isEmpty())
+                            || (valor_unit_produto.getText().toString().isEmpty()) ){
 
-                codigo_produto = idparaproduto;
-                nomeproduto = nome_produto.getText().toString();
-                qtdproduto = Double.parseDouble(quantidade_produto.getText().toString());
-                valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
-                valortotalproduto = qtdproduto * valorproduto;
-                valor_total_lembrete = valor_total_lembrete + valortotalproduto;
+                        codigo_produto = idparaproduto;
+                        nomeproduto = nome_produto.getText().toString();
+                        qtdproduto = 0.0;
+                        valorproduto = 0.0;
+                        valortotalproduto = qtdproduto * valorproduto;;
+                        valor_total_lembrete = valor_total_lembrete + valortotalproduto;
 
-                Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
-                produtos.add(produto);
+                        Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
+                        produtos.add(produto);
 
-                // public Lista_Lembrete(String nome_lembrete, double valor_total_lembrete, String data_lembrete, Integer ultiidprodinsert)
+                    }else{
+                        codigo_produto = idparaproduto;
+                        nomeproduto = nome_produto.getText().toString();
+                        qtdproduto = Double.parseDouble(quantidade_produto.getText().toString());
+                        valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
+                        valortotalproduto = qtdproduto * valorproduto;
+                        valor_total_lembrete = valor_total_lembrete + valortotalproduto;
+
+                        Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
+                        produtos.add(produto);
+
+                    }
+                }
+                acaoPositiva(idparaproduto, idlembrete);
+                dialogproduto.dismiss();
+            }
+        });
+
+
+
+        Button btnconcluilembrete = layoutpositivo.findViewById(R.id.btn_concluirprodlembrete);
+        btnconcluilembrete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nome_produto = layoutpositivo.findViewById(R.id.nome_produto_lembrete);
+                quantidade_produto = layoutpositivo.findViewById(R.id.quantidade_produto_lembrete);
+                valor_unit_produto = layoutpositivo.findViewById(R.id.valor_unit_produto_lembrete);
+
+                if ((nome_produto.getText().toString().isEmpty())){
+                    Toast.makeText(essaactivity, "Erro! É necessário ao menos o nome do produto. Insira novamente o lembrete", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }else{
+                    if(  (quantidade_produto.getText().toString().isEmpty()) || (valor_unit_produto.getText().toString().isEmpty())){
+
+                        codigo_produto = idparaproduto;
+                        nomeproduto = nome_produto.getText().toString();
+                        qtdproduto = 0.0;
+                        valorproduto = 0.0;
+                        valortotalproduto = qtdproduto * valorproduto;;
+                        valor_total_lembrete = valor_total_lembrete + valortotalproduto;
+
+                        Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
+                        produtos.add(produto);
+
+                    }else{
+                        codigo_produto = idparaproduto;
+                        nomeproduto = nome_produto.getText().toString();
+                        qtdproduto = Double.parseDouble(quantidade_produto.getText().toString());
+                        valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
+                        valortotalproduto = qtdproduto * valorproduto;
+                        valor_total_lembrete = valor_total_lembrete + valortotalproduto;
+
+                        Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
+                        produtos.add(produto);
+
+                    }
+                }
+
                 Lista_Lembrete listaLembrete = new Lista_Lembrete(idlembrete, nomelembrete, valor_total_lembrete, datalembrete, idparaproduto);
                 iCompraViewModel.insertVm_ListaLembrete(listaLembrete);
 
-                for(int i=0; i<produtos.size(); i++){
-
-                    produto = produtos.get(i);
+                for (int i = 0; i < produtos.size(); i++) {
+                    Produto produto = produtos.get(i);
                     iCompraViewModel.insertVm_Produto(produto);
 
                     Item_Produto_Lembrete itemProdutoLembrete = new Item_Produto_Lembrete(produtos.get(i).getCodigo_produto(), idlembrete);
                     iCompraViewModel.insertVm_ItemProduroLembrete(itemProdutoLembrete);
-
                 }
 
 
+                Toast.makeText(getContext(), "Lembrete Adicionado com sucesso!", Toast.LENGTH_SHORT).show();
 
-                // public Item_Produto_Lembrete(@NonNull Integer produto_item_id, @NonNull Integer lembrete_item_id)
-                //Item_Produto_Lembrete itemProdutoLembrete = new Item_Produto_Lembrete(idparaproduto, idlembrete);
-                //iCompraViewModel.insertVm_ItemProduroLembrete(itemProdutoLembrete);
+                produtos.clear();
+                dialogproduto.dismiss();
+                mostrar=false;
 
             }
         });
 
-        AlertDialog dialog = alertapositivo.create();
-        dialog.show();
+
+
     }
-
-
-
 }

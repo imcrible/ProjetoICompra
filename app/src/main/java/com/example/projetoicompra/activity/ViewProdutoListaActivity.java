@@ -98,7 +98,7 @@ public class ViewProdutoListaActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 iCompraViewModel.deleteVm_Produto(adapteritem.getPosicaoProduto(viewHolder.getAdapterPosition()));
-                Toast.makeText(ViewProdutoListaActivity.this, "Produto Apagado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewProdutoListaActivity.this, R.string.msg_delete_produto, Toast.LENGTH_SHORT).show();
 
             }
         }).attachToRecyclerView(recyclerViewItem);

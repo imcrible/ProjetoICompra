@@ -1,13 +1,16 @@
 package com.example.projetoicompra.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
@@ -55,5 +58,20 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
                 adapteritem.setProdutos(produtos);
             }
         });
+
+        new ItemTouchHelper((new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT |ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                iCompraViewModel.deleteVm_Produto(adapteritem.getPosicaoProduto(viewHolder.getAdapterPosition()));
+                Toast.makeText(ViewProdutoLembreteActivity.this, R.string.msg_delete_produto, Toast.LENGTH_SHORT).show();
+
+            }
+        })).attachToRecyclerView(recyclerViewItem);
     }
 }

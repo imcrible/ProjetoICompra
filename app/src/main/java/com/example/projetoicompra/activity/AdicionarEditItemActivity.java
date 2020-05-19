@@ -109,45 +109,51 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
     }
 
     private void salvarItem() {
-        codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
-        nomeproduto = nome_produto.getText().toString();
-        qtdproduto= Double.parseDouble(quantidade_produto.getText().toString());
-        valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
 
-        valortotalproduto = qtdproduto * valorproduto;
-        valor_total.setText(valortotalproduto.toString());
 
-        if (nomeproduto.trim().isEmpty() ) {
-            Toast.makeText(this, "Preencha as informações como nome e codigo", Toast.LENGTH_SHORT).show();
+        if ((nome_produto.getText().toString().isEmpty())
+                ||(codigoproduto.getText().toString().isEmpty())
+                || (quantidade_produto.getText().toString().isEmpty())
+                ||  (valor_unit_produto.getText().toString().isEmpty())  ) {
+            Toast.makeText(this, "Preencha as informações abaixo", Toast.LENGTH_SHORT).show();
             return;
         } else {
+            //codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
             codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
-            if (edicao==true) {
-                Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
-                iCompraViewModel.updateVm_Produto(produto);
+            nomeproduto = nome_produto.getText().toString();
+            qtdproduto= Double.parseDouble(quantidade_produto.getText().toString());
+            valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
+            if(codigo_produto< 1000){
+                Toast.makeText(this, "Codigo do produto deve ter 4 ou mais digitos", Toast.LENGTH_SHORT).show();
+                return;
+            }else {
 
-                Toast.makeText(this, "Produto Atualizado com Sucesso", Toast.LENGTH_SHORT).show();
+                valortotalproduto = qtdproduto * valorproduto;
+                valor_total.setText(valortotalproduto.toString());
+                if (edicao == true) {
+                    Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
+                    iCompraViewModel.updateVm_Produto(produto);
 
-                edicao = false;
-                finish();
-            } else {
+                    Toast.makeText(this, "Produto Atualizado com Sucesso", Toast.LENGTH_SHORT).show();
 
-                //public Produto(int codigo_produto, @NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
-                Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
-                iCompraViewModel.insertVm_Produto(produto);
+                    edicao = false;
+                    finish();
+                } else {
 
-                Toast.makeText(this, "Produto salvo com sucesso!", Toast.LENGTH_SHORT).show();
+                    //public Produto(int codigo_produto, @NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
+                    Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
+                    iCompraViewModel.insertVm_Produto(produto);
+                    Toast.makeText(this, "Produto salvo com sucesso!", Toast.LENGTH_SHORT).show();
+                    addChaveEstrangeira(codigo_produto);
 
-                addChaveEstrangeira(codigo_produto);
+                    Intent intent = new Intent(this, ViewProdutoListaActivity.class);
+                    intent.putExtra(NUM_NOTA_FISCAL, nnf.toString());
+                    //intent.putExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, valortotalproduto.toString());
+                    startActivity(intent);
+                    finish();
 
-                Intent intent = new Intent(this, ViewProdutoListaActivity.class);
-                intent.putExtra(NUM_NOTA_FISCAL, nnf.toString());
-                //intent.putExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, valortotalproduto.toString());
-                startActivity(intent);
-                finish();
-
+                }
             }
-
 
         }
 
