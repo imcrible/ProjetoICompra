@@ -122,7 +122,13 @@ public class InicioFragment extends Fragment {
                 Intent intencao = new Intent(getContext(), ViewProdutoLembreteActivity.class);
 
                 intencao.putExtra(ViewProdutoLembreteActivity.EXTRA_PASSAR_ID_LEMBRETE, listaLembrete.getId_lembrete().toString());
+                intencao.putExtra(ViewProdutoLembreteActivity.EXTRA_PASSAR_NOME_LEMBRETE, listaLembrete.getNome_lembrete().toString());
+                intencao.putExtra(ViewProdutoLembreteActivity.EXTRA_PASSAR_VL_TL_LEMBRETE, listaLembrete.getValor_total_lembrete().toString());
+                intencao.putExtra(ViewProdutoLembreteActivity.EXTRA_PASSAR_DATA_LEMBRETE, listaLembrete.getData_lembrete().toString());
+                intencao.putExtra(ViewProdutoLembreteActivity.EXTRA_PASSAR_ULTIIDPRODINSERT, listaLembrete.getUltiidprodinsert().toString());
+
                 startActivityForResult(intencao, VIEW_PRODUTO );
+
             }
         });
 
@@ -246,8 +252,6 @@ public class InicioFragment extends Fragment {
             }
         });
 
-
-
         Button btnconcluilembrete = layoutpositivo.findViewById(R.id.btn_concluirprodlembrete);
         btnconcluilembrete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,7 +261,7 @@ public class InicioFragment extends Fragment {
                 valor_unit_produto = layoutpositivo.findViewById(R.id.valor_unit_produto_lembrete);
 
                 if ((nome_produto.getText().toString().isEmpty())){
-                    Toast.makeText(essaactivity, "Erro! É necessário ao menos o nome do produto. Insira novamente o lembrete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Erro! É necessário ao menos o nome do produto. Insira novamente o lembrete", Toast.LENGTH_SHORT).show();
                     return;
 
                 }else{
