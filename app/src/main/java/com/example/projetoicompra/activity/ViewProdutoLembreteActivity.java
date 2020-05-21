@@ -51,7 +51,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
     Double valorproduto;
     Double valortotalproduto;
     Double valor_total_lembrete = 0.0;
-    String nomelembrete;
+    //String nomelembrete;
     String datalembrete;
 
     private EditText nome_produto;
@@ -201,7 +201,8 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
                     }
                 }
 
-                Lista_Lembrete listaLembrete = new Lista_Lembrete(id_lembrete, nomelembrete, valor_total_lembrete, datalembrete, alt_codigo_produto);
+                //Lista_Lembrete listaLembrete = new Lista_Lembrete(id_lembrete, nomelembrete, valor_total_lembrete, datalembrete, alt_codigo_produto);
+                Lista_Lembrete listaLembrete = new Lista_Lembrete(id_lembrete, nome_lembrete, valor_total_lembrete, data_lembrete, alt_codigo_produto);
                 iCompraViewModel.updateVm_Produto(alt_produto);
                 iCompraViewModel.updateVm_ListaLembrete(listaLembrete);
 
