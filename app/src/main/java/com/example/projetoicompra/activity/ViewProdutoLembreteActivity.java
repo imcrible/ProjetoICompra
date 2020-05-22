@@ -122,8 +122,8 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 iCompraViewModel.deleteVm_Produto(adapteritem.getPosicaoProduto(viewHolder.getAdapterPosition()));
-                Double valor_tl_lembrete = valor_total_lembrete - adapteritem.getPosicaoProduto(viewHolder.getAdapterPosition()).getPreco_total();
-                Lista_Lembrete listaLembrete = new Lista_Lembrete(id_lembrete, nome_lembrete, valor_tl_lembrete, data_lembrete, idparaproduto);
+                valor_total_lembrete = valor_total_lembrete - adapteritem.getPosicaoProduto(viewHolder.getAdapterPosition()).getPreco_total();
+                Lista_Lembrete listaLembrete = new Lista_Lembrete(id_lembrete, nome_lembrete, valor_total_lembrete, data_lembrete, idparaproduto);
                 iCompraViewModel.updateVm_ListaLembrete(listaLembrete);
                 Toast.makeText(ViewProdutoLembreteActivity.this, R.string.msg_delete_produto, Toast.LENGTH_SHORT).show();
 
@@ -149,6 +149,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
 
         AlertDialog.Builder alterar_produto = new AlertDialog.Builder(this);
         alterar_produto.setTitle("Alterar Produto");
+        alterar_produto.setCancelable(false);
         alterar_produto.setMessage("Altere as informações do produto");
         View layourproduto = getLayoutInflater().inflate(R.layout.activity_adicionar_produto_lembrete, null);
         alterar_produto.setView(layourproduto);
@@ -233,6 +234,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
 
         adicionar_produto.setTitle("Adicionar Produto");
         adicionar_produto.setView(layoutpositivo);
+        adicionar_produto.setCancelable(false);
         adicionar_produto.setMessage("Adicione informações do produto");
 
         AlertDialog dialogproduto = adicionar_produto.create();
@@ -329,6 +331,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
 
                 produtos.clear();
                 dialogproduto.dismiss();
+                //valor_total_lembrete=0.0;
             }
         });
     }
@@ -349,6 +352,12 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        valor_total_lembrete=0.0;
+
+    }
 }
 
 

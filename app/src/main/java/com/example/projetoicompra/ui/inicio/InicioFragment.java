@@ -140,6 +140,7 @@ public class InicioFragment extends Fragment {
                 View layout = getLayoutInflater().inflate(R.layout.layout_add_lembrete, null);
 
                 dialogo.setTitle("Adicionar Lembrete de Compra");
+                dialogo.setCancelable(false);
                 dialogo.setMessage("Digite nome e data para o lembrete");
                 dialogo.setView(layout);
 
@@ -202,6 +203,7 @@ public class InicioFragment extends Fragment {
 
         alertapositivo.setTitle("Adicionar Produto");
         alertapositivo.setView(layoutpositivo);
+        alertapositivo.setCancelable(false);
         alertapositivo.setMessage("Adicione informações do produto");
 
         AlertDialog dialogproduto = alertapositivo.create();
@@ -218,11 +220,10 @@ public class InicioFragment extends Fragment {
                 valor_unit_produto = layoutpositivo.findViewById(R.id.valor_unit_produto_lembrete);
 
                 if( nome_produto.getText().toString().isEmpty() ){
-                    Toast.makeText(getContext(), "Preencha o nome do produto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Erro! É necessário ao menos o nome do produto. Insira novamente o lembrete", Toast.LENGTH_SHORT).show();
                     return;
                 }else{
-                    if ( (quantidade_produto.getText().toString().isEmpty())
-                            || (valor_unit_produto.getText().toString().isEmpty()) ){
+                    if ( (quantidade_produto.getText().toString().isEmpty()) || (valor_unit_produto.getText().toString().isEmpty()) ){
 
                         codigo_produto = idparaproduto;
                         nomeproduto = nome_produto.getText().toString();
@@ -302,12 +303,12 @@ public class InicioFragment extends Fragment {
                     iCompraViewModel.insertVm_ItemProduroLembrete(itemProdutoLembrete);
                 }
 
+                produtos.clear();
+                mostrar=false;
+                valor_total_lembrete = 0.0;
+                dialogproduto.dismiss();
 
                 Toast.makeText(getContext(), "Lembrete Adicionado com sucesso!", Toast.LENGTH_SHORT).show();
-
-                produtos.clear();
-                dialogproduto.dismiss();
-                mostrar=false;
 
             }
         });
