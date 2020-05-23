@@ -1,10 +1,14 @@
 package com.example.projetoicompra.activity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +19,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Lista_Compra;
+
+import java.util.Calendar;
 
 public class AdicionarListaManualActivity extends AppCompatActivity {
 
@@ -39,6 +45,7 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
     //private EditText nome_local;
     //protected EditText cnpj_local;
     //private EditText endereco_local;
+    private Button btn_data;
     private EditText num_nota_fiscal;
     private EditText data_compra;
     private EditText hora_compra;
@@ -61,7 +68,7 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_lista_manual);
-
+        
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         setTitle("Adicionar Lista");
 
@@ -73,6 +80,8 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
         data_compra = findViewById(R.id.data_compra);
         hora_compra = findViewById(R.id.hora_compra);
         total_compra = findViewById(R.id.total_compra);
+        
+        btn_data = findViewById(R.id.btn_data);
 
         Intent intencaocnpj = getIntent();
         if(intencaocnpj.hasExtra(EXTRA_PASSAR_CNPJ_LOCALADDLOCAL)){
@@ -181,6 +190,27 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
         //}
 
     }
+
+    public void dialogData(View v){
+        Calendar calendario = Calendar.getInstance();
+
+        int ano = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH);
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        new DatePickerDialog(this, ouvinte_data, ano, mes, dia);
+
+    }
+
+    private DatePickerDialog.OnDateSetListener ouvinte_data = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            String data = String.valueOf(dayOfMonth) + " /"
+                    + String.valueOf(month+1) + "/" + String.valueOf(year);
+
+            data_compra.setText(data);
+        }
+    };
 
 
 

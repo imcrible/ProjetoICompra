@@ -19,7 +19,7 @@
             android:layout_margin="7dp"
             android:orientation="vertical">
 
-           <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_add_produto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Digite o numero da nota fiscal"
-                android:inputType="number"/>
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/info_data_compra"
@@ -64,13 +64,25 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/data_compra"
+
+            <Button
+                android:id="@+id/btn_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Data da compra (dd/mm/aaaa)"
-                android:inputType="date" />
+                android:onClick="dialogData"
+                android:text="Button"
+                android:visibility="invisible"></Button>
+
+                <EditText
+                    android:id="@+id/data_compra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:enabled="true"
+                    android:hint="Data da compra (dd/mm/aaaa)"
+                    android:inputType="date"
+                    android:onClick="dialogData" />
+
 
             <TextView
                 android:id="@+id/info_hora_compra"
@@ -79,7 +91,7 @@
                 android:layout_marginTop="5dp"
                 android:text="Digite a hora da compra"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -105,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Total da Compra, conforme a nota"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal" />
 
             <!--<TextView
                 android:id="@+id/total_compra"

@@ -225,10 +225,20 @@ public class InicioFragment extends Fragment {
                 }else{
                     if ( (quantidade_produto.getText().toString().isEmpty()) || (valor_unit_produto.getText().toString().isEmpty()) ){
 
+                        if ( (quantidade_produto.getText().toString().isEmpty()) ){
+                            qtdproduto = 0.0;
+                        }else{
+                            qtdproduto = Double.parseDouble(quantidade_produto.getText().toString());
+                        }
+
+                        if ( (valor_unit_produto.getText().toString().isEmpty())  ){
+                            valorproduto = 0.0;
+                        }else{
+                            valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
+                        }
+
                         codigo_produto = idparaproduto;
                         nomeproduto = nome_produto.getText().toString();
-                        qtdproduto = 0.0;
-                        valorproduto = 0.0;
                         valortotalproduto = qtdproduto * valorproduto;;
                         valor_total_lembrete = valor_total_lembrete + valortotalproduto;
 
@@ -268,10 +278,20 @@ public class InicioFragment extends Fragment {
                 }else{
                     if(  (quantidade_produto.getText().toString().isEmpty()) || (valor_unit_produto.getText().toString().isEmpty())){
 
+                        if ( (quantidade_produto.getText().toString().isEmpty()) ){
+                            qtdproduto = 0.0;
+                        }else{
+                            qtdproduto = Double.parseDouble(quantidade_produto.getText().toString());
+                        }
+
+                        if ( (valor_unit_produto.getText().toString().isEmpty())  ){
+                            valorproduto = 0.0;
+                        }else{
+                            valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
+                        }
+
                         codigo_produto = idparaproduto;
                         nomeproduto = nome_produto.getText().toString();
-                        qtdproduto = 0.0;
-                        valorproduto = 0.0;
                         valortotalproduto = qtdproduto * valorproduto;;
                         valor_total_lembrete = valor_total_lembrete + valortotalproduto;
 
@@ -312,7 +332,6 @@ public class InicioFragment extends Fragment {
 
             }
         });
-
 
 
     }
