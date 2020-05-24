@@ -16,12 +16,13 @@ import com.example.projetoicompra.model.Local_Compra;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.ListaViewHolder> {
     private List<Lista_Compra> listacompras = new ArrayList<>();
-    private List<Local_Compra> localCompras = new ArrayList<>();
     private OnItemClickListener ouvidor;
 
     @NotNull
@@ -39,12 +40,11 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
         Lista_Compra listaatual = listacompras.get(position);
 
         holder.data_compra.setText(listaatual.getData_compra());
-
         holder.nome_local.setText(listaatual.getRazao_social());
-
-        holder.total_compra.setText(listaatual.getTotal_compra());
+        holder.total_compra.setText((holder.decimal2.format(listaatual.getTotal_compra())));
+        //holder.total_compra.setText(holder.decimal2.format(listaatual.getTotal_compra().toString()));
         }else{
-        holder.nome_local.setText("Sem Listas Adicionadas");
+        holder.nome_local.setText(R.string.msg_lista_vazia);
         }
     }
 
@@ -52,10 +52,6 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
     public int getItemCount() {
         return listacompras.size();
     }
-
-
-
-
 
     public void setListacompras(List<Lista_Compra> listacompras) {
         this.listacompras = listacompras;
@@ -71,6 +67,7 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
         private TextView total_compra;
         private TextView nome_local;
         private TextView data_compra;
+        private NumberFormat decimal2 = new DecimalFormat(".##");
 
         private ListaViewHolder(View listaview) {
             super(listaview);
@@ -85,14 +82,11 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
                     //ouvidor.onItemClick(listacompras.get(posicao), localCompras.get(posicao));
                 }
             });
-
         }
-
     }
 
     public interface OnItemClickListener {
         void onItemClick(Lista_Compra listaCompra);
-        //void onItemClick(Lista_Compra listaCompra, Local_Compra localCompra);
     }
 
     public void setOnItemClickListener(OnItemClickListener ouvidor){

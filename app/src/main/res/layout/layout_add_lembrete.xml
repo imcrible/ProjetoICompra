@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+    <EditText
+        android:id="@+id/data_lembrete"
+        android:inputType="date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:hint="@string/info_data_Lembrete"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/nome_lembrete"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif"
+        android:hint="@string/info_nome_Lembrete"/>
+
+    <Button
+        android:id="@+id/btn_data_lembrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info_data_Lembrete"
+        android:visibility="visible"
+        android:background="@color/FFFFFF"
+        android:layout_marginBottom="10dp"></Button>
+
+
+
+</LinearLayout>

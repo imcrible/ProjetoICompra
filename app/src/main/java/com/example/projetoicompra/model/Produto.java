@@ -23,7 +23,7 @@ public class Produto {
     @ColumnInfo(name = "nome_produto")
     private String nome_produto;
 
-    @NonNull
+
     @ColumnInfo(name = "preco_produto")
     private Double preco_produto;
 
@@ -31,7 +31,7 @@ public class Produto {
     @ColumnInfo(name = "quatidade")
     private double quantidade;
 
-    @NonNull
+
     @ColumnInfo(name = "preco_total")
     private Double preco_total;
 
@@ -58,7 +58,7 @@ public class Produto {
         return preco_produto;
     }
 
-    public void setPreco_produto(@NonNull Double preco_produto) {
+    public void setPreco_produto( Double preco_produto) {
         this.preco_produto = preco_produto;
     }
 
@@ -75,7 +75,7 @@ public class Produto {
         return preco_total;
     }
 
-    public void setPreco_total(@NonNull Double preco_total) {
+    public void setPreco_total( Double preco_total) {
         this.preco_total = preco_total;
     }
 
@@ -87,7 +87,7 @@ public class Produto {
         this.codigo_produto = codigo_produto;
     }
 
-    public Produto(@NonNull Integer codigo_produto, @NonNull String nome_produto, @NonNull Double preco_produto, double quantidade, @NonNull Double preco_total) {
+    public Produto(@NonNull Integer codigo_produto, @NonNull String nome_produto,  Double preco_produto, double quantidade,  Double preco_total) {
         this.codigo_produto = codigo_produto;
         this.nome_produto = nome_produto;
         this.preco_produto = preco_produto;

@@ -9,16 +9,20 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.projetoicompra.DAO.Item_Produto_LembreteDAO;
 import com.example.projetoicompra.DAO.Item_Produto_ListaDAO;
 import com.example.projetoicompra.DAO.Lista_CompraDAO;
+import com.example.projetoicompra.DAO.Lista_Lembrete_DAO;
 import com.example.projetoicompra.DAO.Local_CompraDAO;
 import com.example.projetoicompra.DAO.ProdutoDAO;
+import com.example.projetoicompra.model.Item_Produto_Lembrete;
 import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Lista_Compra;
+import com.example.projetoicompra.model.Lista_Lembrete;
 import com.example.projetoicompra.model.Local_Compra;
 import com.example.projetoicompra.model.Produto;
 
-@Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class}, version = 2, exportSchema = false)
+@Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class, Lista_Lembrete.class, Item_Produto_Lembrete.class}, version = 2, exportSchema = false)
 public abstract class ICompraDataBase extends RoomDatabase {
 
     private static final String NOME_BD = "icompradatabase";
@@ -32,6 +36,10 @@ public abstract class ICompraDataBase extends RoomDatabase {
     public abstract Local_CompraDAO localCompraDAO();
 
     public abstract Lista_CompraDAO listaCompraDAO();
+
+    public abstract Lista_Lembrete_DAO listaLembreteDAO();
+
+    public abstract Item_Produto_LembreteDAO itemProdutoLembreteDAO();
 
     private static final int NUM_DE_THREADS = 4;
 
@@ -58,12 +66,16 @@ public abstract class ICompraDataBase extends RoomDatabase {
         private Local_CompraDAO localCompraDAO;
         private ProdutoDAO produtoDAO;
         private Item_Produto_ListaDAO itemProdutoListaDAO;
+        private Lista_Lembrete_DAO listaLembreteDAO;
+        private Item_Produto_LembreteDAO itemProdutoLembreteDAO;
 
         private PopularDbAsyncTask(ICompraDataBase db) {
             listaCompraDAO = db.listaCompraDAO();
             localCompraDAO = db.localCompraDAO();
             produtoDAO = db.produtoDAO();
             itemProdutoListaDAO = db.itemProdutoListaDAO();
+            listaLembreteDAO = db.listaLembreteDAO();
+            itemProdutoLembreteDAO = db.itemProdutoLembreteDAO();
         }
 
         @Override

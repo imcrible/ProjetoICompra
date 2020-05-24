@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/itemVerListaProduto"
-        android:title="listar Produto"
+        android:title="@string/menu_listar"
         android:orderInCategory="1"
         app:showAsAction="always"
         android:icon="@drawable/ic_lista"/>
 
     <item
         android:id="@+id/itemSalvarLista"
-        android:title="Salvar"
+        android:title="@string/menu_salvar"
         android:orderInCategory="2"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_save_white_24dp" />

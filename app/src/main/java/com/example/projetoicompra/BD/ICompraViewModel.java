@@ -6,8 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.projetoicompra.DAO.Lista_Lembrete_DAO;
+import com.example.projetoicompra.model.Item_Produto_Lembrete;
 import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Lista_Compra;
+import com.example.projetoicompra.model.Lista_Lembrete;
 import com.example.projetoicompra.model.Local_Compra;
 import com.example.projetoicompra.model.Produto;
 
@@ -24,6 +27,9 @@ public class ICompraViewModel extends AndroidViewModel {
     private LiveData<List<Lista_Compra>> vm_ListaPorProdutos;
     private LiveData<Integer> vm_LastIdProduto;
     private LiveData<Integer> vm_LastIdListaCompra;
+    private LiveData<List<Lista_Lembrete>> vm_TodaListaLembrete;
+    private LiveData<List<Lista_Lembrete_DAO.Ultimo>> vm_UltProdInsert;
+    private LiveData<List<Produto>> vm_ProdutosQueEstaLembrete;
 
     static Integer n;
 
@@ -38,6 +44,9 @@ public class ICompraViewModel extends AndroidViewModel {
 
         vm_LastIdProduto = repositorio.getRe_LastIdProduto();
         vm_LastIdListaCompra= repositorio.getRe_LastIdListaCompra();
+
+        vm_TodaListaLembrete = repositorio.getRe_TodaListaLembrete();
+        vm_UltProdInsert = repositorio.getRe_UltProdInsert();
 
     }
 
@@ -69,6 +78,20 @@ public class ICompraViewModel extends AndroidViewModel {
         return vm_LastIdListaCompra;
     }
 
+    public LiveData<List<Lista_Lembrete>> getVm_TodaListaLembrete(){
+        return vm_TodaListaLembrete;
+    }
+
+    public LiveData<List<Lista_Lembrete_DAO.Ultimo>> getVm_UltProdInsert(){
+        return vm_UltProdInsert;
+    }
+
+    public LiveData<List<Produto>> getVm_ProdutosQueEstaLembrete(Integer num){
+        return vm_ProdutosQueEstaLembrete = repositorio.getRe_ProdutosQueEstaLembrete(num);
+    }
+
+
+
     //Inicio Bloco Insert
     public void insertVm_Produto(Produto produto) {
         repositorio.insertRe_Produto(produto);
@@ -84,6 +107,14 @@ public class ICompraViewModel extends AndroidViewModel {
 
     public void insertVm_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
         repositorio.insertRe_ItemProdutoLista(itemProdutoLista);
+    }
+
+    public void insertVm_ListaLembrete(Lista_Lembrete listaLembrete){
+        repositorio.insertRe_Lista_Lembrete(listaLembrete);
+    }
+
+    public void insertVm_ItemProduroLembrete(Item_Produto_Lembrete itemProdutoLembrete){
+        repositorio.insertRe_ItemProdutoLembrete(itemProdutoLembrete);
     }
     //Fim Bloco Insert
 
@@ -103,6 +134,10 @@ public class ICompraViewModel extends AndroidViewModel {
     public void updateVm_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
         repositorio.updateRe_ItemProdutoLista(itemProdutoLista);
     }
+
+    public void updateVm_ListaLembrete(Lista_Lembrete listaLembrete){
+        repositorio.updateRe_Lista_Lembrete(listaLembrete);
+    }
     //Fim do bloco Update
 
     //Inicio do bloco Delete
@@ -120,6 +155,10 @@ public class ICompraViewModel extends AndroidViewModel {
 
     public void deleteVm_ItemProdutoLista(Item_Produto_Lista itemProdutoLista) {
         repositorio.deleteRe_ItemProdutoLista(itemProdutoLista);
+    }
+
+    public void deleteVm_ListaLembrete(Lista_Lembrete listaLembrete){
+        repositorio.deleteRe_ListaLembrete(listaLembrete);
     }
     //Fim do bloco delete
 

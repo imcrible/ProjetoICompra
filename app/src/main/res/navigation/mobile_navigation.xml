@@ -11,19 +11,19 @@
         android:label="@string/menu_inicial"
         tools:layout="@layout/fragment_inicio" />
 
-    <!--android:name="com.example.projetoicompra.ui.historico.HistoricoFragment"-->
-
     <activity
         android:id="@+id/nav_historico"
         android:name="com.example.projetoicompra.activity.ViewListaActivity"
         android:label="@string/menu_historico"
-        tools:layout="@layout/activity_view_lista"/>
+        tools:layout="@layout/activity_view_lista"
+        />
 
     <activity
         android:id="@+id/nav_mapas"
         android:name="com.example.projetoicompra.activity.ViewMapasActivity"
         android:label="@string/menu_mapas"
-        tools:layout="@layout/activity_view_local" />
+        tools:layout="@layout/activity_view_mapas"
+        />
 
     <activity
         android:id="@+id/nav_scan"
@@ -31,5 +31,7 @@
         android:label="@string/menu_scan"
         tools:layout="@layout/activity_adicionar_compras_scan"
         />
+
+
 
 </navigation>

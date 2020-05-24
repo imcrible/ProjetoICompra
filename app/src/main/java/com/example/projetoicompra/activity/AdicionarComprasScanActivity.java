@@ -28,9 +28,7 @@ public class AdicionarComprasScanActivity extends AppCompatActivity {
         intencaoIntegradora.setCameraId(0);
         intencaoIntegradora.initiateScan();
         //fim trecho necessario
-
     }
-
 
     //inicio dos metodos relacionados ao qrcode
     @Override
@@ -50,17 +48,14 @@ public class AdicionarComprasScanActivity extends AppCompatActivity {
             }
 
         } else {
-
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     private void alertar(String msg) {
         abrirLink(msg);
-        //Toast.makeText(getApplicationContext(), msg,Toast.LENGTH_LONG).show();
     }
     //fim dos metodos relacionados ao qrcode
-
 
     //metodo com intent explicita de abrir o navegador
     public void abrirLink(String link) {
@@ -71,12 +66,10 @@ public class AdicionarComprasScanActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 }
