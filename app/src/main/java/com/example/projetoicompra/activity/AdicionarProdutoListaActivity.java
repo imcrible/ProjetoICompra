@@ -62,7 +62,7 @@ public class AdicionarProdutoListaActivity extends AppCompatActivity {
 
 
         //Adiciona o botão de fechar no menu
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         setTitle(R.string.titulo_adicionar_produto);
 
         Intent intencao = getIntent();
@@ -73,6 +73,7 @@ public class AdicionarProdutoListaActivity extends AppCompatActivity {
         quantidade_produto = findViewById(R.id.quantidade_produto);
         valor_total = findViewById(R.id.valor_total);
 
+        //Esse get é necessário para carregar as informações quando for alterar o produto
         if (intencao.hasExtra(EXTRA_PASSAR_CODIGO_PRODUTO)) {
             setTitle(R.string.titulo_editar_produto);
             codigo_produtoString = intencao.getStringExtra(EXTRA_PASSAR_CODIGO_PRODUTO);

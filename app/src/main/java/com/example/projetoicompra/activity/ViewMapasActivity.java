@@ -62,13 +62,12 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
         toolbar.setTitle(R.string.titulo_view_mapa);
         toolbar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+
 
         //usado mais abaixo no Dialog
         essaactivity = this;
 
     }
-
 
     /**
      * Manipulates the map once available.

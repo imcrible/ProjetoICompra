@@ -38,7 +38,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             holder.quantidade_produto.setText(String.valueOf(produtoatual.getQuantidade()));
             holder.valor_total.setText(holder.decimal2.format(produtoatual.getPreco_total()));
             //holder.valor_total.setText(holder.decimal2.format(String.valueOf(produtoatual.getPreco_total())));
-            holder.id_produto.setText(String.valueOf(produtoatual.getCodigo_produto()));
+            //holder.id_produto.setText(String.valueOf(produtoatual.getCodigo_produto()));
         } else {
             holder.nome_produto.setText(R.string.msg_lista_vazia);
         }
@@ -73,7 +73,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             valor_total = itemView.findViewById(R.id.rv_valor_total);
             nome_produto = itemView.findViewById(R.id.rv_nome_produto);
             quantidade_produto = itemView.findViewById(R.id.rv_quantidade_produto);
-            id_produto = itemView.findViewById(R.id.rv_id_produto);
+            //id_produto = itemView.findViewById(R.id.rv_id_produto);
 
             itemView.setOnClickListener(v -> {
                 int posicao = getAdapterPosition();

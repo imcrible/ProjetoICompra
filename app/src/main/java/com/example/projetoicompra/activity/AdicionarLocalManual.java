@@ -161,6 +161,7 @@ public class AdicionarLocalManual extends AppCompatActivity {
     }
 
     public static boolean isCNPJ(String CNPJ) {
+        //deixa apenas digitos na string
         CNPJ = CNPJ.replaceAll("[^0-9]+", "");
         // considera-se erro CNPJ's formados por uma sequencia de numeros iguais
         if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111") ||

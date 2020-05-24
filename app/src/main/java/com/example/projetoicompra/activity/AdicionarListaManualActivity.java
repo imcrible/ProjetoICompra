@@ -95,11 +95,13 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
             }
         });
 
+        //esse get pega o cnpj da tela AdicionarLocalManual
         Intent intencaocnpj = getIntent();
         if(intencaocnpj.hasExtra(EXTRA_PASSAR_CNPJ_LOCALADDLOCAL)){
             cnpjlocal = intencaocnpj.getStringExtra(EXTRA_PASSAR_CNPJ_LOCALADDLOCAL);
         }
 
+        //Esse get é necessário para carregar as informações quando for alterar a lista
         Intent intencao = getIntent();
         if (intencao.hasExtra(EXTRA_PASSAR_NUM_NOTA)) {
             setTitle(R.string.titulo_editar_lista_manual);
@@ -239,8 +241,6 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
             btn_tempo.setText(tempo);
         }
     };
-
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();

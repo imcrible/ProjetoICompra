@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.ACCESS_FINE_LOCATION
     };
 
-    //public static final int REQUEST_CODE_ADD_MANUAL_LISTA = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

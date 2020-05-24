@@ -52,8 +52,7 @@
             android:parentActivityName=".activity.MainActivity">
         </activity>
 
-        <activity android:name=".activity.AdicionarProdutoListaActivity"
-            android:parentActivityName=".activity.ViewProdutoListaActivity">
+        <activity android:name=".activity.AdicionarProdutoListaActivity">
         </activity>
 
         <activity
