@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/itemaddProdutoLembrete"
-        android:title="Adicionar"
+        android:title="@string/menu_adicionar"
         android:orderInCategory="3"
         app:showAsAction="always"
         android:icon="@drawable/ic_menu_add_"/>

@@ -32,7 +32,7 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
             Lista_Lembrete lembreteatual = lista_lembretes.get(position);
             holder.nome_lembrete.setText(lembreteatual.getNome_lembrete());
             holder.valor_total_lembrete.setText(String.valueOf(lembreteatual.getValor_total_lembrete()));
-            //holder.local_compra.setText();
+            holder.data_lembrete.setText(lembreteatual.getData_lembrete());
         }else{
             holder.nome_lembrete.setText("Sem itens adicionados");
         }
@@ -56,6 +56,7 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
     class LembreteViewHolder extends RecyclerView.ViewHolder{
         private TextView nome_lembrete;
         private TextView valor_total_lembrete;
+        private TextView data_lembrete;
 
 
 
@@ -64,6 +65,7 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
 
             nome_lembrete = lembreteView.findViewById(R.id.rv_nome_lembrete);
             valor_total_lembrete = lembreteView.findViewById(R.id.rv_valor_total_lembrete);
+            data_lembrete = lembreteView.findViewById(R.id.rv_data_lembrete);
 
             itemView.setOnClickListener(v -> {
                 int posicao = getAdapterPosition();
@@ -71,8 +73,6 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
                     ouvidor.onItemClick(lista_lembretes.get(posicao));
                 }
             });
-
-
         }
     }
 

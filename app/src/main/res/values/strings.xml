@@ -5,31 +5,104 @@
     <string name="nav_header_title">Projeto ICompra</string>
     <string name="nav_header_subtitle">TCC</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Configuração</string>
 
-    <string name="menu_inicial">Inicio</string>
-    <string name="menu_scan">Envie sua nota</string>
-    <string name="menu_mapas">Mapa de Compras</string>
-    <string name="menu_historico">Histórico de Compras</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_adicionar_compras_manual">AdicionarComprasManualActivity</string>
-    <string name="title_activity_local_mapas">Map</string>
-    <string name="title_activity_view_mapas">ViewMapasActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <!--TITULOS-->
+        <string name="hello_blank_fragment">Hello blank fragment</string>
+        <string name="title_activity_adicionar_compras_manual">AdicionarComprasManualActivity</string>
+        <string name="title_activity_local_mapas">Map</string>
+        <string name="title_activity_view_mapas">ViewMapasActivity</string>
+        <string name="titulo_editar_produto">Editar Produto</string>
+        <string name="titulo_adicionar_produto">Adicionar Produto</string>
+        <string name="titulo_adicionar_lista_manual">Adicionar Lista</string>
+        <string name="titulo_adicionar_local_manual">Adicionar Local de Compra</string>
+        <string name="titulo_editar_lista_manual">Editar Lista</string>
+        <string name="titulo_view_compras">Historico de Compras</string>
+        <string name="titulo_view_mapa">Mapa de Compras</string>
+        <string name="titulo_view_produtos_lembrete">Produtos do Lembrete</string>
+        <string name="titulo_view_produtos_lista">Lista de Produtos</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!--RELACIONADOS A DIALOGS-->
+        <string name="dialog_titulo_confirmar_endereco">Confirme seu Endereço</string>
+        <string name="dialog_titulo_permissao_negada">Permissões Negadas</string>
+        <string name="dialog_titulo_gps_desativado">Serviço de Localização</string>
+        <string name="dialog_titulo_alterar_produto_lembrete">Alterar Produto</string>
+        <string name="dialog_titulo_add_produto_lembrete">Adicionar Produto</string>
+        <string name="dialog_msg_permissao_negada">Para utilizar o app é necessário aceitar as permissões</string>
+        <string name="dialog_msg_gps_desativado">Por favor ative o serviço de localização</string>
+        <string name="dialog_msg_alterar_produto_lembrete">Altere as informações do produto</string>
+        <string name="dialog_msg_add_produto_lembrete">Adicione informações do produto</string>
+        <string name="dialog_botao_confirmar">Confirmar</string>
+        <string name="dialog_botao_cancelar">Cancelar</string>
+        <string name="dialog_botao_ativar">Ativar</string>
+        <string name="dialog_botao_alterar">Alterar</string>
 
-    <string name="add_lembrete">Adicionar Lembrete de compra</string>
-    <string name="verificar_end">Verificar Endereço</string>
-    <string name="Nome_Lembrete">Nome do Lembrete</string>
-    <string name="data_Lembrete">Data</string>
-    <string name="msg_delete_produto">Produto Apagado</string>
+
+    <!-- LAYOUTS -->
+        <!--PRODUTOS-->
+            <string name="info_add_codigo_produto">Codigo do Produto conforme a nota</string>
+            <string name="info_nome_produto">Nome do Produto</string>
+            <string name="info_valor_unitario">Valor Unitário</string>
+            <string name="info_quantidade_produto">Quantidade</string>
+            <string name="info_valor_total_produto">Valor Total </string>
+
+        <!--LISTA_PRODUTOS_MANUAL-->
+            <string name="info_titulo_lista">Informações da nota fiscal / lista</string>
+            <string name="info_numero_nota_fiscal">Digite numero da nota fiscal</string>
+            <string name="info_data_compra_lista">Informe a data da Compra</string>
+            <string name="info_tempo_compra_lista">Informe a hora da compra</string>
+            <string name="info_total_compra_lista">Digite o total da compra, conforme a nota</string>
+
+        <!--LOCAL_MANUAL-->
+            <string name="info_nome_local">Digite o nome da loja</string>
+            <string name="info_cnpj_local">Digite o CNPJ da loja, conforme está na nota</string>
+            <string name="info_endereco_local">Digite o Endereço da loja</string>
+            <string name="btn_verificar_end">Verificar Endereço</string>
+
+        <!--FRAGMENT_INICIO-->
+            <string name="add_lembrete">Adicionar Lembrete de compra</string>
+
+        <!--LAYOUT_ADD_LEMBRETE-->
+            <string name="info_nome_Lembrete">Nome do lembrete</string>
+            <string name="info_data_Lembrete">Data do lembrete</string>
+
+        <!--LAYOUT_ADD_PRODUTO_LEMBRETE-->
+            <string name="btn_concluir_produto">CONCLUIR</string>
+            <string name="btn_add_mais_produto">ADICIONAR MAIS</string>
+
+
+    <!-- TOASTS/MENSAGENS -->
+        <string name="msg_tela_vazia">Por favor revise os campos e os preencha</string>
+        <string name="msg_endereco_vazio">Preencha o endereço do local antes</string>
+        <string name="msg_min_digito_cod_produto">Codigo do produto deve ter 4 ou mais digitos</string>
+        <string name="msg_att_produto_sucesso">Produto atualizado com sucesso</string>
+        <string name="msg_att_lista_sucesso">Lista atualizada com sucesso</string>
+        <string name="msg_add_produto_sucesso">Produto adicionado com sucesso</string>
+        <string name="msg_add_lista_sucesso">Lista adicionada com sucesso</string>
+        <string name="msg_add_local_sucesso">Local adicionado com sucesso</string>
+        <string name="msg_lat_long_null">Por favor confirme o endereço</string>
+        <string name="msg_delete_lista">Lista apagada</string>
+        <string name="msg_delete_produto">Produto apagado</string>
+        <string name="msg_local_atual">Você está aqui</string>
+        <string name="msg_produto_lembrete_vazio">"Preencha ao menos o nome do produto</string>
+
+
+
+    <!-- MENUS -->
+        <string name="menu_inicial">Inicio</string>
+        <string name="menu_scan">Envie sua nota</string>
+        <string name="menu_mapas">Mapa de Compras</string>
+        <string name="menu_historico">Histórico de Compras</string>
+        <string name="action_settings">Configuração</string>
+        <string name="menu_adicionar">Adicionar</string>
+        <string name="menu_confirmar">Confirmar</string>
+        <string name="menu_fechar">Fechar</string>
+        <string name="menu_salvar">Salvar</string>
+        <string name="menu_listar">Listar</string>
+
+
+
 
 </resources>

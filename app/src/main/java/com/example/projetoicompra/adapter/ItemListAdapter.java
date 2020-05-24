@@ -38,7 +38,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
             holder.nome_produto.setText("Sem itens adicionados");
         }
 
-
     }
 
     @Override
@@ -79,7 +78,6 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
                     }
                 }
             });
-
         }
     }
 

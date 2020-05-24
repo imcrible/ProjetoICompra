@@ -16,10 +16,10 @@
             android:id="@+id/text_local"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:text="Informações do Local de Compra"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold" />
 
         <TextView
@@ -27,25 +27,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Digite o nome da loja"
+            android:layout_marginBottom="10dp"
+            android:text="@string/info_nome_local"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/nome_local"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Digite o nome da loja" />
+            android:hint="@string/info_nome_local" />
 
         <TextView
             android:id="@+id/info_cnpj_local"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Digite o CNPJ da loja"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/info_cnpj_local"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
@@ -53,24 +55,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ems="10"
-            android:hint="Digite o CNPJ conforme está na nota"
+            android:hint="@string/info_cnpj_local"
             android:inputType="date" />
 
         <TextView
             android:id="@+id/info_end_local"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Digite o Endereço da loja"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/info_endereco_local"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/end_local"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Endereço da Loja" />
+            android:hint="@string/info_endereco_local" />
 
         <Button
             android:id="@+id/btn_VerifcarEnd"
@@ -78,8 +81,9 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:onClick="verificarEndereco"
-            android:text="@string/verificar_end"
-            android:textColor="#FFFFFF" />
+            android:text="@string/btn_verificar_end"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 

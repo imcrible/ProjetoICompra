@@ -31,7 +31,7 @@ public class ViewListaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_lista);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
-        setTitle("Historico de Compras");
+        setTitle(R.string.titulo_view_compras);
 
         recyclerViewLista = findViewById(R.id.recycler_lista);
 
@@ -43,6 +43,7 @@ public class ViewListaActivity extends AppCompatActivity {
 
 
         iCompraViewModel = ViewModelProviders.of(this).get(ICompraViewModel.class);
+        //trecho abaixo responsavel por exibir e manter atualizado a lista de compras muita atenção com o onChanged
         iCompraViewModel.getVm_TodaListaCompra().observe(this, new Observer<List<Lista_Compra>>() {
             @Override
             public void onChanged(List<Lista_Compra> lista_compras) {
@@ -51,15 +52,7 @@ public class ViewListaActivity extends AppCompatActivity {
             }
         });
 
-
-        /*iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
-        iCompraViewModel.getVm_TodaListaCompra().observe(this, new Observer<List<Lista_Compra>>() {
-            @Override
-            public void onChanged(@Nullable final List<Lista_Compra> lista_compras) {
-                adapterlista.setListacompras(lista_compras);
-            }
-        });*/
-
+        //Trecho que habilita o swipe, onde atraves disso é feito a ação de apagar a lista
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -70,11 +63,12 @@ public class ViewListaActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 iCompraViewModel.deleteVm_ListaCompra(adapterlista.getPosicaoListaCompra(viewHolder.getAdapterPosition()));
-                Toast.makeText(ViewListaActivity.this, "Lista apagada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewListaActivity.this, R.string.msg_delete_lista, Toast.LENGTH_SHORT).show();
 
             }
         }).attachToRecyclerView(recyclerViewLista);
 
+        //trecho abaixo habilita o clique em um item da View, onde abre para edição
         adapterlista.setOnItemClickListener(new ListaListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Lista_Compra listaCompra) {
@@ -84,14 +78,11 @@ public class ViewListaActivity extends AppCompatActivity {
                 intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_DATA_COMPRA, listaCompra.getData_compra());
                 intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_HORA_COMPRA, listaCompra.getHora_compra());
                 intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_NUM_NOTA, listaCompra.getNota_fiscal().toString());
-                intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_TOTAL_COMPRA, listaCompra.getTotal_compra());
-                //intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_NOME_LOCAL, localCompra.getRazao_social());
-                //intencao.putExtra(AdicionarComprasManualActivity.EXTRA_PASSAR_END_LOCAL, localCompra.getCoordenadas());
+                intencao.putExtra(AdicionarListaManualActivity.EXTRA_PASSAR_TOTAL_COMPRA, listaCompra.getTotal_compra().toString());
 
                 startActivityForResult(intencao, EDITAR_LISTA );
             }
         });
-
 
     }
 }

@@ -4,23 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    android:orientation="vertical"
-    tools:context=".activity.AdicionarProdutoLembreteActivity">
+    android:orientation="vertical">
 
 
     <EditText
         android:id="@+id/nome_produto_lembrete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome do Produto" />
+        android:layout_marginTop="10dp"
+        android:hint="@string/info_nome_produto"
+        android:importantForAutofill="no"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/valor_unit_produto_lembrete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Valor Unitário"
-        android:inputType="numberDecimal" />
+        android:hint="@string/info_valor_unitario"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="10dp"/>
 
 
     <EditText
@@ -28,13 +31,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Quantidade"
-        android:inputType="numberDecimal" />
+        android:hint="@string/info_quantidade_produto"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <Button
             android:id="@+id/btn_concluirprodlembrete"
@@ -44,7 +49,7 @@
             android:layout_weight="1"
             android:layout_gravity="left"
             android:background="@color/FFFFFF"
-            android:text="Concluir" />
+            android:text="@string/btn_concluir_produto" />
 
         <Button
             android:id="@+id/btn_addmaisprodlembrete"
@@ -53,8 +58,8 @@
             android:layout_marginLeft="4dp"
             android:layout_weight="1"
             android:background="@color/FFFFFF"
-            android:text="Adicionar Mais"
-             />
+            android:text="@string/btn_add_mais_produto"
+            android:layout_marginStart="4dp" />
 
     </LinearLayout>
 

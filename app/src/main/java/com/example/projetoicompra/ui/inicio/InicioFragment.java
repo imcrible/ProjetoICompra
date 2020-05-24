@@ -2,6 +2,8 @@ package com.example.projetoicompra.ui.inicio;
 
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -29,11 +32,12 @@ import com.example.projetoicompra.activity.ViewProdutoLembreteActivity;
 import com.example.projetoicompra.adapter.LembreteListAdapter;
 import com.example.projetoicompra.model.Item_Produto_Lembrete;
 import com.example.projetoicompra.model.Lista_Lembrete;
-import com.example.projetoicompra.model.Local_Compra;
 import com.example.projetoicompra.model.Produto;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 
 public class InicioFragment extends Fragment {
@@ -41,7 +45,7 @@ public class InicioFragment extends Fragment {
     private ICompraViewModel iCompraViewModel;
     private RecyclerView recyclerViewLembrete;
     View view;
-    public Activity essaactivity;
+    public Activity essaactivity = getActivity();
     private Button btnAddLembrete;
     Integer idparaproduto = 0;
     Integer idlembrete = 0;
@@ -53,9 +57,11 @@ public class InicioFragment extends Fragment {
     //private TextView valor_total_lembrete;
     private EditText nome_lembrete;
     private EditText data_lembrete;
+    private Button btn_data_lembrete;
     private String numnotafiscal;
 
     private static final int VIEW_PRODUTO=5;
+    static final int DATA_DIALOG_ID = 0;
 
     Boolean mostrar = false;
 
@@ -144,6 +150,15 @@ public class InicioFragment extends Fragment {
                 dialogo.setMessage("Digite nome e data para o lembrete");
                 dialogo.setView(layout);
 
+                nome_lembrete = layout.findViewById(R.id.nome_lembrete);
+                data_lembrete = layout.findViewById(R.id.data_lembrete);
+                btn_data_lembrete = layout.findViewById(R.id.btn_data_lembrete);
+                btn_data_lembrete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onCreateDialog(DATA_DIALOG_ID).show();
+                    }
+                });
 
                 dialogo.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
                     @Override
@@ -189,17 +204,52 @@ public class InicioFragment extends Fragment {
             }
         });
 
-
         return view;
     }
+
+    public Dialog onCreateDialog(int id){
+        Calendar calendario = Calendar.getInstance();
+
+        int ano = calendario.get(Calendar.YEAR);
+        int mes = calendario.get(Calendar.MONTH);
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+        switch (id){
+            case DATA_DIALOG_ID:
+                return new DatePickerDialog(getActivity(), ouvinte_data, ano, mes, dia);
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener ouvinte_data = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            String data;
+
+            if(dayOfMonth<10 ){
+                data = "0"+dayOfMonth;
+            }else{
+                data = String.valueOf(dayOfMonth);
+            }
+
+            if(month<10){
+                data = data+"/"+"0"+(month+1);
+            }else{
+                data = data+"/"+(month+1);
+            }
+
+            data = data+"/"+year;
+            data_lembrete.setText(data);
+            btn_data_lembrete.setText(data);
+        }
+    };
 
     public void acaoPositiva(Integer ultidprod, Integer ultidlembrete ){
         idparaproduto = ultidprod+1;
         idlembrete = ultidlembrete;
 
         AlertDialog.Builder alertapositivo = new AlertDialog.Builder(getContext());
-        View layoutpositivo = getLayoutInflater().inflate(R.layout.activity_adicionar_produto_lembrete, null);
-
+        View layoutpositivo = getLayoutInflater().inflate(R.layout.layout_add_produto_lembrete, null);
 
         alertapositivo.setTitle("Adicionar Produto");
         alertapositivo.setView(layoutpositivo);
@@ -308,7 +358,6 @@ public class InicioFragment extends Fragment {
 
                         Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
                         produtos.add(produto);
-
                     }
                 }
 
@@ -332,7 +381,6 @@ public class InicioFragment extends Fragment {
 
             }
         });
-
 
     }
 }

@@ -16,11 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.ViewProdutoLembreteActivity"
-            android:parentActivityName=".activity.MainActivity"></activity>
-        <activity android:name=".activity.AdicionarProdutoLembreteActivity" />
+            android:parentActivityName=".activity.MainActivity">
+
+        </activity>
+
+
         <activity
             android:name=".activity.AdicionarLocalManual"
             android:parentActivityName=".activity.MainActivity" />
+
         <activity
             android:name=".activity.ViewMapasActivity"
             android:label="@string/title_activity_view_mapas"
@@ -40,15 +44,26 @@
 
         <activity
             android:name=".activity.ViewProdutoListaActivity"
-            android:parentActivityName=".activity.MainActivity" />
+            android:parentActivityName=".activity.ViewListaActivity">
+        </activity>
+
         <activity
             android:name=".activity.ViewListaActivity"
-            android:parentActivityName=".activity.MainActivity" />
-        <activity android:name=".activity.AdicionarEditItemActivity" />
+            android:parentActivityName=".activity.MainActivity">
+        </activity>
+
+        <activity android:name=".activity.AdicionarProdutoListaActivity"
+            android:parentActivityName=".activity.ViewProdutoListaActivity">
+        </activity>
+
         <activity
             android:name=".activity.AdicionarListaManualActivity"
-            android:parentActivityName=".activity.MainActivity" />
-        <activity android:name=".activity.AdicionarComprasScanActivity" />
+            android:parentActivityName=".activity.ViewListaActivity" />
+
+        <activity android:name=".activity.AdicionarComprasScanActivity"
+            android:parentActivityName=".activity.ViewListaActivity">
+        </activity>
+
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"

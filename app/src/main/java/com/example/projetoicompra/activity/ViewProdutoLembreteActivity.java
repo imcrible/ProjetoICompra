@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,8 +66,6 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
     public static final String EXTRA_PASSAR_ULTIIDPRODINSERT = "com.exemple.projetoicompra.activity.EXTRA_PASSAR_ULTIIDPRODINSERT";
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +74,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
 
         //configura o recycler
         recyclerViewItem = findViewById(R.id.recycler_item);
-        setTitle("Produtos do Lembrete");
+        setTitle(R.string.titulo_view_produtos_lembrete);
 
         recyclerViewItem.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewItem.setHasFixedSize(true);
@@ -89,9 +86,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
             valor_total_lembrete = Double.valueOf(intent.getStringExtra(EXTRA_PASSAR_VL_TL_LEMBRETE));
             data_lembrete = intent.getStringExtra(EXTRA_PASSAR_DATA_LEMBRETE);
             ultiidinsetprod = Integer.valueOf(intent.getStringExtra(EXTRA_PASSAR_ULTIIDPRODINSERT));
-            //idparaproduto = ultiidinsetprod;
         }
-
 
         ItemListAdapter adapteritem = new ItemListAdapter();
 
@@ -148,10 +143,10 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
     private void alterarProduto(Integer alt_codigo_produto, String alt_nome_produto, Double alt_valor_produto, Double alt_qtd_produto, Double alt_vl_tl_produto) {
 
         AlertDialog.Builder alterar_produto = new AlertDialog.Builder(this);
-        alterar_produto.setTitle("Alterar Produto");
+        alterar_produto.setTitle(R.string.dialog_titulo_alterar_produto_lembrete);
         alterar_produto.setCancelable(false);
-        alterar_produto.setMessage("Altere as informações do produto");
-        View layourproduto = getLayoutInflater().inflate(R.layout.activity_adicionar_produto_lembrete, null);
+        alterar_produto.setMessage(R.string.dialog_msg_alterar_produto_lembrete);
+        View layourproduto = getLayoutInflater().inflate(R.layout.layout_add_produto_lembrete, null);
         alterar_produto.setView(layourproduto);
 
         nome_produto = layourproduto.findViewById(R.id.nome_produto_lembrete);
@@ -167,7 +162,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
         btaddmais.setVisibility(View.INVISIBLE);
         btnconcluilembrete.setVisibility(View.INVISIBLE);
 
-        alterar_produto.setPositiveButton("Alterar", new DialogInterface.OnClickListener() {
+        alterar_produto.setPositiveButton(R.string.dialog_botao_alterar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Produto alt_produto;
@@ -177,7 +172,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
                 valor_unit_produto = layourproduto.findViewById(R.id.valor_unit_produto_lembrete);
 
                 if( nome_produto.getText().toString().isEmpty() ){
-                    Toast.makeText(getApplication(), "Preencha o nome do produto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), R.string.msg_produto_lembrete_vazio, Toast.LENGTH_SHORT).show();
                     return;
                 }else{
                     if( (quantidade_produto.getText().toString().isEmpty())
@@ -217,19 +212,19 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
                 iCompraViewModel.updateVm_Produto(alt_produto);
                 iCompraViewModel.updateVm_ListaLembrete(listaLembrete);
 
-                Toast.makeText(ViewProdutoLembreteActivity.this, "Produto atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewProdutoLembreteActivity.this, R.string.msg_att_produto_sucesso, Toast.LENGTH_SHORT).show();
             }
         });
 
-        alterar_produto.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        alterar_produto.setNegativeButton(R.string.dialog_botao_cancelar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 return;
             }
         });
 
-        Dialog dialog_alt_protudo = alterar_produto.create();
-        dialog_alt_protudo.show();
+        Dialog dialog_alt_produto = alterar_produto.create();
+        dialog_alt_produto.show();
     }
 
     private void ultimoProduto(Integer ultimoprodinsert){
@@ -240,12 +235,12 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
         idparaproduto = idparaproduto +1;
 
         AlertDialog.Builder adicionar_produto = new AlertDialog.Builder(this);
-        View layoutpositivo = getLayoutInflater().inflate(R.layout.activity_adicionar_produto_lembrete, null);
+        View layoutpositivo = getLayoutInflater().inflate(R.layout.layout_add_produto_lembrete, null);
 
-        adicionar_produto.setTitle("Adicionar Produto");
+        adicionar_produto.setTitle(R.string.dialog_titulo_add_produto_lembrete);
         adicionar_produto.setView(layoutpositivo);
         adicionar_produto.setCancelable(false);
-        adicionar_produto.setMessage("Adicione informações do produto");
+        adicionar_produto.setMessage(R.string.dialog_msg_add_produto_lembrete);
 
         AlertDialog dialogproduto = adicionar_produto.create();
         dialogproduto.show();
@@ -259,7 +254,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
                 valor_unit_produto = layoutpositivo.findViewById(R.id.valor_unit_produto_lembrete);
 
                 if(nome_produto.getText().toString().isEmpty() ){
-                    Toast.makeText(getApplication(), "Preencha o nome do produto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), R.string.msg_produto_lembrete_vazio, Toast.LENGTH_SHORT).show();
                     return;
                 }else{
                     if ( (quantidade_produto.getText().toString().isEmpty())
@@ -312,7 +307,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
                 valor_unit_produto = layoutpositivo.findViewById(R.id.valor_unit_produto_lembrete);
 
                 if( (nome_produto.getText().toString().isEmpty()) ){
-                    Toast.makeText(getApplication(), "Erro! É necessário ao menos o nome do produto. Insira novamente o lembrete", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(), R.string.msg_produto_lembrete_vazio, Toast.LENGTH_SHORT).show();
                     return;
                 }else{
                     if(  (quantidade_produto.getText().toString().isEmpty()) || (valor_unit_produto.getText().toString().isEmpty())){
@@ -359,7 +354,7 @@ public class ViewProdutoLembreteActivity extends AppCompatActivity {
                     Item_Produto_Lembrete itemProdutoLembrete = new Item_Produto_Lembrete(produtos.get(i).getCodigo_produto(), id_lembrete);
                     iCompraViewModel.insertVm_ItemProduroLembrete(itemProdutoLembrete);
                 }
-                Toast.makeText(getApplication(), "Produto Adicionado com sucesso!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), R.string.msg_add_produto_sucesso, Toast.LENGTH_SHORT).show();
 
                 produtos.clear();
                 dialogproduto.dismiss();

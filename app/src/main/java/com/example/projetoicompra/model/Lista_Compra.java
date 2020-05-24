@@ -38,7 +38,7 @@ public class Lista_Compra {
 
     @NonNull
     @ColumnInfo(name = "total_compra")
-    private String total_compra;
+    private Double total_compra;
 
     @NonNull
     @ColumnInfo(name = "cnpj_local_lista")
@@ -80,11 +80,11 @@ public class Lista_Compra {
     }
 
     @NonNull
-    public String getTotal_compra() {
+    public Double getTotal_compra() {
         return total_compra;
     }
 
-    public void setTotal_compra(@NonNull String total_compra) {
+    public void setTotal_compra(@NonNull Double total_compra) {
         this.total_compra = total_compra;
     }
 
@@ -97,7 +97,7 @@ public class Lista_Compra {
         this.cnpj_local_lista = cnpj_local_lista;
     }
 
-    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull Integer nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista) {
+    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull Integer nota_fiscal, @NonNull Double total_compra, @NonNull String cnpj_local_lista) {
         this.hora_compra = hora_compra;
         this.data_compra = data_compra;
         this.nota_fiscal = nota_fiscal;
@@ -118,7 +118,7 @@ public class Lista_Compra {
     }
 
     @Ignore
-    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull Integer nota_fiscal, @NonNull String total_compra, @NonNull String cnpj_local_lista, String razao_social) {
+    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull Integer nota_fiscal, @NonNull Double total_compra, @NonNull String cnpj_local_lista, String razao_social) {
         this.hora_compra = hora_compra;
         this.data_compra = data_compra;
         this.nota_fiscal = nota_fiscal;

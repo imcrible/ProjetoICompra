@@ -16,25 +16,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="7dp"
+            android:layout_margin="10dp"
             android:orientation="vertical">
-
-            <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_add_produto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_marginRight="7dp"
-                app:srcCompat="@drawable/ic_menu_add_" /> -->
 
             <TextView
                 android:id="@+id/text_info_lista"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Informações da Nota fiscal/Lista"
+                android:layout_marginTop="10dp"
+                android:text="@string/info_titulo_lista"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -42,81 +34,74 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Digite numero da nota fiscal"
+                android:text="@string/info_numero_nota_fiscal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
 
             <EditText
                 android:id="@+id/num_nota_fiscal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Digite o numero da nota fiscal"
+                android:hint="@string/info_numero_nota_fiscal"
                 android:inputType="number" />
 
             <TextView
                 android:id="@+id/info_data_compra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Digite a data da compra "
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_data_compra_lista"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
-
 
             <Button
                 android:id="@+id/btn_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="dialogData"
-                android:text="Button"
-                android:visibility="invisible"></Button>
-
-                <EditText
-                    android:id="@+id/data_compra"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:enabled="true"
-                    android:hint="Data da compra (dd/mm/aaaa)"
-                    android:inputType="date"
-                    android:onClick="dialogData" />
-
+                android:text="@string/info_data_compra_lista"
+                android:visibility="visible"
+                android:background="@color/FFFFFF"></Button>
 
             <TextView
                 android:id="@+id/info_hora_compra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Digite a hora da compra"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_tempo_compra_lista"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/hora_compra"
+            <Button
+                android:id="@+id/btn_tempo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Hora da compra"
-                android:inputType="time" />
+                android:visibility="visible"
+                android:text="@string/info_tempo_compra_lista"
+                android:background="@color/FFFFFF"/>
+
 
             <TextView
                 android:id="@+id/info_total_compra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Digite o total da Compra, conforme a nota"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/info_total_compra_lista"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/total_compra"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Total da Compra, conforme a nota"
+                android:hint="@string/info_total_compra_lista"
                 android:inputType="numberDecimal" />
 
             <!--<TextView
@@ -125,6 +110,25 @@
                 android:layout_height="wrap_content"
                 android:text="Total da Compra"
                 android:textAppearance="@android:style/TextAppearance.Medium" /> -->
+
+            <EditText
+                android:id="@+id/data_compra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="true"
+                android:hint="Data da compra (dd/mm/aaaa)"
+                android:inputType="date"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/hora_compra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Hora da compra"
+                android:inputType="time"
+                android:visibility="invisible"/>
 
 
         </LinearLayout>

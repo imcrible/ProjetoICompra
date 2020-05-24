@@ -23,17 +23,29 @@
             android:layout_alignParentRight="true" />
 
         <TextView
-            android:id="@+id/rv_nome_lembrete"
+        android:id="@+id/rv_nome_lembrete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome do Lembrete"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:maxLines="1"
+        android:layout_toStartOf="@+id/rv_valor_total"
+        android:layout_alignParentStart="true"
+
+        android:layout_toLeftOf="@+id/rv_valor_total_lembrete"
+        android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/rv_data_lembrete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome do Lembrete"
+            android:text="Data do Lembrete"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:maxLines="1"
-            android:layout_toStartOf="@+id/rv_valor_total"
+            android:layout_below="@+id/rv_nome_lembrete"
             android:layout_alignParentStart="true"
-
-            android:layout_toLeftOf="@+id/rv_valor_total_lembrete"
             android:layout_alignParentLeft="true" />
+
+
 
     </RelativeLayout>
 

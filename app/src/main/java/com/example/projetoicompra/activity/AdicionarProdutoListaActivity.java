@@ -18,7 +18,7 @@ import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Produto;
 
-public class AdicionarEditItemActivity extends AppCompatActivity {
+public class AdicionarProdutoListaActivity extends AppCompatActivity {
 
     private EditText codigoproduto;
     private EditText nome_produto;
@@ -41,14 +41,7 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
     LiveData<Integer> listidlistaCompra;
 
 
-    public static final String EXTRACODIGO_PRODUTO = "com.example.projetoicompra.activity.CODIGO_PRODUTO";
-    public static final String EXTRANOME_PRODUTO = "com.example.projetoicompra.activity.NOME_PRODUTO";
-    public static final String EXTRAVALOR_UNIT_PRODUTO = "com.example.projetoicompra.activity.VALORUNITPRODUTO";
-    public static final String EXTRAQUANTIDADE_PRODUTO = "com.example.projetoicompra.activity.QUANTIDADE_PRODUTO";
-    public static final String EXTRAVALOR_TOTAL = "com.example.projetoicompra.activity.VALOR_TOTAL";
-    public static final String NUM_NOTA_FISCAL = "com.example.projetoicompra.activity.NUM_NOTA_FISCAL";
-
-
+    public static final String PASSAR_NUM_NOTA_FISCAL = "com.example.projetoicompra.activity.NUM_NOTA_FISCAL";
 
     public static final String EXTRA_PASSAR_CODIGO_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_CODIGO_PRODUTO";
     public static final String EXTRA_PASSAR_NOME_PRODUTO = "com.example.projetoicompra.activity.EXTRA_PASSAR_NOME_PRODUTO";
@@ -63,10 +56,12 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_item);
 
-        //Adiciona o botão de fechar no menu
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
-        Intent intencao = getIntent();
 
+        //Adiciona o botão de fechar no menu
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
+        setTitle(R.string.titulo_adicionar_produto);
+
+        Intent intencao = getIntent();
 
         codigoproduto = findViewById(R.id.codigo_produto);
         nome_produto = findViewById(R.id.nome_produto);
@@ -75,56 +70,51 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
         valor_total = findViewById(R.id.valor_total);
 
         if (intencao.hasExtra(EXTRA_PASSAR_CODIGO_PRODUTO)) {
-            setTitle("Editar Produto");
+            setTitle(R.string.titulo_editar_produto);
             codigo_produtoString = intencao.getStringExtra(EXTRA_PASSAR_CODIGO_PRODUTO);
             nomeproduto = intencao.getStringExtra(EXTRA_PASSAR_NOME_PRODUTO);
             valorproduto = intencao.getDoubleExtra(EXTRA_PASSAR_VL_UNIT_PRODUTO, 1);
             qtdproduto = intencao.getDoubleExtra(EXTRA_PASSAR_QTD_PRODUTO, 1);
             valortotalproduto = intencao.getDoubleExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, 1);
-
-            //Toast.makeText(this, codigo_produtoString+" "+nomeproduto+" "+valorproduto+" "+qtdproduto+" "+valortotalproduto, Toast.LENGTH_LONG).show();
+            numnotafiscal = intencao.getStringExtra(PASSAR_NUM_NOTA_FISCAL);
+            nnf = Integer.parseInt(numnotafiscal);
 
             codigoproduto.setText(codigo_produtoString);
+            codigoproduto.setEnabled(false);
             nome_produto.setText(nomeproduto);
             valor_unit_produto.setText(valorproduto.toString());
             quantidade_produto.setText(String.valueOf(qtdproduto));
             valor_total.setText(valortotalproduto.toString());
             edicao = true;
-        } else {
-            setTitle("Adicionar Produto");
         }
 
         iCompraViewModel = new ViewModelProvider(this).get(ICompraViewModel.class);
 
-        listidproduto = iCompraViewModel.getVm_LastIdProduto();
-        listidlistaCompra = iCompraViewModel.getVm_LastIdListaCompra();
+        //listidproduto = iCompraViewModel.getVm_LastIdProduto();
+        //listidlistaCompra = iCompraViewModel.getVm_LastIdListaCompra();
 
-
-        if (intencao.hasExtra(NUM_NOTA_FISCAL)) {
-            numnotafiscal = intencao.getStringExtra(NUM_NOTA_FISCAL);
-            //Toast.makeText(this, numnotafiscal, Toast.LENGTH_SHORT).show();
+        if (intencao.hasExtra(PASSAR_NUM_NOTA_FISCAL)) {
+            numnotafiscal = intencao.getStringExtra(PASSAR_NUM_NOTA_FISCAL);
             nnf = Integer.parseInt(numnotafiscal);
         }
-
     }
 
     private void salvarItem() {
-
 
         if ((nome_produto.getText().toString().isEmpty())
                 ||(codigoproduto.getText().toString().isEmpty())
                 || (quantidade_produto.getText().toString().isEmpty())
                 ||  (valor_unit_produto.getText().toString().isEmpty())  ) {
-            Toast.makeText(this, "Preencha as informações abaixo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.msg_tela_vazia, Toast.LENGTH_SHORT).show();
             return;
         } else {
-            //codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
+
             codigo_produto = Integer.parseInt(codigoproduto.getText().toString());
             nomeproduto = nome_produto.getText().toString();
             qtdproduto= Double.parseDouble(quantidade_produto.getText().toString());
             valorproduto = Double.parseDouble(valor_unit_produto.getText().toString());
             if(codigo_produto< 1000){
-                Toast.makeText(this, "Codigo do produto deve ter 4 ou mais digitos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.msg_min_digito_cod_produto, Toast.LENGTH_SHORT).show();
                 return;
             }else {
 
@@ -134,24 +124,25 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
                     Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
                     iCompraViewModel.updateVm_Produto(produto);
 
-                    Toast.makeText(this, "Produto Atualizado com Sucesso", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(this, R.string.msg_att_produto_sucesso, Toast.LENGTH_SHORT).show();
                     edicao = false;
+
+                    Intent intencao = new Intent(this, ViewProdutoListaActivity.class);
+                    intencao.putExtra(PASSAR_NUM_NOTA_FISCAL, nnf.toString());
+                    startActivity(intencao);
                     finish();
                 } else {
 
                     //public Produto(int codigo_produto, @NonNull String nome_produto, @NonNull Double preco_produto, int quantidade, @NonNull Double preco_total)
                     Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
                     iCompraViewModel.insertVm_Produto(produto);
-                    Toast.makeText(this, "Produto salvo com sucesso!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.msg_add_produto_sucesso, Toast.LENGTH_SHORT).show();
                     addChaveEstrangeira(codigo_produto);
 
                     Intent intent = new Intent(this, ViewProdutoListaActivity.class);
-                    intent.putExtra(NUM_NOTA_FISCAL, nnf.toString());
-                    //intent.putExtra(EXTRA_PASSAR_VL_TOTAL_PRODUTO, valortotalproduto.toString());
+                    intent.putExtra(PASSAR_NUM_NOTA_FISCAL, nnf.toString());
                     startActivity(intent);
                     finish();
-
                 }
             }
 
@@ -160,14 +151,10 @@ public class AdicionarEditItemActivity extends AppCompatActivity {
     }
 
     public void addChaveEstrangeira(Integer codigo_produto) {
-
         //public Item_Produto_Lista(@NonNull String produto_item_id, @NonNull String lista_item_compra_id)
         Item_Produto_Lista itemProdutoLista = new Item_Produto_Lista(codigo_produto, nnf);
 
-        //Toast.makeText(this, codigo_produto + " " + nnf, Toast.LENGTH_SHORT).show();
-
         iCompraViewModel.insertVm_ItemProdutoLista(itemProdutoLista);
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

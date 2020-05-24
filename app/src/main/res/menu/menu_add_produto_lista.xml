@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/itemConfirmar"
-        android:title="Confirmar"
+        android:title="@string/menu_confirmar"
         app:showAsAction="always"
         android:orderInCategory="1"
         android:icon="@drawable/ic_confirma_circle" />
     <item
         android:id="@+id/itemAdicionarProduto"
-        android:title="Adicionar"
+        android:title="@string/menu_adicionar"
         android:orderInCategory="3"
         app:showAsAction="always"
         android:icon="@drawable/ic_menu_add_"/>

@@ -4,42 +4,79 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".activity.AdicionarEditItemActivity">
+    tools:context=".activity.AdicionarProdutoListaActivity"
+    android:layout_margin="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_add_codigo_produto"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <EditText
         android:id="@+id/codigo_produto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Codigo do Produto conforme a nota"
+        android:hint="@string/info_add_codigo_produto"
         android:inputType="number"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_nome_produto"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <EditText
         android:id="@+id/nome_produto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome do Produto"/>
+        android:hint="@string/info_nome_produto"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_valor_unitario"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <EditText
         android:id="@+id/valor_unit_produto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Valor Unitário"
+        android:hint="@string/info_valor_unitario"
         android:inputType="numberDecimal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_quantidade_produto"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <EditText
         android:id="@+id/quantidade_produto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Quantidade"
+        android:hint="@string/info_quantidade_produto"
         android:inputType="numberDecimal" />
 
     <TextView
         android:id="@+id/valor_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Valor Total"
+        android:text="@string/info_valor_total_produto"
         android:textAppearance="@android:style/TextAppearance.Medium" />
 
 </LinearLayout>
