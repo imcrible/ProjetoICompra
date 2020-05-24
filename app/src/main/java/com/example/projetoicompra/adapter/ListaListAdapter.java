@@ -16,6 +16,8 @@ import com.example.projetoicompra.model.Local_Compra;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +41,10 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
 
         holder.data_compra.setText(listaatual.getData_compra());
         holder.nome_local.setText(listaatual.getRazao_social());
-        holder.total_compra.setText(listaatual.getTotal_compra().toString());
+        holder.total_compra.setText((holder.decimal2.format(listaatual.getTotal_compra())));
+        //holder.total_compra.setText(holder.decimal2.format(listaatual.getTotal_compra().toString()));
         }else{
-        holder.nome_local.setText("Sem Listas Adicionadas");
+        holder.nome_local.setText(R.string.msg_lista_vazia);
         }
     }
 
@@ -64,6 +67,7 @@ public class ListaListAdapter extends RecyclerView.Adapter<ListaListAdapter.List
         private TextView total_compra;
         private TextView nome_local;
         private TextView data_compra;
+        private NumberFormat decimal2 = new DecimalFormat(".##");
 
         private ListaViewHolder(View listaview) {
             super(listaview);

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Lista_Lembrete;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +33,11 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
         if (lista_lembretes !=null){
             Lista_Lembrete lembreteatual = lista_lembretes.get(position);
             holder.nome_lembrete.setText(lembreteatual.getNome_lembrete());
-            holder.valor_total_lembrete.setText(String.valueOf(lembreteatual.getValor_total_lembrete()));
+            holder.valor_total_lembrete.setText(holder.decimal2.format(lembreteatual.getValor_total_lembrete()));
+            //holder.valor_total_lembrete.setText(holder.decimal2.format(String.valueOf(lembreteatual.getValor_total_lembrete())));
             holder.data_lembrete.setText(lembreteatual.getData_lembrete());
         }else{
-            holder.nome_lembrete.setText("Sem itens adicionados");
+            holder.nome_lembrete.setText(R.string.msg_lista_vazia);
         }
 
     }
@@ -57,15 +60,16 @@ public class LembreteListAdapter extends RecyclerView.Adapter<LembreteListAdapte
         private TextView nome_lembrete;
         private TextView valor_total_lembrete;
         private TextView data_lembrete;
+        private NumberFormat decimal2 = new DecimalFormat(".##");
 
 
-
-        public LembreteViewHolder(@NonNull View lembreteView) {
+        private LembreteViewHolder(@NonNull View lembreteView) {
             super(lembreteView);
 
             nome_lembrete = lembreteView.findViewById(R.id.rv_nome_lembrete);
             valor_total_lembrete = lembreteView.findViewById(R.id.rv_valor_total_lembrete);
             data_lembrete = lembreteView.findViewById(R.id.rv_data_lembrete);
+
 
             itemView.setOnClickListener(v -> {
                 int posicao = getAdapterPosition();

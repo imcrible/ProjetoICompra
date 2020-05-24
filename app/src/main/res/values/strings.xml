@@ -86,7 +86,9 @@
         <string name="msg_delete_lista">Lista apagada</string>
         <string name="msg_delete_produto">Produto apagado</string>
         <string name="msg_local_atual">Você está aqui</string>
-        <string name="msg_produto_lembrete_vazio">"Preencha ao menos o nome do produto</string>
+        <string name="msg_produto_lembrete_vazio">Preencha ao menos o nome do produto</string>
+        <string name="msg_cnpj_invalido">CNPJ inválido. Revise e clique em verificar endereço novamente</string>
+        <string name="msg_lista_vazia">Sem itens adicionados</string>
 
 
 

@@ -18,6 +18,9 @@ import com.example.projetoicompra.R;
 import com.example.projetoicompra.model.Item_Produto_Lista;
 import com.example.projetoicompra.model.Produto;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class AdicionarProdutoListaActivity extends AppCompatActivity {
 
     private EditText codigoproduto;
@@ -34,6 +37,7 @@ public class AdicionarProdutoListaActivity extends AppCompatActivity {
     double qtdproduto;
     Double valorproduto;
     Double valortotalproduto;
+    NumberFormat decimal2 = new DecimalFormat(".##");
 
     static boolean edicao = false;
 
@@ -82,9 +86,9 @@ public class AdicionarProdutoListaActivity extends AppCompatActivity {
             codigoproduto.setText(codigo_produtoString);
             codigoproduto.setEnabled(false);
             nome_produto.setText(nomeproduto);
-            valor_unit_produto.setText(valorproduto.toString());
+            valor_unit_produto.setText(String.valueOf(valorproduto));
             quantidade_produto.setText(String.valueOf(qtdproduto));
-            valor_total.setText(valortotalproduto.toString());
+            valor_total.setText(decimal2.format(valortotalproduto));
             edicao = true;
         }
 
@@ -119,8 +123,8 @@ public class AdicionarProdutoListaActivity extends AppCompatActivity {
             }else {
 
                 valortotalproduto = qtdproduto * valorproduto;
-                valor_total.setText(valortotalproduto.toString());
-                if (edicao == true) {
+                valor_total.setText(decimal2.format(valortotalproduto));
+                if (edicao) {
                     Produto produto = new Produto(codigo_produto, nomeproduto, valorproduto, qtdproduto, valortotalproduto);
                     iCompraViewModel.updateVm_Produto(produto);
 
@@ -164,15 +168,12 @@ public class AdicionarProdutoListaActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.itemSalvarItem:
-                salvarItem();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-
+        //Caso no futuro tenha mais opções no menu. Colocar switch no lugar no if
+        if (item.getItemId() == R.id.itemSalvarItem) {
+            salvarItem();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
 
     }
 }
