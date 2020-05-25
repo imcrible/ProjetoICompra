@@ -22,7 +22,7 @@ import com.example.projetoicompra.model.Lista_Lembrete;
 import com.example.projetoicompra.model.Local_Compra;
 import com.example.projetoicompra.model.Produto;
 
-@Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class, Lista_Lembrete.class, Item_Produto_Lembrete.class}, version = 2, exportSchema = false)
+@Database(entities = {Produto.class, Local_Compra.class, Lista_Compra.class, Item_Produto_Lista.class, Lista_Lembrete.class, Item_Produto_Lembrete.class}, version = 1, exportSchema = false)
 public abstract class ICompraDataBase extends RoomDatabase {
 
     private static final String NOME_BD = "icompradatabase";
