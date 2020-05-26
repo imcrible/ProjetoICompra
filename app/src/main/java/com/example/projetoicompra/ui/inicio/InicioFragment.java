@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -54,7 +53,6 @@ public class InicioFragment extends Fragment {
     private EditText nome_produto;
     private EditText valor_unit_produto;
     private EditText quantidade_produto;
-    //private TextView valor_total_lembrete;
     private EditText nome_lembrete;
     private EditText data_lembrete;
     private Button btn_data_lembrete;

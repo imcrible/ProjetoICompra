@@ -94,7 +94,7 @@ public class ViewMapasActivity extends AppCompatActivity implements OnMapReadyCa
 
                 mMap.clear();
                 LatLng localusuario = new LatLng(latitudeusuario, longitudeusuario);
-                mMap.addMarker(new MarkerOptions().position(localusuario).title(String.valueOf(R.string.msg_local_atual)));
+                mMap.addMarker(new MarkerOptions().position(localusuario).title("Voce está aqui!"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localusuario, 15));
                 definirPontosCompra();
             }

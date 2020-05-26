@@ -22,7 +22,7 @@
 
 
         <activity
-            android:name=".activity.AdicionarLocalManual"
+            android:name=".activity.AdicionarLocalManualActivity"
             android:parentActivityName=".activity.MainActivity" />
 
         <activity

@@ -60,7 +60,6 @@ public class AdicionarProdutoListaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_item);
 
-
         //Adiciona o botão de fechar no menu
         //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         setTitle(R.string.titulo_adicionar_produto);

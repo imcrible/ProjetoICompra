@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,13 +22,9 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.projetoicompra.BD.ICompraViewModel;
 import com.example.projetoicompra.BD.Permissoes;
 import com.example.projetoicompra.R;
-import com.example.projetoicompra.model.Item_Produto_Lista;
-import com.example.projetoicompra.model.Lista_Compra;
-import com.example.projetoicompra.model.Local_Compra;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-import java.text.SimpleDateFormat;
 import android.Manifest;
 
 
@@ -60,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intencao = new Intent(essaactivity, AdicionarLocalManual.class);
+                Intent intencao = new Intent(essaactivity, AdicionarLocalManualActivity.class);
                 startActivity(intencao);
             }
         });

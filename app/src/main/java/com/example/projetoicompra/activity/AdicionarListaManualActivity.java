@@ -66,7 +66,7 @@ public class AdicionarListaManualActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_lista_manual);
-        
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         setTitle(R.string.titulo_adicionar_lista_manual);
 

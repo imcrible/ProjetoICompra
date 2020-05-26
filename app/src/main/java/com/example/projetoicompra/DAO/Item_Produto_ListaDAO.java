@@ -48,6 +48,4 @@ public interface Item_Produto_ListaDAO {
     @Query("SELECT nota_fiscal from lista_compra order by nota_fiscal DESC limit 2")
     LiveData<Integer> getLastIdListaCompra();
 
-
-
 }

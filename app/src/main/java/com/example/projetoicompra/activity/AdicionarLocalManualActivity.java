@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class AdicionarLocalManual extends AppCompatActivity {
+public class AdicionarLocalManualActivity extends AppCompatActivity {
     private ICompraViewModel iCompraViewModel;
 
     private EditText nome_local;
