@@ -63,6 +63,7 @@ public class ViewListaActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 iCompraViewModel.deleteVm_ListaCompra(adapterlista.getPosicaoListaCompra(viewHolder.getAdapterPosition()));
+                //dapterlista.getPosicaoListaCompra(viewHolder.getAdapterPosition()).getCnpj_local_lista();
                 Toast.makeText(ViewListaActivity.this, R.string.msg_delete_lista, Toast.LENGTH_SHORT).show();
 
             }
