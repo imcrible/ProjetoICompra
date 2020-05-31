@@ -18,11 +18,6 @@ import androidx.room.PrimaryKey;
         indices = {@Index(value = {"cnpj_local_lista"})})
 public class Lista_Compra {
 
-    /*@PrimaryKey(autoGenerate = true)
-    @NonNull
-    @ColumnInfo(name = "lista_compra_id")
-    private int lista_compra_id;*/
-
     @NonNull
     @ColumnInfo(name = "hora_compra")
     private String hora_compra;
@@ -43,14 +38,6 @@ public class Lista_Compra {
     @NonNull
     @ColumnInfo(name = "cnpj_local_lista")
     private String cnpj_local_lista;
-
-    /*public int getLista_compra_id() {
-        return lista_compra_id;
-    }
-
-    public void setLista_compra_id(int lista_compra_id) {
-        this.lista_compra_id = lista_compra_id;
-    }*/
 
     @NonNull
     public String getHora_compra() {
@@ -97,7 +84,9 @@ public class Lista_Compra {
         this.cnpj_local_lista = cnpj_local_lista;
     }
 
-    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull Integer nota_fiscal, @NonNull Double total_compra, @NonNull String cnpj_local_lista) {
+    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra,
+                        @NonNull Integer nota_fiscal, @NonNull Double total_compra,
+                        @NonNull String cnpj_local_lista) {
         this.hora_compra = hora_compra;
         this.data_compra = data_compra;
         this.nota_fiscal = nota_fiscal;
@@ -105,7 +94,6 @@ public class Lista_Compra {
         this.cnpj_local_lista = cnpj_local_lista;
         razao_social = "vazio";
     }
-
 
     private String razao_social;
 
@@ -118,7 +106,9 @@ public class Lista_Compra {
     }
 
     @Ignore
-    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra, @NonNull Integer nota_fiscal, @NonNull Double total_compra, @NonNull String cnpj_local_lista, String razao_social) {
+    public Lista_Compra(@NonNull String hora_compra, @NonNull String data_compra,
+                        @NonNull Integer nota_fiscal, @NonNull Double total_compra,
+                        @NonNull String cnpj_local_lista, String razao_social) {
         this.hora_compra = hora_compra;
         this.data_compra = data_compra;
         this.nota_fiscal = nota_fiscal;
@@ -126,5 +116,4 @@ public class Lista_Compra {
         this.cnpj_local_lista = cnpj_local_lista;
         this.razao_social = razao_social;
     }
-
 }

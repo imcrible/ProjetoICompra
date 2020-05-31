@@ -27,7 +27,8 @@ public interface Lista_CompraDAO {
     //@Query("SELECT * FROM lista_compra")
     //LiveData<List<Lista_Compra>> getTodaListaCompra();
 
-    @Query("SELECT hora_compra, data_compra, nota_fiscal, total_compra, cnpj_local_lista, local_compra.razao_social  FROM lista_compra join local_compra " +
+    @Query("SELECT hora_compra, data_compra, nota_fiscal, total_compra, " +
+            "cnpj_local_lista, local_compra.razao_social  FROM lista_compra join local_compra " +
             "on lista_compra.cnpj_local_lista = local_compra.cnpj_local ")
     LiveData<List<Lista_Compra>> getTodaListaCompra();
 
